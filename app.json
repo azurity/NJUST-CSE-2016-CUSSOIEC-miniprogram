@@ -1,8 +1,9 @@
 {
     "pages": [
-      "pages/launch/launch",
-      "pages/index/index",
-      "pages/logs/logs"
+        "pages/launch/launch",
+        "pages/binding/binding",
+        "pages/index/index",
+        "pages/logs/logs"
     ],
     "window": {
         "backgroundTextStyle": "light",
