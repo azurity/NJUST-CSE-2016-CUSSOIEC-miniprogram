@@ -5,3 +5,9 @@ interface openid extends successRes {
 }
 
 export type openidRes = openid | failRes
+
+interface binding extends successRes {
+    result: null
+}
+
+export type bindingRes = binding | failRes

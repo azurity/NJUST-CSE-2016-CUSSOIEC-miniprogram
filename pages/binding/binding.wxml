@@ -1,0 +1,4 @@
+<!--pages/binding/binding.wxml-->
+<text>pages/binding/binding.wxml</text>
+<input type="text" placeholder="学号" auto-focus />
+<button type="default" size="defaultSize" bindtap="submit" hover-class="defaultTap">Button</button>
