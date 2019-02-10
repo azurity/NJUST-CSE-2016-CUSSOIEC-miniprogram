@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/app.js" />
+        <item url="file://$PROJECT_DIR$/pages/binding/binding.js" />
+        <item url="file://$PROJECT_DIR$/pages/launch/launch.js" />
+        <item url="file://$PROJECT_DIR$/utils/basicRes.js" />
+        <item url="file://$PROJECT_DIR$/utils/globalRes.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app.js" />
+      <root url="file://$PROJECT_DIR$/pages/binding/binding.js" />
+      <root url="file://$PROJECT_DIR$/pages/launch/launch.js" />
+      <root url="file://$PROJECT_DIR$/utils/basicRes.js" />
+      <root url="file://$PROJECT_DIR$/utils/globalRes.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

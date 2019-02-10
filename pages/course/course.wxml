@@ -1,6 +1,6 @@
 <!--pages/course/course.wxml-->
 <view class="section">
-  <view class="section_tittle">课程表</view>
+  <view class="section_tittle">今日课程</view>
   <view class="flex-wrp" style="height:300px;flex-direction:column;">
   <view></view>
   </view>

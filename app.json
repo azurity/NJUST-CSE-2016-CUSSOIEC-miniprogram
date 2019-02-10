@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/course/course",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/course/course",
     "pages/community/community"
   ],
   "window": {
@@ -16,15 +16,15 @@
     "selectedColor": "#11cd6e",
     "borderStyle": "black",
     "list": [{
-      "selectedIconPath": "images/tabBar/index_press.png",
-      "iconPath": "images/tabBar/index.png",
-      "pagePath": "pages/index/index",
-      "text": "通知"
-    }, {
       "selectedIconPath": "images/tabBar/course_press.png",
       "iconPath": "images/tabBar/course.png",
       "pagePath": "pages/course/course",
       "text": "课程"
+    }, {
+      "selectedIconPath": "images/tabBar/index_press.png",
+      "iconPath": "images/tabBar/index.png",
+      "pagePath": "pages/index/index",
+      "text": "通知"
     }, {
       "selectedIconPath": "images/tabBar/community_press.png",
       "iconPath": "images/tabBar/community.png",
