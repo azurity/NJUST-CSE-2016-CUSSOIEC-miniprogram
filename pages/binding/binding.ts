@@ -4,12 +4,18 @@ import { bindingRes } from '../../utils/globalRes'
 
 const app = getApp<IMyApp>()
 
+type InputType = 'college' | 'studentID' | 'realName' | 'nickName'
+
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        studentID: ''
+        loading: false,
+        college: '',
+        studentID: '',
+        realName: '',
+        nickName: ''
     },
 
     /**
@@ -21,17 +27,31 @@ Page({
      * 提交请求
      */
     submit() {
+        if (this.data.college === '' || this.data.studentID === '' || this.data.realName === '') {
+            // TODO: 信息不完整提示
+            return
+        }
+        this.setData({ loading: true })
         this.submitRequest()
             .then((value) => {
                 if (value) {
                     // TODO: 成功，跳转
                 } else {
+                    this.setData({ loading: false })
                     // TODO: 失败，提示
                 }
             })
             .catch((reason) => {
                 console.log(reason)
             })
+    },
+
+    input(inputType: InputType) {
+        return (e: wx.InputEvent) => {
+            this.setData({
+                [inputType]: e.detail.value
+            })
+        }
     },
 
     async submitRequest() {
@@ -41,8 +61,11 @@ Page({
                 method: 'POST',
                 data: {
                     openid: app.globalData.openid,
-                    data:{
-                        studentID: this.data.studentID
+                    data: {
+                        college: this.data.college,
+                        studentID: this.data.studentID,
+                        realName: this.data.realName,
+                        nickName: this.data.nickName
                     }
                 },
                 success: ({ data }) => {
