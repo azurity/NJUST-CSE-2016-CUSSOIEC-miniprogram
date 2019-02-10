@@ -74,9 +74,6 @@ Page({
                 fail: reject
             })
         })
-        if (result.success) {
-            app.globalData.studentID = result.result
-        }
         return result.success
     }
 })

@@ -6,14 +6,17 @@ interface openid extends successRes {
 
 export type openidRes = openid | failRes
 
-interface studentID extends successRes {
-    result: string
+interface personID extends successRes {
+    result: {
+        college: string
+        personID: string
+    }
 }
 
-export type studentIDRes = studentID | failRes
+export type personIDRes = personID | failRes
 
 interface binding extends successRes {
-    result: string
+    result: undefined
 }
 
 export type bindingRes = binding | failRes
