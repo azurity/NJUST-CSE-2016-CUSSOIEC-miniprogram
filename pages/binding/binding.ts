@@ -41,7 +41,9 @@ Page({
                 method: 'POST',
                 data: {
                     openid: app.globalData.openid,
-                    studentID: this.data.studentID
+                    data:{
+                        studentID: this.data.studentID
+                    }
                 },
                 success: ({ data }) => {
                     resolve(<bindingRes>data)
