@@ -22,7 +22,7 @@ Page({
         Promise.all([this.initOpenid()]) // 利用Prmoise.all做多个并行的初始化流程
             .then(() => {
                 let aim = DirectAim.Binding // 没有学号信息时强制绑定
-                if (app.globalData != null) {
+                if (app.globalData.college != null && app.globalData.personID != null) {
                     aim = DirectAim.Index
                 }
                 this.direct(aim)
