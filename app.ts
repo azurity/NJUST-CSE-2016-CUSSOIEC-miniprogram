@@ -1,5 +1,5 @@
 //app.ts
-export interface IMyApp {
+export interface IMyApp extends wx.AppOptions {
     globalData: {
         readonly hostName: string // 后端的地址
         openid: string | null

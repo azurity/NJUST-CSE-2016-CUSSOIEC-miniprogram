@@ -33,7 +33,7 @@ Page({
     },
 
     async initOpenid() {
-        let code = await new Promise<wx.LoginSuccessCallbackResult>((resolve, reject) => {
+        let code = await new Promise<wx.LoginResponse>((resolve, reject) => {
             wx.login({ success: resolve, fail: reject })
         })
         let res = await new Promise<openidRes>((resolve, reject) => {
