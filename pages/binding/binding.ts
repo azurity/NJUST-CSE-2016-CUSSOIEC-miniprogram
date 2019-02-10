@@ -4,7 +4,7 @@ import { bindingRes } from '../../utils/globalRes'
 
 const app = getApp<IMyApp>()
 
-type InputType = 'college' | 'studentID' | 'realName' | 'nickName'
+type InputType = 'college' | 'personID' | 'realName' | 'nickName'
 
 Page({
     /**
@@ -13,7 +13,7 @@ Page({
     data: {
         loading: false,
         college: '',
-        studentID: '',
+        personID: '',
         realName: '',
         nickName: ''
     },
@@ -27,7 +27,7 @@ Page({
      * 提交请求
      */
     submit() {
-        if (this.data.college === '' || this.data.studentID === '' || this.data.realName === '') {
+        if (this.data.college === '' || this.data.personID === '' || this.data.realName === '') {
             // TODO: 信息不完整提示
             return
         }
@@ -63,7 +63,7 @@ Page({
                     openid: app.globalData.openid,
                     data: {
                         college: this.data.college,
-                        studentID: this.data.studentID,
+                        personID: this.data.personID,
                         realName: this.data.realName,
                         nickName: this.data.nickName
                     }

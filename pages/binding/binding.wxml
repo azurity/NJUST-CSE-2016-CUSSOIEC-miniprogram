@@ -5,8 +5,8 @@
     <input type="text" class="radius" bindinput="input('college')" placeholder="学校" disabled="{{loading}}" auto-focus />
   </view>
   <view class="cu-form-group">
-    <view class="title must-star">学号</view>
-    <input type="text" class="radius" bindinput="input('studentID')" placeholder="学号" disabled="{{loading}}" />
+    <view class="title must-star">编号</view>
+    <input type="text" class="radius" bindinput="input('personID')" placeholder="学号/教工号" disabled="{{loading}}" />
   </view>
   <view class="cu-form-group">
     <view class="title must-star">姓名</view>
