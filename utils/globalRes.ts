@@ -6,8 +6,14 @@ interface openid extends successRes {
 
 export type openidRes = openid | failRes
 
+interface studentID extends successRes {
+    result: string
+}
+
+export type studentIDRes = studentID | failRes
+
 interface binding extends successRes {
-    result: null
+    result: string
 }
 
 export type bindingRes = binding | failRes

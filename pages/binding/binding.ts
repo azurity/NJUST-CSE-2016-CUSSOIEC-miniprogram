@@ -8,7 +8,9 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        studentID: ''
+    },
 
     /**
      * 生命周期函数--监听页面加载
@@ -37,13 +39,19 @@ Page({
             wx.request({
                 url: app.globalData.hostName + '/global/binding',
                 method: 'POST',
-                data: JSON.stringify({}),
+                data: {
+                    openid: app.globalData.openid,
+                    studentID: this.data.studentID
+                },
                 success: ({ data }) => {
                     resolve(<bindingRes>data)
                 },
                 fail: reject
             })
         })
+        if (result.success) {
+            app.globalData.studentID = result.result
+        }
         return result.success
     }
 })

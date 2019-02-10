@@ -1,6 +1,6 @@
 // pages/launch/launch.js
 import { IMyApp } from '../../app'
-import { openidRes } from '../../utils/globalRes'
+import { openidRes, studentIDRes } from '../../utils/globalRes'
 
 const app = getApp<IMyApp>()
 
@@ -22,7 +22,7 @@ Page({
         Promise.all([this.initOpenid()]) // 利用Prmoise.all做多个并行的初始化流程
             .then(() => {
                 let aim = DirectAim.Binding // 没有学号信息时强制绑定
-                if (app.globalData != null) {
+                if (app.globalData.studentID != null) {
                     aim = DirectAim.Index
                 }
                 this.direct(aim)
@@ -39,8 +39,8 @@ Page({
         let res = await new Promise<openidRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/global/login',
-                method: 'POST',
-                data: JSON.stringify({ code: code.code }),
+                method: 'GET',
+                data: { code: code.code },
                 success: ({ data }) => {
                     resolve(<openidRes>data)
                 },
@@ -51,6 +51,20 @@ Page({
             app.globalData.openid = res.result
         } else {
             // TODO: 未能获取到openid，做出处理
+        }
+        let stdudentID = await new Promise<studentIDRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/global/student_id',
+                method: 'GET',
+                data: { openid: app.globalData.openid },
+                success: ({ data }) => {
+                    resolve(<studentIDRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (stdudentID.success) {
+            app.globalData.studentID = stdudentID.result
         }
         // error抛出到外面，由catch处理
     },
