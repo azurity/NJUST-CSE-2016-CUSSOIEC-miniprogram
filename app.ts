@@ -1,9 +1,10 @@
 //app.ts
-export interface IMyApp {
+export interface IMyApp extends wx.AppOptions {
     globalData: {
         readonly hostName: string // 后端的地址
         openid: string | null
-        studentID: string | null
+        college: string | null // 学校
+        personID: string | null // 学号/教工号
     }
 }
 
@@ -14,6 +15,7 @@ App<IMyApp>({
     globalData: {
         hostName: 'http://example.com', // TODO: 设置后端地址，此处的hostName请勿添加末尾斜线
         openid: null,
-        studentID: null
+        college: null,
+        personID: null
     }
 })
