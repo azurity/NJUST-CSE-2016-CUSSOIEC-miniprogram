@@ -4,17 +4,25 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/app.js" />
         <item url="file://$PROJECT_DIR$/pages/binding/binding.js" />
+        <item url="file://$PROJECT_DIR$/pages/course/course.js" />
+        <item url="file://$PROJECT_DIR$/pages/index/index.js" />
         <item url="file://$PROJECT_DIR$/pages/launch/launch.js" />
+        <item url="file://$PROJECT_DIR$/pages/logs/logs.js" />
         <item url="file://$PROJECT_DIR$/utils/basicRes.js" />
         <item url="file://$PROJECT_DIR$/utils/globalRes.js" />
+        <item url="file://$PROJECT_DIR$/utils/util.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/app.js" />
       <root url="file://$PROJECT_DIR$/pages/binding/binding.js" />
+      <root url="file://$PROJECT_DIR$/pages/course/course.js" />
+      <root url="file://$PROJECT_DIR$/pages/index/index.js" />
       <root url="file://$PROJECT_DIR$/pages/launch/launch.js" />
+      <root url="file://$PROJECT_DIR$/pages/logs/logs.js" />
       <root url="file://$PROJECT_DIR$/utils/basicRes.js" />
       <root url="file://$PROJECT_DIR$/utils/globalRes.js" />
+      <root url="file://$PROJECT_DIR$/utils/util.js" />
     </CLASSES>
     <SOURCES />
   </library>
