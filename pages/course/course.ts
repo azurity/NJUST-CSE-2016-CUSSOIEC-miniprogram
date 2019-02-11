@@ -1,5 +1,5 @@
 import { IMyApp } from '../../app'
-import { scheduleRes } from '../../utils/course/courseRes'
+import { CourseItem, scheduleRes } from '../../utils/course/courseRes'
 
 const app = getApp<IMyApp>()
 
@@ -7,8 +7,8 @@ Page({
     data: {
         TabCur: 0,
         scrollLeft: 0,
-        obj: [],
-        scheduleDay: [],
+        obj: <CourseItem[]>[],
+        scheduleDay: <CourseItem[]>[],
         numOfWeek: 0
     },
     tabSelect(e: wx.TapEvent) {
@@ -18,57 +18,66 @@ Page({
             TabCur: e.currentTarget.dataset.id
         })
         this.setData({
-            obj: this.data.scheduleDay.filter(item => item.position.dayOfWeek == this.data.TabCur && item.active.indexOf(this.data.numOfWeek) != -1)
+            obj: this.data.scheduleDay.filter(
+                (item: CourseItem) =>
+                    item.position.dayOfWeek == this.data.TabCur &&
+                    item.active.indexOf(this.data.numOfWeek) != -1
+            )
         })
     },
     onLoad() {
         let sch = []
-        sch.push({
-                courseID: "qw123",
-                active: [2,3,4],
+        sch.push(
+            {
+                courseID: 'qw123',
+                active: [2, 3, 4],
                 position: {
                     dayOfWeek: 0,
-                    indexOfDay: [0,1,2]
+                    indexOfDay: [0, 1, 2]
                 },
                 info: {
-                    name: "高等数学",
-                    teacher: "祖冲之",
-                    location: "III-105"
+                    name: '高等数学',
+                    teacher: '祖冲之',
+                    location: 'III-105'
                 }
             },
             {
-                courseID: "qw124",
-                active: [2,3,4],
+                courseID: 'qw124',
+                active: [2, 3, 4],
                 position: {
                     dayOfWeek: 0,
-                    indexOfDay: [3,4]
+                    indexOfDay: [3, 4]
                 },
                 info: {
-                    name: "毛泽东思想与中国特色社会主义理论体系概论",
-                    teacher: "冯友兰·茅以升",
-                    location: "IV-C108"
+                    name: '毛泽东思想与中国特色社会主义理论体系概论',
+                    teacher: '冯友兰·茅以升',
+                    location: 'IV-C108'
                 }
             },
             {
-                courseID: "qw125",
-                active: [2,3,4],
+                courseID: 'qw125',
+                active: [2, 3, 4],
                 position: {
                     dayOfWeek: 1,
-                    indexOfDay: [0,1,2]
+                    indexOfDay: [0, 1, 2]
                 },
                 info: {
-                    name: "计算机组成原理",
-                    teacher: "侯捷",
-                    location: "I-205"
+                    name: '计算机组成原理',
+                    teacher: '侯捷',
+                    location: 'I-205'
                 }
-            })
+            }
+        )
         let week = 2
         this.setData({
             scheduleDay: sch,
             numOfWeek: week
         })
         this.setData({
-            obj: this.data.scheduleDay.filter(item => item.position.dayOfWeek == 0 && item.active.indexOf(this.data.numOfWeek) != -1)
+            obj: this.data.scheduleDay.filter(
+                (item: CourseItem) =>
+                    item.position.dayOfWeek == 0 && item.active.indexOf(this.data.numOfWeek) != -1
+            )
         })
         /*
         Promise.all([this.courseSchedule()])
@@ -79,7 +88,7 @@ Page({
                 console.log(reason)
             })
             */
-    },
+    }
     /*
     async courseSchedule() {
         let res = await new Promise<scheduleRes>((resolve, reject) => {
