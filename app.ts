@@ -13,7 +13,7 @@ App<IMyApp>({
         // TODO: 在此处初始化APP信息(需要同步的网络请求，请在launch-page处理)
     },
     globalData: {
-        hostName: 'http://example.com', // TODO: 设置后端地址，此处的hostName请勿添加末尾斜线
+        hostName: 'https://www.turing-cup.online/netc', // 此处的hostName请勿添加末尾斜线
         openid: null,
         college: null,
         personID: null
