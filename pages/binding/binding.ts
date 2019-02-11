@@ -57,7 +57,7 @@ Page({
     async submitRequest() {
         let result = await new Promise<bindingRes>((resolve, reject) => {
             wx.request({
-                url: app.globalData.hostName + '/global/binding',
+                url: app.globalData.hostName + '/user/binding',
                 method: 'POST',
                 data: {
                     openid: app.globalData.openid,
