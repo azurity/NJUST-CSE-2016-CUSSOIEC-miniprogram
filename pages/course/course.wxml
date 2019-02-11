@@ -3,7 +3,7 @@
   <view class="flex-wrp" style="height:300px;flex-direction:column;">
     <view class="cu-bar bg-white solid-bottom">
       <view class='action'>
-        <text class='icon-titles text-orange '></text> 第1周
+        <text class='icon-titles text-orange '></text> 第{{numOfWeek}}周
       </view>
     </view>
     <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
@@ -11,17 +11,17 @@
         星期{{index+1}}
       </view>
     </scroll-view>
-    <view hidden='{{TabCur != 0}}'>
+    <view>
       <view class="cu-card article">
-        <view wx:for="{{5}}" wx:key class="cu-item shadow">
-          <view class="title"> 课程名称 </view>
+        <view wx:for="{{obj}}" wx:key="item" class="cu-item shadow">
+          <view class="title text-limit-long"> {{item.info.name}} </view>
           <view class='content'>
             <view class="desc">
-              <view class='text-gray'> 教师：任课教师 </view>
+              <view class='text-gray text-limit-short'> 教师：{{item.info.teacher}} </view>
             </view>
             <view class='content'>
-              <view class='cu-tag bg-red light round'> 第7~9小节 </view>
-              <view class='cu-tag bg-green light round'> III-108 </view>
+              <view class='cu-tag bg-red light round'> 第{{item.position.indexOfDay[0]+1}}~9小节 </view>
+              <view class='cu-tag bg-green light round'> {{item.info.location}} </view>
             </view>
           </view>
         </view>

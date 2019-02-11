@@ -9,6 +9,7 @@
         <item url="file://$PROJECT_DIR$/pages/launch/launch.js" />
         <item url="file://$PROJECT_DIR$/pages/logs/logs.js" />
         <item url="file://$PROJECT_DIR$/utils/basicRes.js" />
+        <item url="file://$PROJECT_DIR$/utils/course/courseRes.js" />
         <item url="file://$PROJECT_DIR$/utils/globalRes.js" />
         <item url="file://$PROJECT_DIR$/utils/util.js" />
       </sourceFilesUrls>
@@ -21,6 +22,7 @@
       <root url="file://$PROJECT_DIR$/pages/launch/launch.js" />
       <root url="file://$PROJECT_DIR$/pages/logs/logs.js" />
       <root url="file://$PROJECT_DIR$/utils/basicRes.js" />
+      <root url="file://$PROJECT_DIR$/utils/course/courseRes.js" />
       <root url="file://$PROJECT_DIR$/utils/globalRes.js" />
       <root url="file://$PROJECT_DIR$/utils/util.js" />
     </CLASSES>
