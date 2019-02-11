@@ -1113,6 +1113,16 @@ button.icon.lg {
   padding: 0 30rpx;
 }
 
+.cu-list.menu>.cu-item-gray {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100rpx;
+  background: rgb(221, 221, 221);
+  padding: 0 30rpx;
+}
+
 .cu-list.menu>.cu-item::after {
   content: " ";
   width: 200%;
@@ -1121,7 +1131,7 @@ button.icon.lg {
   top: 0;
   left: 0;
   border-radius: inherit;
-  transform: scale(0.5);
+  transform: scale(0.49);
   transform-origin: 0 0;
   pointer-events: none;
   box-sizing: border-box;
@@ -1129,7 +1139,7 @@ button.icon.lg {
 }
 
 .cu-list.menu.sm-border>.cu-item::after {
-  width: calc(200% - 120rpx);
+  width: calc(200% - 90rpx);
   left: 30rpx;
 }
 
