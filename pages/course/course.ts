@@ -11,7 +11,7 @@ Page({
         scheduleDay: [],
         numOfWeek: 0
     },
-    tabSelect(e) {
+    tabSelect(e: wx.TapEvent) {
         console.log(e)
         console.log(this.data.scheduleDay)
         this.setData({
