@@ -4,8 +4,6 @@ import { bindingRes } from '../../utils/globalRes'
 
 const app = getApp<IMyApp>()
 
-type InputType = 'college' | 'personID' | 'realName' | 'nickName'
-
 Page({
     /**
      * 页面的初始数据
@@ -15,7 +13,8 @@ Page({
         college: '',
         personID: '',
         realName: '',
-        nickName: ''
+        nickName: '',
+        canIUse: wx.canIUse('button.open-type.getUserInfo')
     },
 
     /**
@@ -26,15 +25,15 @@ Page({
     /**
      * 提交请求
      */
-    submit() {
+    submit(defaultNickName: string) {
         if (this.data.college === '' || this.data.personID === '' || this.data.realName === '') {
-            // TODO: 信息不完整提示
+            wx.showToast({ title: '请填写所有必填项', icon: 'none' })
             return
         }
         this.setData({ loading: true })
-        this.submitRequest()
+        this.submitRequest(defaultNickName)
             .then((value) => {
-                if (value) {
+                if (value.success) {
                     // TODO: 成功，跳转
                 } else {
                     this.setData({ loading: false })
@@ -46,15 +45,50 @@ Page({
             })
     },
 
-    input(inputType: InputType) {
-        return (e: wx.InputEvent) => {
-            this.setData({
-                [inputType]: e.detail.value
-            })
+    collegeInput(e: wx.InputEvent) {
+        this.setData({
+            college: e.detail.value
+        })
+    },
+
+    personIDInput(e: wx.InputEvent) {
+        this.setData({
+            personID: e.detail.value
+        })
+    },
+
+    realNameInput(e: wx.InputEvent) {
+        this.setData({
+            realName: e.detail.value
+        })
+    },
+
+    nickNameInput(e: wx.InputEvent) {
+        this.setData({
+            nickName: e.detail.value
+        })
+    },
+
+    userInfoSubmit() {
+        wx.getUserInfo({
+            success: (res: wx.UserInfoResponse) => {
+                this.submit(res.userInfo.nickName)
+            },
+            fail: ()=>{
+                wx.showToast({ title: '请授权允许使用用户信息', icon: 'none' })
+            }
+        })
+    },
+
+    bindGetUserInfo(e: any) {
+        if (!e.detail.userInfo) {
+            wx.showToast({ title: '请授权允许使用用户信息', icon: 'none' })
+        } else {
+            this.submit(e.detail.userInfo.nickName)
         }
     },
 
-    async submitRequest() {
+    async submitRequest(defaultNickName: string) {
         let result = await new Promise<bindingRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/user/binding',
@@ -65,7 +99,7 @@ Page({
                         college: this.data.college,
                         personID: this.data.personID,
                         realName: this.data.realName,
-                        nickName: this.data.nickName
+                        nickName: this.data.nickName || defaultNickName
                     }
                 },
                 success: ({ data }) => {
@@ -74,6 +108,6 @@ Page({
                 fail: reject
             })
         })
-        return result.success
+        return result
     }
 })
