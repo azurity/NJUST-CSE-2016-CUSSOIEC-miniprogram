@@ -20,12 +20,17 @@
               <view class='text-gray text-limit-short'> 教师：{{item.info.teacher}} </view>
             </view>
             <view class='content'>
-              <view class='cu-tag bg-red light round'> 第{{item.position.indexOfDay[0]+1}}~{{item.position.indexOfDay[item.position.indexOfDay.length-1]+1}}小节 </view>
+              <view class='cu-tag bg-red light round'> 第{{item.position[0].indexOfDay[0]+1}}~{{item.position[0].indexOfDay[item.position[0].indexOfDay.length-1]+1}}小节 </view>
               <view class='cu-tag bg-green light round'> {{item.info.location}} </view>
             </view>
           </view>
         </view>
       </view>
     </view>
+  </view>
+</view>
+<view wx:if="{{loading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
   </view>
 </view>

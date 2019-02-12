@@ -5,6 +5,7 @@ const app = getApp<IMyApp>()
 
 Page({
     data: {
+        loading: true,
         TabCur: 0,
         scrollLeft: 0,
         obj: <CourseItem[]>[],
@@ -20,13 +21,7 @@ Page({
             TabCur: e.currentTarget.dataset.id,
             scrollLeft: (e.currentTarget.dataset.id - 1) * 60
         })
-        this.setData({
-            obj: this.data.scheduleDay.filter(
-                (item: CourseItem) =>
-                    item.position.dayOfWeek == this.data.TabCur &&
-                    item.active.indexOf(this.data.numOfWeek) != -1
-            )
-        })
+        this.showCourses()
     },
     toggleDelay() {
         const that = this
@@ -45,10 +40,12 @@ Page({
             {
                 courseID: 'qw123',
                 active: [2, 3, 4],
-                position: {
-                    dayOfWeek: 0,
-                    indexOfDay: [0, 1, 2]
-                },
+                position: [
+                    {
+                        dayOfWeek: 0,
+                        indexOfDay: [0, 1, 2]
+                    }
+                ],
                 info: {
                     name: '高等数学',
                     teacher: '祖冲之',
@@ -58,10 +55,12 @@ Page({
             {
                 courseID: 'qw124',
                 active: [2, 3, 4],
-                position: {
-                    dayOfWeek: 0,
-                    indexOfDay: [3, 4]
-                },
+                position: [
+                    {
+                        dayOfWeek: 0,
+                        indexOfDay: [3, 4]
+                    }
+                ],
                 info: {
                     name: '毛泽东思想与中国特色社会主义理论体系概论',
                     teacher: '冯友兰·茅以升',
@@ -71,10 +70,12 @@ Page({
             {
                 courseID: 'qw125',
                 active: [2, 3, 4],
-                position: {
-                    dayOfWeek: 1,
-                    indexOfDay: [0, 1, 2]
-                },
+                position: [
+                    {
+                        dayOfWeek: 1,
+                        indexOfDay: [0, 1, 2]
+                    }
+                ],
                 info: {
                     name: '计算机组成原理',
                     teacher: '侯捷',
@@ -85,30 +86,49 @@ Page({
         let week = 2
         this.setData({
             scheduleDay: sch,
-            numOfWeek: week
+            numOfWeek: week,
+            loading: false
         })
-        this.setData({
-            obj: this.data.scheduleDay.filter(
-                (item: CourseItem) =>
-                    item.position.dayOfWeek == 0 && item.active.indexOf(this.data.numOfWeek) != -1
-            )
-        })
+        this.showCourses()
         this.toggleDelay()
         /*
         Promise.all([this.courseSchedule()])
             .then(() => {
+                this.showCourses()
+                this.toggleDelay()
                 // TODO数据绑定到this
             })
             .catch((reason) => {
                 console.log(reason)
-            })
-            */
-    }
-    /*
+            })*/
+    },
+    showCourses() {
+        this.setData({
+            obj: this.data.scheduleDay
+                .reduce((arr: CourseItem[], item: CourseItem) => {
+                    for (let pos of item.position) {
+                        if (pos.dayOfWeek == this.data.TabCur) {
+                            let result: CourseItem = JSON.parse(JSON.stringify(item))
+                            result.position = [pos]
+                            arr.push(result)
+                        }
+                    }
+                    return arr
+                }, [])
+                .filter((item: CourseItem) => {
+                    for (let pos of item.position) {
+                        if (pos.dayOfWeek == this.data.TabCur) {
+                            return item.active.indexOf(this.data.numOfWeek) != -1
+                        }
+                    }
+                    return false
+                })
+        })
+    },
     async courseSchedule() {
         let res = await new Promise<scheduleRes>((resolve, reject) => {
             wx.request({
-                url: app.globalData.hostName + '/courses/course',
+                url: app.globalData.hostName + '/course/courses',
                 method: 'POST',
                 data: {
                     college: app.globalData.college,
@@ -122,11 +142,15 @@ Page({
         })
         if (res.success) {
             this.setData({
-                scheduleDay: res.result
+                scheduleDay: res.result,
+                loading: false
             })
         } else {
+            this.setData({
+                loading: false
+            })
+            // TODO:
         }
-    return res.success
+        return res.success
     }
-    */
 })

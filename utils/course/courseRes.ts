@@ -1,12 +1,14 @@
 import { successRes, failRes } from '../basicRes'
 
+interface PositionItem {
+    dayOfWeek: number
+    indexOfDay: number[]
+}
+
 export interface CourseItem {
     courseID: string
     active: number[]
-    position: {
-        dayOfWeek: number
-        indexOfDay: number[]
-    }
+    position: PositionItem[]
     info: {
         name: string
         teacher: string
