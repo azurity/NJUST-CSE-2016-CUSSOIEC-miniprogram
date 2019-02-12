@@ -38,7 +38,7 @@ Page({
         })
         let res = await new Promise<openidRes>((resolve, reject) => {
             wx.request({
-                url: app.globalData.hostName + '/global/login',
+                url: app.globalData.hostName + '/global/openid',
                 method: 'GET',
                 data: { code: code.code },
                 success: ({ data }) => {
