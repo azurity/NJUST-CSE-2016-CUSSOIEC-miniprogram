@@ -6,7 +6,7 @@
     "compile": "tsc"
   },
   "devDependencies": {
-    "typescript": "^3.1.6"
+    "typescript": "^3.3.3"
   },
   "dependencies": {
     "dayjs": "^1.8.5"

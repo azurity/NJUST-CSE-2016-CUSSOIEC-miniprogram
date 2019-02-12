@@ -1,1 +1,3 @@
 /* pages/courseDetail/courseDetail.wxss */
+@import "../../component/colorUI/colorui.wxss";
+@import "../../component/colorUI/app.wxss";
