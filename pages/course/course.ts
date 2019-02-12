@@ -17,8 +17,6 @@ Page({
         toggleDelay: false
     },
     tabSelect(e: wx.TapEvent) {
-        console.log(e)
-        console.log(this.data.scheduleDay)
         this.setData({
             TabCur: e.currentTarget.dataset.id,
             scrollLeft: (e.currentTarget.dataset.id - 1) * 60
@@ -37,7 +35,7 @@ Page({
         }, 1000)
     },
     onLoad() {
-        let sch = []
+        /*let sch = []
         sch.push(
             {
                 courseID: 'qw123',
@@ -93,7 +91,7 @@ Page({
         })
         this.showCourses()
         this.toggleDelay()
-        /*
+        */
         Promise.all([this.courseSchedule(), this.weekInfo()])
             .then(() => {
                 this.showCourses()
@@ -102,7 +100,7 @@ Page({
             })
             .catch((reason) => {
                 console.log(reason)
-            })*/
+            })
     },
     showCourses() {
         this.setData({
