@@ -3,24 +3,24 @@
   <view class="flex-wrp" style="height:300px;flex-direction:column;">
     <view class="cu-bar bg-white solid-bottom">
       <view class='action'>
-        <text class='icon-titles text-orange '></text> 第{{numOfWeek}}周
+        <text class='icon-titles text-orange text-bold'></text> <text class='text-bold'>第 {{numOfWeek}} 周</text>
       </view>
     </view>
-    <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{7}}" wx:key bindtap='tabSelect' data-id="{{index}}">
-        星期{{index+1}}
+    <scroll-view scroll-x class="bg-white nav padding-left" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" wx:for="{{7}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+        星期{{weekNum[index]}}
       </view>
     </scroll-view>
     <view>
       <view class="cu-card article">
-        <view wx:for="{{obj}}" wx:key="item" class="cu-item shadow">
+        <view wx:for="{{obj}}" wx:key="item" class='cu-item shadow'>
           <view class="title text-limit-long"> {{item.info.name}} </view>
           <view class='content'>
             <view class="desc">
               <view class='text-gray text-limit-short'> 教师：{{item.info.teacher}} </view>
             </view>
             <view class='content'>
-              <view class='cu-tag bg-red light round'> 第{{item.position.indexOfDay[0]+1}}~9小节 </view>
+              <view class='cu-tag bg-red light round'> 第{{item.position.indexOfDay[0]+1}}~{{item.position.indexOfDay[item.position.indexOfDay.length-1]+1}}小节 </view>
               <view class='cu-tag bg-green light round'> {{item.info.location}} </view>
             </view>
           </view>

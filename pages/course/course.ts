@@ -9,13 +9,16 @@ Page({
         scrollLeft: 0,
         obj: <CourseItem[]>[],
         scheduleDay: <CourseItem[]>[],
-        numOfWeek: 0
+        numOfWeek: 0,
+        weekNum: ['一', '二', '三', '四', '五', '六', '日'],
+        toggleDelay: false
     },
     tabSelect(e: wx.TapEvent) {
         console.log(e)
         console.log(this.data.scheduleDay)
         this.setData({
-            TabCur: e.currentTarget.dataset.id
+            TabCur: e.currentTarget.dataset.id,
+            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
         })
         this.setData({
             obj: this.data.scheduleDay.filter(
@@ -24,6 +27,17 @@ Page({
                     item.active.indexOf(this.data.numOfWeek) != -1
             )
         })
+    },
+    toggleDelay() {
+        const that = this
+        this.setData({
+            toggleDelay: true
+        })
+        setTimeout(function() {
+            that.setData({
+                toggleDelay: false
+            })
+        }, 1000)
     },
     onLoad() {
         let sch = []
@@ -79,6 +93,7 @@ Page({
                     item.position.dayOfWeek == 0 && item.active.indexOf(this.data.numOfWeek) != -1
             )
         })
+        this.toggleDelay()
         /*
         Promise.all([this.courseSchedule()])
             .then(() => {

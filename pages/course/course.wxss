@@ -13,3 +13,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.text-spacing {
+  letter-spacing: 4rpx;
+}
