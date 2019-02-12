@@ -4,6 +4,7 @@
     "pages/launch/launch",
     "pages/binding/binding",
     "pages/index/index",
+    "pages/courseDetail/courseDetail",
     "pages/logs/logs",
     "pages/community/community"
   ],
