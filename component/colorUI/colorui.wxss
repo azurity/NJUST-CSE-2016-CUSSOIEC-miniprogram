@@ -1139,7 +1139,8 @@ button.icon.lg {
 }
 
 .cu-list.menu.sm-border>.cu-item::after {
-  width: calc(200% - 90rpx);
+  width: calc(200% - 12
+  0rpx);
   left: 30rpx;
 }
 
