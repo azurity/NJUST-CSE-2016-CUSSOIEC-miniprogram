@@ -133,7 +133,7 @@ Page({
                 data: {
                     college: app.globalData.college,
                     personID: app.globalData.personID,
-                    date: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                    date: dayjs().format('YYYY-MM-DD')
                 },
                 success: ({ data }) => {
                     resolve(<weekInfoRes>data)
@@ -153,7 +153,7 @@ Page({
         let res = await new Promise<scheduleRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/courses',
-                method: 'POST',
+                method: 'GET',
                 data: {
                     college: app.globalData.college,
                     personID: app.globalData.personID
