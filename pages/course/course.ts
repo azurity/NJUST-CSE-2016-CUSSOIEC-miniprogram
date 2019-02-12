@@ -1,12 +1,13 @@
 import { IMyApp } from '../../app'
 import { CourseItem, scheduleRes } from '../../utils/course/courseRes'
+import dayjs = require('dayjs')
 
 const app = getApp<IMyApp>()
 
 Page({
     data: {
         loading: true,
-        TabCur: 0,
+        TabCur: (dayjs().day() + 6) % 7,
         scrollLeft: 0,
         obj: <CourseItem[]>[],
         scheduleDay: <CourseItem[]>[],
