@@ -1,5 +1,7 @@
 import { IMyApp } from '../../app'
-import { infoRes, infoPostRes } from '../../utils/info/infoRes'
+import { PersonInfo, infoRes, infoPostRes } from '../../utils/info/infoRes'
+
+type ModalName = 'menuModal' | null
 
 const app = getApp<IMyApp>()
 
@@ -8,28 +10,26 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        personInfo: {},
+        personInfo: <PersonInfo>{
+            userType: '学生',
+            college: '南京理工大学',
+            personID: '916106840117',
+            realName: '陈清扬',
+            nickName: 'yuanmou',
+            gender: '男',
+            grade: '本科三年级',
+            academy: '计算机科学与工程学院',
+            major: '智能科学与技术',
+            phone: '18851198612',
+            email: 'yuanmou8@gmail.com'
+        },
         reviseNickName: '',
         revisePhone: '',
         reviseEmail: '',
-        reviseFlage: false
+        reviseFlage: false,
+        modalName: <ModalName>null
     },
     onLoad() {
-        this.setData({
-            personInfo: {
-                userType: '学生',
-                college: '南京理工大学',
-                personID: '916106840117',
-                realName: '陈清扬',
-                nickName: 'yuanmou',
-                gender: '男',
-                grade: '本科三年级',
-                academy: '计算机科学与工程学院',
-                major: '智能科学与技术',
-                phone: '18851198612',
-                email: 'yuanmou8@gmail.com'
-            }
-        })
         if (app.globalData.userInfo) {
             this.setData!({
                 userInfo: app.globalData.userInfo,
@@ -47,7 +47,7 @@ Page({
         } else {
             // 在没有 open-type=getUserInfo 版本的兼容处理
             wx.getUserInfo({
-                success: res => {
+                success: (res) => {
                     app.globalData.userInfo = res.userInfo
                     this.setData!({
                         userInfo: res.userInfo,
@@ -65,7 +65,7 @@ Page({
             hasUserInfo: true
         })
     },
-    showModal(e) {
+    showModal(e: wx.TapEvent) {
         this.setData({
             modalName: e.currentTarget.dataset.target,
             reviseNickName: this.data.personInfo.nickName,
@@ -73,27 +73,27 @@ Page({
             reviseEmail: this.data.personInfo.email
         })
     },
-    hideModal(e) {
+    hideModal(_: wx.TapEvent) {
         this.setData({
             modalName: null
         })
     },
-    nickNameInput(e) {
+    nickNameInput(e: wx.InputEvent) {
         this.setData({
             reviseNickName: e.detail.value
         })
     },
-    phoneInput(e) {
+    phoneInput(e: wx.InputEvent) {
         this.setData({
             revisePhone: e.detail.value
         })
     },
-    emailInput(e) {
+    emailInput(e: wx.InputEvent) {
         this.setData({
             reviseEmail: e.detail.value
         })
     },
-    resivedInfo() {
+    revisedInfo() {
         this.setData({
             personInfo: {
                 userType: this.data.personInfo.userType,
@@ -134,7 +134,7 @@ Page({
     async postUserInfo() {
         let result = await new Promise<infoPostRes>((resolve, reject) => {
             wx.request({
-                url: app.globalData.hostName + '/global/binding',
+                url: app.globalData.hostName + '/user/info',
                 method: 'POST',
                 data: {
                     college: app.globalData.college,
@@ -169,7 +169,7 @@ Page({
         this.setData({
             modalName: null
         })
-        this.resivedInfo()
+        this.revisedInfo()
         /*
         this.postUserInfo()
             .then((value) => {

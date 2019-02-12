@@ -1,26 +1,27 @@
 import { successRes, failRes } from '../basicRes'
 
+export interface PersonInfo {
+    userType: string
+    college: string
+    personID: string
+    realName: string
+    nickName: string
+    gender: string
+    grade: string
+    academy: string
+    major: string
+    phone: string
+    email: string
+}
+
 interface info extends successRes {
-    result: {
-        userType: string,
-        college: string,
-        personID: string,
-        realName: string,
-        nickName: string,
-        gender: string,
-        grade: string,
-        academy: string,
-        major: string,
-        phone: string,
-        email: string
-    }
+    result: PersonInfo
 }
 
 export type infoRes = info | failRes
 
 interface infoPost extends successRes {
-    result: null
+    result: undefined
 }
 
 export type infoPostRes = infoPost | failRes
-

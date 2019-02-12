@@ -20,7 +20,7 @@
     </view>
   </view>
   <view class="cu-modal {{modalName=='menuModal'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog" catchtap>
+    <view class="cu-dialog">
       <view class="cu-form-group">
         <view class='title'>昵称：</view>
         <input placeholder="{{personInfo.nickName}}" class='radius' name='input' bindinput='nickNameInput'></input>
