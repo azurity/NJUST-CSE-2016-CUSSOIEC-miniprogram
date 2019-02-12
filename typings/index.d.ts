@@ -3483,7 +3483,7 @@ declare namespace wx {
 	interface EventTarget {
 		id: string;
 		tagName: string;
-		dataset: { [name: string]: string };
+		dataset: { [name: string]: any };
 	}
 
 	type TouchEventType =
