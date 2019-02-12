@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/colorUI/colorui.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/component/colorUI/colorui.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/info.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/info/info.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/basicRes.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/basicRes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/info/info.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/info/info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/info/info.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/info/info.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/info/info.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/info/info.wxss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/info/info.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1045">
-              <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="94" selection-end-column="6" />
+            <state relative-caret-position="209">
+              <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -175,7 +174,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="ts.external.directory.path" value="C:\Users\JyunmauChan\Documents\GitHub\NJUST-CSE-2016-CUSSOIEC-miniprogram\node_modules\typescript\lib" />
   </component>
   <component name="RunDashboard">
@@ -202,12 +201,12 @@
       <updated>1549035784798</updated>
       <workItem from="1549035786152" duration="1180000" />
       <workItem from="1549688253541" duration="28000" />
-      <workItem from="1549962671206" duration="606000" />
+      <workItem from="1549962671206" duration="891000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13996000" />
+    <option name="totallyTimeSpent" value="14281000" />
   </component>
   <component name="TodoView" selected-index="3" />
   <component name="ToolWindowManager">
@@ -348,8 +347,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/info/info.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1045">
-          <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="94" selection-end-column="6" />
+        <state relative-caret-position="209">
+          <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
