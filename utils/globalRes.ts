@@ -11,3 +11,12 @@ interface binding extends successRes {
 }
 
 export type bindingRes = binding | failRes
+
+interface weekInfo extends successRes {
+    result: {
+        numOfWeek: number
+        range: number[]
+    }
+}
+
+export type weekInfoRes = weekInfo | failRes

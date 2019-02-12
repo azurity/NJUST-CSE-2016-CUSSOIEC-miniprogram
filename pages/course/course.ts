@@ -1,4 +1,5 @@
 import { IMyApp } from '../../app'
+import { weekInfoRes } from '../../utils/globalRes'
 import { CourseItem, scheduleRes } from '../../utils/course/courseRes'
 import dayjs = require('dayjs')
 
@@ -93,7 +94,7 @@ Page({
         this.showCourses()
         this.toggleDelay()
         /*
-        Promise.all([this.courseSchedule()])
+        Promise.all([this.courseSchedule(), this.weekInfo()])
             .then(() => {
                 this.showCourses()
                 this.toggleDelay()
@@ -126,6 +127,30 @@ Page({
                 })
         })
     },
+    async weekInfo() {
+        let info = await new Promise<weekInfoRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/global/week_info',
+                method: 'GET',
+                data: {
+                    college: app.globalData.college,
+                    personID: app.globalData.personID,
+                    date: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                },
+                success: ({ data }) => {
+                    resolve(<weekInfoRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (info.success) {
+            this.setData({
+                numOfWeek: info.result.numOfWeek
+            })
+        } else {
+            // TODO: 失败处理
+        }
+    },
     async courseSchedule() {
         let res = await new Promise<scheduleRes>((resolve, reject) => {
             wx.request({
@@ -150,8 +175,8 @@ Page({
             this.setData({
                 loading: false
             })
-            // TODO:
+            // TODO: 失败处理
         }
-        return res.success
+        //return res.success
     }
 })
