@@ -4,6 +4,10 @@
     "pages/launch/launch",
     "pages/binding/binding",
     "pages/index/index",
+<<<<<<< HEAD
+=======
+    "pages/courseDetail/courseDetail",
+>>>>>>> feature-courseDetail
     "pages/logs/logs",
     "pages/community/community"
   ],
