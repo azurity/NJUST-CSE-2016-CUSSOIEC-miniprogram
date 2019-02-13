@@ -34,12 +34,20 @@ Page({
                 name: '配套资源'
             }
         ],
-        class: {},
+        lesson: {},
         isLiving: true, //是否正在直播
         videoList: []
     },
 
-    tapCourse() {},
+    tapCourse(event:any) {
+        let id:string=event.currentTarget.dataset.id;
+        let name:string=event.currentTarget.dataset.name;
+        let url:string=event.currentTarget.dataset.url;
+        wx.setStorageSync("id",id);
+        wx.setStorageSync("name",name);
+        wx.setStorageSync("url",url);
+        wx.navigateTo({url:"/pages/video/video"})
+    },
 
     /**
      * 生命周期函数--监听页面加载，在此处做需要同步的初始化
@@ -113,7 +121,7 @@ Page({
             }
         ]
         this.setData({
-            class: obj,
+            lesson: obj,
             videoList: videos
         })
         /*if (query === undefined || query.courseID === undefined) {
