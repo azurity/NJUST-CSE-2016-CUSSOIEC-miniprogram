@@ -30,7 +30,9 @@ Page({
         modalName: <ModalName>null
     },
     onLoad() {
-
+        this.getPeronInfo().catch((reason) => {
+            console.log(reason)
+        })
     },
     showModal(e: wx.TapEvent) {
         this.setData({
