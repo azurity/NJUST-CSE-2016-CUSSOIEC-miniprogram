@@ -22,10 +22,77 @@ Page({
             color: 'olive',
             badge: 22,
             name: '配套资源'
-          }]
+          }],
+      class:{},
+      isLiving:true,//是否正在直播
+      videoList:[]
+
 
     },
+    tapCourse(){
+
+      
+    },
     onLoad(){
+      let obj={
+        courseID:'qw123',
+        active:[2,3,4],
+        position: [
+          {
+              dayOfWeek: 0,                                                             
+              indexOfDay: [0, 1, 2]
+          }
+         ],
+         info: {
+           name: '高等数学',
+           teacher: '祖冲之',
+           location: 'III-105'                          
+        }
+     }
+     let videos=[{
+      date:'2019-1-12',
+      courses:[{
+          id: 'v001',
+          name: '1.函数及其特性',
+          iswatch:false,
+          url: ''}]},
+      {date:'2019-1-13',
+      courses:[{
+          id: 'v002',
+          name: '2.极限的概念、性质和运算法则',
+          iswatch:true,
+          url: ''
+      }]         
+       },
+       {date:'2019-1-14',
+       courses:[{
+          id: 'v003',
+          name: '3.两个重要极限',
+          iswatch:true,
+          url: ''
+       },{
+          id: 'v004',
+          name: '4.极限存在准则',
+          iswatch: false,
+          url: ''
+       }]
+
+       },
+       {date:'2019-1-15',
+       courses:[{
+          id: 'v005',
+          name: '5.无穷小量和无穷大量',
+          iswatch: false,
+          url: ''
+       }]
+
+       }
+  
+  ]
+    this.setData({
+      class:obj,
+      videoList:videos
+    })
 
     }
 
