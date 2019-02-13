@@ -1,4 +1,6 @@
 import { IMyApp } from '../../app'
+import { liveRes } from '../../utils/course/live'
+import { DayVideos, videosRes } from '../../utils/course/video'
 
 interface CourseDetailQuery {
     courseID?: string
@@ -38,8 +40,9 @@ Page({
             }
         ],
         info: {},
-        isLiving: true, //是否正在直播
-        videoList: []
+        isLive: false, //是否正在直播
+        liveUrl: '',
+        videoList: <DayVideos[]>[]
     },
 
     tapCourse() {},
@@ -141,7 +144,46 @@ Page({
         }*/
     },
 
-    async init(courseID: string) {
-        // TODO: 加载课程详情页
+    async initLive(courseID: string) {
+        let live = await new Promise<liveRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/live_info',
+                method: 'GET',
+                data: { courseID: courseID },
+                success: ({ data }) => {
+                    resolve(<liveRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (live.success) {
+            this.setData({
+                isLive: live.result.isLive,
+                liveUrl: live.result.url
+            })
+        } else {
+            // TODO: 失败处理
+        }
+    },
+
+    async initVideos(courseID: string) {
+        let result = await new Promise<videosRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/videos',
+                method: 'GET',
+                data: { courseID: courseID },
+                success: ({ data }) => {
+                    resolve(<videosRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (result.success) {
+            this.setData({
+                videoList: result.result
+            })
+        } else {
+            // TODO: 失败处理
+        }
     }
 })
