@@ -2,6 +2,9 @@ import { IMyApp } from '../../app'
 
 interface CourseDetailQuery {
     courseID?: string
+    name?: string
+    teacher?: string
+    location?: string
 }
 
 const app = getApp<IMyApp>()
@@ -34,7 +37,7 @@ Page({
                 name: '配套资源'
             }
         ],
-        class: {},
+        info: {},
         isLiving: true, //是否正在直播
         videoList: []
     },
@@ -45,7 +48,7 @@ Page({
      * 生命周期函数--监听页面加载，在此处做需要同步的初始化
      */
     onLoad(query?: CourseDetailQuery) {
-        let obj = {
+        /*let obj = {
             courseID: 'qw123',
             active: [2, 3, 4],
             position: [
@@ -59,13 +62,13 @@ Page({
                 teacher: '祖冲之',
                 location: 'III-105'
             }
-        }
+        }*/
         let videos = [
             {
                 date: '2019-1-12',
-                courses: [
+                videos: [
                     {
-                        id: 'v001',
+                        videoID: 'v001',
                         name: '1.函数及其特性',
                         iswatch: false,
                         url: ''
@@ -74,9 +77,9 @@ Page({
             },
             {
                 date: '2019-1-13',
-                courses: [
+                videos: [
                     {
-                        id: 'v002',
+                        videoID: 'v002',
                         name: '2.极限的概念、性质和运算法则',
                         iswatch: true,
                         url: ''
@@ -85,15 +88,15 @@ Page({
             },
             {
                 date: '2019-1-14',
-                courses: [
+                videos: [
                     {
-                        id: 'v003',
+                        videoID: 'v003',
                         name: '3.两个重要极限',
                         iswatch: true,
                         url: ''
                     },
                     {
-                        id: 'v004',
+                        videoID: 'v004',
                         name: '4.极限存在准则',
                         iswatch: false,
                         url: ''
@@ -102,9 +105,9 @@ Page({
             },
             {
                 date: '2019-1-15',
-                courses: [
+                videos: [
                     {
-                        id: 'v005',
+                        videoID: 'v005',
                         name: '5.无穷小量和无穷大量',
                         iswatch: false,
                         url: ''
@@ -113,10 +116,19 @@ Page({
             }
         ]
         this.setData({
-            class: obj,
+            info: {
+                courseID: 'qwe',
+                name: '高等数学',
+                teacher: '祖冲之',
+                location: 'III-105'
+            },
             videoList: videos
         })
-        /*if (query === undefined || query.courseID === undefined) {
+        /*if (query === undefined 
+            || query.courseID === undefined
+            || query.name === undefined
+            || query.teacher === undefined
+            || query.location === undefined) {
             // TODO: 处理确实参数
         } else {
             this.init(query.courseID)
