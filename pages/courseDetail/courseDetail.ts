@@ -73,7 +73,7 @@ Page({
                     {
                         videoID: 'v001',
                         name: '1.函数及其特性',
-                        iswatch: false,
+                        isWatch: false,
                         url: ''
                     }
                 ]
@@ -84,7 +84,7 @@ Page({
                     {
                         videoID: 'v002',
                         name: '2.极限的概念、性质和运算法则',
-                        iswatch: true,
+                        isWatch: true,
                         url: ''
                     }
                 ]
@@ -95,13 +95,13 @@ Page({
                     {
                         videoID: 'v003',
                         name: '3.两个重要极限',
-                        iswatch: true,
+                        isWatch: true,
                         url: ''
                     },
                     {
                         videoID: 'v004',
                         name: '4.极限存在准则',
-                        iswatch: false,
+                        isWatch: false,
                         url: ''
                     }
                 ]
@@ -112,7 +112,7 @@ Page({
                     {
                         videoID: 'v005',
                         name: '5.无穷小量和无穷大量',
-                        iswatch: false,
+                        isWatch: false,
                         url: ''
                     }
                 ]
