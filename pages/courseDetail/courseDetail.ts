@@ -1,6 +1,7 @@
 import { IMyApp } from '../../app'
 import { liveRes } from '../../utils/course/live'
 import { DayVideos, videosRes } from '../../utils/course/video'
+import { CheckInfo, checkInRes } from '../../utils/course/checkIn'
 
 interface CourseDetailQuery {
     courseID?: string
@@ -40,12 +41,26 @@ Page({
             }
         ],
         info: {},
+        checkIn: <CheckInfo>{},
         isLive: false, //是否正在直播
         liveUrl: '',
         videoList: <DayVideos[]>[]
     },
 
     tapCourse() {},
+
+    tapIcon(e:wx.TapEvent){
+        switch(e.currentTarget.id){
+            case '考勤':
+                break
+            case '试题作业':
+                break
+            case '评教':
+                break
+            case '配套资源':
+                break
+        }
+    },
 
     /**
      * 生命周期函数--监听页面加载，在此处做需要同步的初始化
@@ -142,6 +157,31 @@ Page({
                     // TODO: 初始化出错处理
                 })
         }*/
+    },
+
+    async initCheckIn(courseID: string) {
+        let checkIn = await new Promise<checkInRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/check_in',
+                method: 'GET',
+                data: {
+                    college: app.globalData.college,
+                    personID: app.globalData.personID,
+                    courseID: courseID
+                },
+                success: ({ data }) => {
+                    resolve(<checkInRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (checkIn.success) {
+            this.setData({
+                checkIn: checkIn.result
+            })
+        } else {
+            // TODO: 错误处理
+        }
     },
 
     async initLive(courseID: string) {
