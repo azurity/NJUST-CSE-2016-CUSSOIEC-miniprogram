@@ -1,0 +1,50 @@
+<!--pages/homework/homework.wxml-->
+<view>
+  <scroll-view scroll-y scroll-with-animation='true' scroll-top='{{ topNum }}'>
+    <view>
+      
+      <view class='bg-white padding radius shadow-lg'>
+        <view class='cu-steps'>
+          <view class='cu-item {{index>num?"":"text-blue"}}' wx:for="{{numList}}" wx:key>
+            <text class='num {{index==2?"err":""}}' data-index='{{index + 1}}'></text>
+          </view>
+        </view>
+      </view>
+
+      <view class="cu-card dynamic no-card">
+        <view class="cu-item shadow padding">
+          <view class='text-content'>
+            {{numList[num].question}}
+          </view>
+          <view class="padding">
+            <view class="bg-img">此处可以显示一张图片(看后端方便加不加，数据结构留有了)
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <block wx:if="{{numList[num].type==0}}">
+        <radio-group class="block margin-top" bindchange="checkboxChange">
+          <view class="cu-form-group" wx:for="{{numList[num].choseList}}" wx:key="{{index}}">
+            <view class='title'>{{numList[num].choseList[index].name}}</view>
+            <radio class='round blue' value="{{index}}"></radio>
+          </view>
+        </radio-group>
+      </block>
+
+      <block wx:else>
+        <checkbox-group class="margin-top" bindchange="checkboxChange">
+          <view class="cu-form-group" wx:for="{{numList[num].choseList}}" wx:key="{{index}}">
+            <view class='title'>{{numList[num].choseList[index].name}}</view>
+            <checkbox class='round blue' value="{{index}}"></checkbox>
+          </view>
+        </checkbox-group>
+      </block>
+
+      <view class="flex padding justify-center align-center">
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='numSteps' wx:if="{{num == numList.length - 1}}">完成</button>
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='numSteps' wx:else>下一题</button>
+      </view>
+    </view>
+  </scroll-view>
+</view>
