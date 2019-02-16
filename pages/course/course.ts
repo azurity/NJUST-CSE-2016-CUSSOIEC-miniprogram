@@ -17,11 +17,17 @@ Page({
         toggleDelay: false
     },
     tabSelect(e: wx.TapEvent) {
-        this.setData({
-            TabCur: e.currentTarget.dataset.id,
-            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-        })
-        this.showCourses()
+        console.log(this.createSelectorQuery().select(`#${e.currentTarget.id}`))
+        wx.createSelectorQuery()
+            .select(`#${e.currentTarget.id}`)
+            .boundingClientRect((rect) => {
+                this.setData({
+                    TabCur: e.currentTarget.dataset.id,
+                    scrollLeft: (e.currentTarget.dataset.id - 1) * (<wx.NodesRefRect>rect).width
+                })
+                this.showCourses()
+            })
+            .exec()
     },
     toggleDelay() {
         const that = this

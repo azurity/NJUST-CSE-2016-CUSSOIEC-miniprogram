@@ -7,7 +7,7 @@
       </view>
     </view>
     <scroll-view scroll-x class="bg-white nav padding-left" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" wx:for="{{7}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      <view class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" wx:for="{{7}}" wx:key bindtap='tabSelect' data-id="{{index}}" id="item-{{index}}">
         星期{{weekNum[index]}}
       </view>
     </scroll-view>
