@@ -1,5 +1,5 @@
 import { IMyApp } from '../../app'
-import { PersonInfo, infoRes, infoPostRes } from '../../utils/info/infoRes'
+import { infoPostRes } from '../../utils/info/infoRes'
 
 type ModalName = 'menuModal' | null
 
@@ -10,30 +10,14 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        personInfo: <PersonInfo>{
-            userType: '学生',
-            college: '南京理工大学',
-            personID: '916106840117',
-            realName: '陈清扬',
-            nickName: 'yuanmou',
-            gender: '男',
-            grade: '本科三年级',
-            academy: '计算机科学与工程学院',
-            major: '智能科学与技术',
-            phone: '18851198612',
-            email: 'yuanmou8@gmail.com'
-        },
+        personInfo: app.globalData.personInfo!,
         reviseNickName: '',
         revisePhone: '',
         reviseEmail: '',
         reviseFlage: false,
         modalName: <ModalName>null
     },
-    onLoad() {
-        this.getPeronInfo().catch((reason) => {
-            console.log(reason)
-        })
-    },
+    onLoad() {},
     showModal(e: wx.TapEvent) {
         this.setData({
             modalName: e.currentTarget.dataset.target,
@@ -79,7 +63,7 @@ Page({
             }
         })
     },
-    async getPeronInfo() {
+    /*async getPeronInfo() {
         let res = await new Promise<infoRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/user/info',
@@ -99,15 +83,15 @@ Page({
             //console.log(res.reason)
         }
         // error抛出到外面，由catch处理
-    },
+    },*/
     async postUserInfo() {
         let result = await new Promise<infoPostRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/user/info',
                 method: 'POST',
                 data: {
-                    college: app.globalData.college,
-                    personID: app.globalData.personID,
+                    college: app.globalData.personInfo!.college,
+                    personID: app.globalData.personInfo!.personID,
                     data: {
                         nickName: this.data.personInfo.nickName,
                         phone: this.data.personInfo.phone,
