@@ -4,4 +4,5 @@ export interface successRes {
 
 export interface failRes {
     success: false
+    reason: string
 }
