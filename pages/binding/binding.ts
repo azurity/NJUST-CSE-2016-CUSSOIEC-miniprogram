@@ -1,6 +1,7 @@
 // pages/binding/binding.js
 import { IMyApp } from '../../app'
 import { bindingRes } from '../../utils/globalRes'
+import { infoRes } from '../../utils/info/infoRes'
 
 const app = getApp<IMyApp>()
 
@@ -33,7 +34,7 @@ Page({
         this.setData({ loading: true })
         this.submitRequest(defaultNickName)
             .then((value) => {
-                if (value.success) {
+                if (value) {
                     // TODO: 成功，跳转
                 } else {
                     this.setData({ loading: false })
@@ -74,7 +75,7 @@ Page({
             success: (res: wx.UserInfoResponse) => {
                 this.submit(res.userInfo.nickName)
             },
-            fail: ()=>{
+            fail: () => {
                 wx.showToast({ title: '请授权允许使用用户信息', icon: 'none' })
             }
         })
@@ -108,6 +109,23 @@ Page({
                 fail: reject
             })
         })
-        return result
+        if (!result.success) {
+            return false
+        }
+        let info = await new Promise<infoRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/user/info',
+                method: 'GET',
+                data: { openid: app.globalData.openid },
+                success: ({ data }) => {
+                    resolve(<infoRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (info.success) {
+            app.globalData.personInfo = info.result
+        }
+        return info.success
     }
 })
