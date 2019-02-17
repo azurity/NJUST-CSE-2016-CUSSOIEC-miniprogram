@@ -123,15 +123,10 @@ Page({
             modalName: null
         })
         this.revisedInfo()
-        /*
         this.postUserInfo()
             .then((value) => {
                 if (value) {
-                    wx.showToast({
-                        title: '修改成功',
-                        icon: 'success',
-                        duration: 2000
-                    })
+                    // TODO: 成功
                 } else {
                     // TODO: 失败，提示
                 }
@@ -139,6 +134,5 @@ Page({
             .catch((reason) => {
                 console.log(reason)
             })
-            */
     }
 })
