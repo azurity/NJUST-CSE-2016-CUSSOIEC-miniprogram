@@ -2,7 +2,7 @@ import { successRes, failRes } from '../basicRes'
 
 export interface CheckInfo {
     hasChecked: boolean
-    stage: number
+    isOpen: boolean
 }
 
 interface checkIn extends successRes {

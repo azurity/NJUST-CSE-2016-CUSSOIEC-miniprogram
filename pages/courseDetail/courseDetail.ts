@@ -60,6 +60,17 @@ Page({
     tapIcon(e: wx.TapEvent) {
         switch (e.currentTarget.id) {
             case '考勤':
+                if (this.data.checkIn.hasChecked) {
+                    // TODO: 已经签到
+                } else if (this.data.checkIn.isOpen) {
+                    this.checkIn()
+                        .then(() => {})
+                        .catch((reason) => {
+                            console.log(reason)
+                        })
+                } else {
+                    // TODO: 不能亲到
+                }
                 break
             case '试题作业':
                 break
@@ -234,5 +245,7 @@ Page({
         } else {
             // TODO: 失败处理
         }
-    }
+    },
+
+    async checkIn() {}
 })
