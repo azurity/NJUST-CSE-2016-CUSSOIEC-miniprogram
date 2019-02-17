@@ -2,6 +2,7 @@
   "pages": [
     "pages/courseDetail/courseDetail",
     "pages/video/video",
+    "pages/homework/homework",
     "pages/course/course",
     "pages/launch/launch",
     "pages/binding/binding",
@@ -20,22 +21,25 @@
     "color": "#a9b7b7",
     "selectedColor": "#11cd6e",
     "borderStyle": "black",
-    "list": [{
-      "selectedIconPath": "images/tabBar/course_press.png",
-      "iconPath": "images/tabBar/course.png",
-      "pagePath": "pages/course/course",
-      "text": "课程"
-    }, {
-      "selectedIconPath": "images/tabBar/index_press.png",
-      "iconPath": "images/tabBar/index.png",
-      "pagePath": "pages/index/index",
-      "text": "通知"
-    }, {
-      "selectedIconPath": "images/tabBar/community_press.png",
-      "iconPath": "images/tabBar/community.png",
-      "pagePath": "pages/community/community",
-      "text": "社区"
-    }]
+    "list": [
+      {
+        "selectedIconPath": "images/tabBar/course_press.png",
+        "iconPath": "images/tabBar/course.png",
+        "pagePath": "pages/course/course",
+        "text": "课程"
+      },
+      {
+        "selectedIconPath": "images/tabBar/index_press.png",
+        "iconPath": "images/tabBar/index.png",
+        "pagePath": "pages/index/index",
+        "text": "通知"
+      },
+      {
+        "selectedIconPath": "images/tabBar/community_press.png",
+        "iconPath": "images/tabBar/community.png",
+        "pagePath": "pages/community/community",
+        "text": "社区"
+      }
+    ]
   }
 }
-
