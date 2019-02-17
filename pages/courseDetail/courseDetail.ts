@@ -3,11 +3,11 @@ import { liveRes } from '../../utils/course/live'
 import { DayVideos, videosRes } from '../../utils/course/video'
 import { CheckInfo, checkInRes } from '../../utils/course/checkIn'
 
-interface CourseDetailQuery {
-    courseID?: string
-    name?: string
-    teacher?: string
-    location?: string
+interface CourseDetailInfo {
+    courseID: string
+    name: string
+    teacher: string
+    location: string
 }
 
 const app = getApp<IMyApp>()
@@ -49,8 +49,8 @@ Page({
 
     tapCourse() {},
 
-    tapIcon(e:wx.TapEvent){
-        switch(e.currentTarget.id){
+    tapIcon(e: wx.TapEvent) {
+        switch (e.currentTarget.id) {
             case '考勤':
                 break
             case '试题作业':
@@ -65,7 +65,13 @@ Page({
     /**
      * 生命周期函数--监听页面加载，在此处做需要同步的初始化
      */
-    onLoad(query?: CourseDetailQuery) {
+    onLoad() {
+        let detail: CourseDetailInfo | null = null
+        try {
+            detail = wx.getStorageSync('CourseDetail')
+        } catch (e) {
+            // TODO: 无参数处理
+        }
         /*let obj = {
             courseID: 'qw123',
             active: [2, 3, 4],
@@ -134,29 +140,18 @@ Page({
             }
         ]
         this.setData({
-            info: {
-                courseID: 'qwe',
-                name: '高等数学',
-                teacher: '祖冲之',
-                location: 'III-105'
-            },
+            info: detail,
             videoList: videos
         })
-        /*if (query === undefined 
-            || query.courseID === undefined
-            || query.name === undefined
-            || query.teacher === undefined
-            || query.location === undefined) {
-            // TODO: 处理确实参数
-        } else {
-            this.init(query.courseID)
-                .then(() => {
-                    // TODO: 完成初始化后
-                })
-                .catch(() => {
-                    // TODO: 初始化出错处理
-                })
-        }*/
+        /*
+        Promise.all([this.initCheckIn(), this.initLive(), this.initVideos()])
+            .then(() => {
+                // TODO: 完成初始化后
+            })
+            .catch(() => {
+                // TODO: 初始化出错处理
+            })
+        */
     },
 
     async initCheckIn(courseID: string) {
