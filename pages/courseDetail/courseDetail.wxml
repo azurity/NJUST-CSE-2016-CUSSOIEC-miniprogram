@@ -13,8 +13,8 @@
   </view>
 </view>
 <view class="cu-timeline">
-  <view class="cu-time" wx:if="{{isLiving}}">现在</view>
-  <view class="cu-item cur icon-noticefill text-red">
+  <view class="cu-time" wx:if="{{isLive}}">现在</view>
+  <view class="cu-item cur icon-noticefill text-red" wx:if="{{isLive}}">
     <view class="content bg-red light shadow-blur">
       <text>直播中...</text>
     </view>

@@ -47,14 +47,14 @@ Page({
         videoList: <DayVideos[]>[]
     },
 
-    tapCourse(event:any) {
-        let id:string=event.currentTarget.dataset.id;
-        let name:string=event.currentTarget.dataset.name;
-        let url:string=event.currentTarget.dataset.url;
-        wx.setStorageSync("id",id);
-        wx.setStorageSync("name",name);
-        wx.setStorageSync("url",url);
-        wx.navigateTo({url:"/pages/video/video"})
+    tapCourse(event: any) {
+        let id: string = event.currentTarget.dataset.id
+        let name: string = event.currentTarget.dataset.name
+        let url: string = event.currentTarget.dataset.url
+        wx.setStorageSync('id', id)
+        wx.setStorageSync('name', name)
+        wx.setStorageSync('url', url)
+        wx.navigateTo({ url: '/pages/video/video' })
     },
 
     tapIcon(e: wx.TapEvent) {
@@ -95,7 +95,7 @@ Page({
                 location: 'III-105'
             }
         }*/
-        let videos = [
+        /*let videos = [
             {
                 date: '2019-1-12',
                 videos: [
@@ -151,15 +151,21 @@ Page({
             info: detail,
             videoList: videos
         })
-        /*
-        Promise.all([this.initCheckIn(), this.initLive(), this.initVideos()])
+        */
+        this.setData({
+            info: detail!
+        })
+        Promise.all([
+            this.initCheckIn(detail!.courseID),
+            this.initLive(detail!.courseID),
+            this.initVideos(detail!.courseID)
+        ])
             .then(() => {
                 // TODO: 完成初始化后
             })
             .catch(() => {
                 // TODO: 初始化出错处理
             })
-        */
     },
 
     async initCheckIn(courseID: string) {
@@ -214,7 +220,7 @@ Page({
             wx.request({
                 url: app.globalData.hostName + '/course/videos',
                 method: 'GET',
-                data: { courseID: courseID },
+                data: { openid: app.globalData.openid, courseID: courseID },
                 success: ({ data }) => {
                     resolve(<videosRes>data)
                 },
