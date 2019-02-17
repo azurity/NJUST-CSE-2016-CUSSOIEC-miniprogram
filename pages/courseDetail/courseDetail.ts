@@ -1,7 +1,8 @@
 import { IMyApp } from '../../app'
-import { liveRes } from '../../utils/course/live'
-import { DayVideos, videosRes } from '../../utils/course/video'
-import { CheckInfo, checkInRes } from '../../utils/course/checkIn'
+import { liveRes } from '../../utils/course/liveRes'
+import { DayVideos, videosRes } from '../../utils/course/videoRes'
+import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkInRes'
+import { CourseWeekInfo } from '../../utils/course/CourseWeekInfo'
 
 interface CourseDetailInfo {
     courseID: string
@@ -247,5 +248,35 @@ Page({
         }
     },
 
-    async checkIn() {}
+    async checkIn() {
+        let courseWeekInfo: CourseWeekInfo | null = null
+        try {
+            courseWeekInfo = wx.getStorageSync('CourseWeekInfo')
+        } catch (e) {
+            // TODO:
+        }
+        let result = await new Promise<checkInPostRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/check_in',
+                method: 'POST',
+                data: {
+                    college: app.globalData.college,
+                    personID: app.globalData.personID,
+                    courseID: this.data.info.courseID,
+                    numOfWeek: courseWeekInfo!.numOfWeek,
+                    dayOfWeek: courseWeekInfo!.dayOfWeek,
+                    indexOfDay: courseWeekInfo!.indexOfDay
+                },
+                success: ({ data }) => {
+                    resolve(<checkInPostRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (result.success) {
+            // TODO:
+        } else {
+            // TODO:
+        }
+    }
 })

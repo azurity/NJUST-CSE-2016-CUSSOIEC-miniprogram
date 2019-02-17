@@ -10,3 +10,9 @@ interface checkIn extends successRes {
 }
 
 export type checkInRes = checkIn | failRes
+
+interface checkInPost extends successRes {
+    result: undefined
+}
+
+export type checkInPostRes = checkInPost | failRes
