@@ -47,7 +47,15 @@ Page({
         videoList: <DayVideos[]>[]
     },
 
-    tapCourse() {},
+    tapCourse(event:any) {
+        let id:string=event.currentTarget.dataset.id;
+        let name:string=event.currentTarget.dataset.name;
+        let url:string=event.currentTarget.dataset.url;
+        wx.setStorageSync("id",id);
+        wx.setStorageSync("name",name);
+        wx.setStorageSync("url",url);
+        wx.navigateTo({url:"/pages/video/video"})
+    },
 
     tapIcon(e: wx.TapEvent) {
         switch (e.currentTarget.id) {

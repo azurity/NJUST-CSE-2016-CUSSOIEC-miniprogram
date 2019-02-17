@@ -1,12 +1,14 @@
 {
   "pages": [
     "pages/courseDetail/courseDetail",
+    "pages/video/video",
     "pages/course/course",
     "pages/launch/launch",
     "pages/binding/binding",
     "pages/index/index",
     "pages/logs/logs",
     "pages/community/community"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
