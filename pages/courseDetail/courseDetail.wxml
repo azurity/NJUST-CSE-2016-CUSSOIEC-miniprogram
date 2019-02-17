@@ -24,10 +24,10 @@
   <view class="cu-timeline">
   <view class="cu-time">{{item.date}}</view>
     <view wx:for="{{item.videos}}" wx:for-item="course" wx:key="{{course.videoID}}" class="cu-item">
-      <view wx:if="{{course.isWatch}}" class="content">
+      <view wx:if="{{course.isWatch}}" class="content" data-id="{{course.id}}" data-name="{{course.name}}" data-url="{{course.url}}" bindtap="tapCourse">
       {{course.name}}
       </view>
-      <view wx:else class="content bg-orange light">
+      <view wx:else class="content bg-orange light"  data-id="{{course.id}}" data-name="{{course.name}}" data-url="{{course.url}}" bindtap='tapCourse'>
       {{course.name}}
       </view>
     </view>

@@ -1,0 +1,25 @@
+
+<view class="cu-bar bg-white solid-bottom">
+    <view class='action title-style-3'>
+      <text class='text-xl text-bold'>{{courseName}}</text>
+    </view>
+</view>
+
+<view class="section tc">
+  <view class="flex solid-bottom padding justify-center">
+  <video
+    id="myVideo"
+    src="{{src}}"
+    danmu-list="{{danmuList}}"
+    enable-danmu
+    danmu-btn
+    controls
+  ></video>
+  </view>
+</view>
+<view class="box">
+  <view class="cu-bar input">
+    <input class='solid-bottom' focus="{{false}}" maxlength="300" cursor-spacing="10" bindblur="bindInputBlur"></input>
+    <button class='cu-btn bg-green light shadow-blur' bindtap="bindSendDanmu">发送弹幕</button>
+  </view>
+  </view>
