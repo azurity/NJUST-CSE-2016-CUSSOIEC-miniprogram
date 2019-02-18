@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/resource/resource",
+    "pages/homework/homework",
     "pages/courseDetail/courseDetail",
     "pages/video/video",
-    "pages/homework/homework",
     "pages/course/course",
     "pages/launch/launch",
     "pages/binding/binding",
