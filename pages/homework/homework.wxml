@@ -1,12 +1,33 @@
 <!--pages/homework/homework.wxml-->
-<view>
+<view class="cu-card" wx:if="{{!isInList}}">
+  <view wx:for="{{homeworkList}}" wx:key="{{index}}" class="cu-item shadow">
+    <view class="flex padding justify-start bg-green light" wx:if="{{homeworkList[index].isFinished}}" bindtap='entryCard' id='{{index}}'>
+      <text class="icon-check lg text-green margin-xs"></text>
+      <view class="text-green margin-xs">{{homeworkList[index].name}}</view>
+    </view>
+    <view class="flex padding justify-start bg-red light" wx:else bindtap='entryCard' id='{{index}}'>
+      <text class="icon-close lg text-red margin-xs"></text>
+      <view class="text-red margin-xs">{{homeworkList[index].name}}</view>
+    </view>
+  </view>
+</view>
+
+<view wx:else>
+  <view class="cu-bar bg-blue light">
+    <view class='action' bindtap='backCard'>
+      <text class='icon-close'></text> 关闭
+    </view>
+    <view class='content text-bold' bingtap='backCard'>
+      {{homeworkList[listNum].name}}
+    </view>
+  </view>
   <scroll-view scroll-y scroll-with-animation='true' scroll-top='{{ topNum }}'>
     <view>
       
       <view class='bg-white padding radius shadow-lg'>
         <view class='cu-steps'>
-          <view class='cu-item {{index>num?"":"text-blue"}}' wx:for="{{numList}}" wx:key>
-            <text class='num {{index==2?"err":""}}' data-index='{{index + 1}}'></text>
+          <view class='cu-item {{index>questionNum?"":"text-blue"}}' wx:for="{{questionList}}" wx:key>
+            <text class='num' data-index='{{index + 1}}'></text>
           </view>
         </view>
       </view>
@@ -14,7 +35,7 @@
       <view class="cu-card dynamic no-card">
         <view class="cu-item shadow padding">
           <view class='text-content'>
-            {{numList[num].question}}
+            {{questionList[questionNum].question}}
           </view>
           <view class="padding">
             <view class="bg-img">此处可以显示一张图片(看后端方便加不加，数据结构留有了)
@@ -23,27 +44,29 @@
         </view>
       </view>
       
-      <block wx:if="{{numList[num].type==0}}">
+      <block wx:if="{{questionList[questionNum].type==0}}">
         <radio-group class="block margin-top" bindchange="checkboxChange">
-          <view class="cu-form-group" wx:for="{{numList[num].choseList}}" wx:key="{{index}}">
-            <view class='title'>{{numList[num].choseList[index].name}}</view>
-            <radio class='round blue' value="{{index}}"></radio>
+          <view class="cu-form-group" wx:for="{{questionList[questionNum].choseList}}" wx:key="{{index}}">
+            <view class='title'>{{questionList[questionNum].choseList[index].name}}</view>
+            <text class='icon-roundcheckfill' wx:if="{{questionList[questionNum].choseList[index].checked}}"></text>
+            <radio class='round blue' value="{{index}}" wx:else></radio>
           </view>
         </radio-group>
       </block>
 
       <block wx:else>
         <checkbox-group class="margin-top" bindchange="checkboxChange">
-          <view class="cu-form-group" wx:for="{{numList[num].choseList}}" wx:key="{{index}}">
-            <view class='title'>{{numList[num].choseList[index].name}}</view>
-            <checkbox class='round blue' value="{{index}}"></checkbox>
+          <view class="cu-form-group" wx:for="{{questionList[questionNum].choseList}}" wx:key="{{index}}">
+            <view class='title'>{{questionList[questionNum].choseList[index].name}}</view>
+            <text class='icon-roundcheckfill' wx:if="{{questionList[questionNum].choseList[index].checked}}"></text>
+            <checkbox class='round blue' value="{{index}}" wx:else></checkbox>
           </view>
         </checkbox-group>
       </block>
 
       <view class="flex padding justify-center align-center">
-        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='numSteps' wx:if="{{num == numList.length - 1}}">完成</button>
-        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='numSteps' wx:else>下一题</button>
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionSteps' wx:if="{{questionNum == questionList.length - 1}}">完成</button>
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionSteps' wx:else>下一题</button>
       </view>
     </view>
   </scroll-view>

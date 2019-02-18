@@ -6,7 +6,17 @@ const app = getApp<IMyApp>()
 Page({
     data: {
         basics: 0,
-        numList: [{
+        homeworkList: [{
+            name: '数字音频理论',
+            homeworkID: '1234',
+            isFinished: true
+        }, {
+            name: '数字视频信号处理',
+            homeworkID: '12345',
+            isFinished: false
+        }],
+        isInList: false,
+        questionList: [{
             type: 0,
             question: '这是单选题',
             imageURL: '',
@@ -19,7 +29,8 @@ Page({
             }, {
                 name: '选项四'
             }],
-            correctAnswer: '0'
+            correctAnswer: '0',
+            userAnswer: '1'
         }, {
             type: 1,
             question: '这是多选题',
@@ -35,14 +46,33 @@ Page({
             }, {
                 name: '选项五'
             }],
-            correctAnswer: ['1', '2']
+            correctAnswer: ['1', '2'],
+            userAnswer: ['1', '2']
+        },{
+            type: 1,
+            question: '这是多选题2',
+            imageURL: '',
+            choseList: [{
+                name: '选项一'
+            }, {
+                name: '选项二'
+            }, {
+                name: '选项三'
+            }, {
+                name: '选项四'
+            }, {
+                name: '选项五'
+            }],
+            correctAnswer: ['1', '2'],
+            userAnswer: ['1', '2']
         }],
         answerList: [],
-        userAnswer: null,
-        num: 0
+        userAnswer: [],
+        questionNum: 0,
+        listNum: 0
     },
     onLoad() {
-        // 获取作业数据
+        // 获取作业列表
     },
     async getHomework() {
         let res = await new Promise<homeworkRes>((resolve, reject) => {
@@ -60,7 +90,7 @@ Page({
         })
         if (res.success) {
             this.setData({
-                numList: res.result
+                questionList: res.result
             })
         } else {
             // 作业未获取成功
@@ -86,13 +116,60 @@ Page({
         })
         return res
     },
-    numSteps() {
-        if (this.data.num == this.data.numList.length - 1) {
-            // 提示错题情况
+    entryCard(e: wx.TapEvent) {
+        // 获取作业详情
+        this.setData({
+            listNum: e.currentTarget.id
+        })
+        if (this.data.homeworkList[this.data.listNum].isFinished) {
+            for (let i = 0; i < this.data.questionList.length; i++) {
+                for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
+                    if (isInArray(this.data.questionList[i].userAnswer, j.toString())) {
+                        this.data.questionList[i].choseList[j].checked = true
+                    } else {
+                        this.data.questionList[i].choseList[j].checked = false
+                    }
+                    this.setData({
+                        questionList: this.data.questionList
+                    })
+                }
+            }
+        }
+        this.setData({
+            isInList: true
+        })
+    },
+    backCard() {
+        this.setData({
+            isInList: false
+        })
+        this.onLoad()
+    },
+    questionSteps() {
+        console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
+        if (this.data.questionNum == this.data.questionList.length - 1) {
             // 完成作业提交
             // 页面跳转返回
+            if (arrayEqual(this
+                .data.userAnswer, this.data.questionList[this.data.questionNum].correctAnswer)) {
+                this.data.answerList.push({
+                    indexNum: this.data.questionNum,
+                    isCorrect: true,
+                    userAnswer: this.data.userAnswer
+                })
+            } else {
+                this.data.answerList.push({
+                    indexNum: this.data.questionNum,
+                    isCorrect: false,
+                    userAnswer: this.data.userAnswer
+                })
+            }
+            this.setData({
+                answerList: this.data.answerList
+            })
+            this.backCard()
         }
-        if (!this.data.userAnswer) {
+        if (this.data.userAnswer.length==0) {
             wx.showToast({
                 title: '请作答！',
                 icon: 'none',
@@ -100,23 +177,29 @@ Page({
             })
         } else {
             if (arrayEqual(this
-                .data.userAnswer, this.data.numList[this.data.num].correctAnswer)) {
+                .data.userAnswer, this.data.questionList[this.data.questionNum].correctAnswer)) {
                 this.data.answerList.push({
-                    indexNum: this.data.num,
+                    indexNum: this.data.questionNum,
                     isCorrect: true,
                     userAnswer: this.data.userAnswer
                 })
             } else {
                 this.data.answerList.push({
-                    indexNum: this.data.num,
+                    indexNum: this.data.questionNum,
                     isCorrect: false,
                     userAnswer: this.data.userAnswer
                 })
             }
+            this.setData({
+                answerList: this.data.answerList
+            })
             console.log(this.data.answerList)
-            if (this.data.num < this.data.numList.length - 1) {
+            if (this.data.questionNum < this.data.questionList.length - 1) {
                 this.setData({
-                    num: this.data.num + 1
+                    questionNum: this.data.questionNum + 1
+                })
+                this.setData({
+                    userAnswer: []
                 })
             }
         }
@@ -150,4 +233,13 @@ function arrayEqual(array1: Array<any>, array2: Array<any>): boolean {
         }
     }
     return true
+}
+
+function isInArray(array: Array<any>, value: any): boolean {
+    for (let i = 0; i < array.length; i++) {
+        if (value === array[i]) {
+            return true
+        }
+    }
+    return false
 }

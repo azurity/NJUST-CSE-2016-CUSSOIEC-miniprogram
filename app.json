@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/homework/homework",
     "pages/courseDetail/courseDetail",
     "pages/video/video",
-    "pages/homework/homework",
+    "pages/homeworkTeacher/homeworkTeacher",
     "pages/course/course",
     "pages/launch/launch",
     "pages/binding/binding",
     "pages/index/index",
     "pages/logs/logs",
     "pages/community/community"
-
   ],
   "window": {
     "backgroundTextStyle": "light",

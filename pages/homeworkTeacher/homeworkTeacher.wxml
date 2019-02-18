@@ -1,0 +1,13 @@
+<!--pages/homeworkTeacher/homeworkTeacher.wxml-->
+<view class="cu-card">
+  <view wx:for="{{homeworkList}}" wx:key class="cu-item shadow">
+    <view class="flex padding justify-start bg-green light">
+      <text class="icon-check lg text-green margin-xs"></text>
+      <view class="text-green margin-xs">这里有个戏精铲屎官，主子了解一下？</view>
+    </view>
+    <view class="flex padding justify-start bg-red light">
+      <text class="icon-close lg text-red margin-xs"></text>
+      <view class="text-red margin-xs">这里有个戏精铲屎官，主子了解一下？</view>
+    </view>
+  </view>
+</view>
