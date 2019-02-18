@@ -21,15 +21,15 @@
     <view class="cu-dialog" catchtap>
       <view class="cu-form-group">
         <view class='title padding-left'>昵称：</view>
-        <input placeholder="{{personInfo.nickName}}" class='radius' name='input' bindinput='nickNameInput'></input>
+        <input value="{{personInfo.nickName}}" class='radius' name='input' bindinput='nickNameInput'></input>
       </view>
       <view class="cu-form-group">
         <view class='title padding-left'>电话：</view>
-        <input placeholder="{{personInfo.phone}}" class='radius' name='input' bindinput='phoneInput'></input>
+        <input value="{{personInfo.phone}}" class='radius' name='input' bindinput='phoneInput'></input>
       </view>
       <view class="cu-form-group">
         <view class='title padding-left'>邮箱：</view>
-        <input placeholder="{{personInfo.email}}" class='radius' name='input' bindinput='emailInput'></input>
+        <input value="{{personInfo.email}}" class='radius' name='input' bindinput='emailInput'></input>
       </view>
       <view class="cu-item justify-around">
         <view class='action padding'>
