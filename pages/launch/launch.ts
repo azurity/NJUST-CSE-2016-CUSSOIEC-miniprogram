@@ -72,11 +72,12 @@ Page({
     },
 
     direct(aim: DirectAim) {
-        // TODO: 在此处完成实际的跳转过程，跳转至主页面
         if (aim == DirectAim.Binding) {
             // 跳转至绑定页
+            wx.redirectTo({ url: '/pages/binding/binding' })
         } else if (aim == DirectAim.Index) {
             // 跳转至主页
+            wx.switchTab({ url: '/pages/index/index' })
         }
     }
 })

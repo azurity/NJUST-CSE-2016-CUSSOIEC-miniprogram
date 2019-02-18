@@ -35,7 +35,8 @@ Page({
         this.submitRequest(defaultNickName)
             .then((value) => {
                 if (value) {
-                    // TODO: 成功，跳转
+                    // 成功，跳转
+                    wx.switchTab({ url: '/pages/index/index' })
                 } else {
                     this.setData({ loading: false })
                     // TODO: 失败，提示
