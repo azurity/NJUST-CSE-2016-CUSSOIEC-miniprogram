@@ -2,7 +2,7 @@ import { successRes, failRes } from '../basicRes'
 
 interface homework extends successRes {
     result: {
-        homeworkList:[]
+        homeworkList: []
     }
 }
 

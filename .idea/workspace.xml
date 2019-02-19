@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" afterDir="false" />
-    </list>
+    <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -32,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="158" column="74" selection-start-line="158" selection-start-column="74" selection-end-line="158" selection-end-column="74" />
+            <state relative-caret-position="209">
+              <caret line="170" column="16" lean-forward="true" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -250,12 +243,12 @@
       <workItem from="1549035786152" duration="1180000" />
       <workItem from="1549688253541" duration="28000" />
       <workItem from="1550371869171" duration="2737000" />
-      <workItem from="1550482803514" duration="19764000" />
+      <workItem from="1550482803514" duration="20254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40796000" />
+    <option name="totallyTimeSpent" value="41286000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="19" width="1696" height="1026" extended-state="6" />
@@ -390,8 +383,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="158" column="74" selection-start-line="158" selection-start-column="74" selection-end-line="158" selection-end-column="74" />
+        <state relative-caret-position="209">
+          <caret line="170" column="16" lean-forward="true" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>

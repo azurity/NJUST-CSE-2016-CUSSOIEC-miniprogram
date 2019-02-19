@@ -48,7 +48,7 @@ Page({
             }],
             correctAnswer: ['1', '2'],
             userAnswer: ['1', '2']
-        },{
+        }, {
             type: 1,
             question: '这是多选题2',
             imageURL: '',
@@ -176,8 +176,8 @@ Page({
     },
     questionSteps() {
         console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
-        let finished:boolean = this.data.homeworkList[this.data.listNum].isFinished
-        if (this.data.userAnswer.length==0 && !finished) {
+        let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
+        if (this.data.userAnswer.length == 0 && !finished) {
             wx.showToast({
                 title: '请作答！',
                 icon: 'none',
@@ -209,8 +209,7 @@ Page({
                 this.setData({
                     userAnswer: []
                 })
-            }
-            else {
+            } else {
                 if (!finished) {
                     // 完成，发送answerList
                 }
