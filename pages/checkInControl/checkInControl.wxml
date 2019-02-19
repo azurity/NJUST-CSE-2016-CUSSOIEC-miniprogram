@@ -1,0 +1,26 @@
+<!--pages/checkInControl/checkInControl.wxml-->
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg light" bindtap="toggleState" loading="{{loading}}" disabled="{{loading}}">{{isOpen?'结束签到':'开放签到'}}</button>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item" wx:for="{{list}}" wx:key>
+    <view class="content">
+      <text class="text-black">第{{item.weekInfo.numOfWeek}}周，</text>
+      <text class="text-black">星期{{weekNum[item.weekInfo.dayOfWeek]}}，</text>
+      <text class="text-black">第{{item.weekInfo.indexOfDay[0]+1}}~{{item.weekInfo.indexOfDay[item.weekInfo.indexOfDay.length-1]+1}}节</text>
+      <view class="text-grey text-sm">
+        <text>{{item.count}}人</text>
+      </view>
+    </view>
+    <view class="action">
+      <button class="cu-btn round line-green" data-index="{{item.recordID}}" bindtap="deleteItem">
+        <text class="icon-delete"> 删除</text>
+      </button>
+    </view>
+  </view>
+</view>
+<view wx:if="{{listLoading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
+  </view>
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/checkInControl/checkInControl",
     "pages/courseDetail/courseDetail",
     "pages/video/video",
     "pages/homework/homework",

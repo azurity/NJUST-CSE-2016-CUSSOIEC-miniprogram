@@ -1,4 +1,4 @@
-import { successRes, failRes } from '../basicRes'
+import { successRes, failRes } from '../../basicRes'
 
 export interface CheckInfo {
     hasChecked: boolean

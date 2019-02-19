@@ -1,15 +1,8 @@
 import { IMyApp } from '../../app'
 import { liveRes } from '../../utils/course/liveRes'
 import { DayVideos, videosRes } from '../../utils/course/videoRes'
-import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkInRes'
-import { CourseWeekInfo } from '../../utils/course/CourseWeekInfo'
-
-interface CourseDetailInfo {
-    courseID: string
-    name: string
-    teacher: string
-    location: string
-}
+import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkIn/checkInRes'
+import { CourseDetailInfo, CourseWeekInfo } from '../../utils/course/CourseInfo'
 
 const app = getApp<IMyApp>()
 

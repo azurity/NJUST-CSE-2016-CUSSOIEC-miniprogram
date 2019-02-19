@@ -1,0 +1,19 @@
+/* pages/checkInControl/checkInControl.wxss */
+@import '../../component/colorUI/colorui.wxss';
+@import '../../component/colorUI/icon.wxss';
+@import "../../component/loader/loaders.min.wxss";
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.square-spin > view {
+  background-color: lightgray;
+}
