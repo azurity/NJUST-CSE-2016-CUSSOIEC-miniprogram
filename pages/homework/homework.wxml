@@ -48,8 +48,14 @@
         <radio-group class="block margin-top" bindchange="checkboxChange">
           <view class="cu-form-group" wx:for="{{questionList[questionNum].choseList}}" wx:key="{{index}}">
             <view class='title'>{{questionList[questionNum].choseList[index].name}}</view>
-            <text class='icon-roundcheckfill' wx:if="{{questionList[questionNum].choseList[index].checked}}"></text>
-            <radio class='round blue' value="{{index}}" wx:else></radio>
+            <view wx:if='{{homeworkList[listNum].isFinished}}'>
+              <text class='icon-roundcheckfill text-green' wx:if="{{questionList[questionNum].choseList[index].checked==2}}"></text>
+              <text class='icon-roundcheckfill text-red' wx:elif="{{questionList[questionNum].choseList[index].checked==1}}"></text>
+              <text class='icon-roundclosefill text-gray' wx:else></text>
+            </view>
+            <view wx:else>
+              <radio class='round blue' value="{{index}}"></radio>
+            </view>
           </view>
         </radio-group>
       </block>
@@ -58,8 +64,14 @@
         <checkbox-group class="margin-top" bindchange="checkboxChange">
           <view class="cu-form-group" wx:for="{{questionList[questionNum].choseList}}" wx:key="{{index}}">
             <view class='title'>{{questionList[questionNum].choseList[index].name}}</view>
-            <text class='icon-roundcheckfill' wx:if="{{questionList[questionNum].choseList[index].checked}}"></text>
-            <checkbox class='round blue' value="{{index}}" wx:else></checkbox>
+            <view wx:if='{{homeworkList[listNum].isFinished}}'>
+              <text class='icon-roundcheckfill text-green' wx:if="{{questionList[questionNum].choseList[index].checked==2}}"></text>
+              <text class='icon-roundcheckfill text-red' wx:elif="{{questionList[questionNum].choseList[index].checked==1}}"></text>
+              <text class='icon-roundclosefill text-gray' wx:else></text>
+            </view>
+            <view wx:else>
+              <checkbox class='round blue' value="{{index}}"></checkbox>
+            </view>
           </view>
         </checkbox-group>
       </block>

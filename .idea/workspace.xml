@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/courseDetail/courseDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/courseDetail/courseDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homework/homework.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homework/homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homework/homework.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,11 +32,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="166" column="26" lean-forward="true" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="26" />
+            <state relative-caret-position="380">
+              <caret line="158" column="74" selection-start-line="158" selection-start-column="74" selection-end-line="158" selection-end-column="74" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -65,8 +71,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/utils/homework/homeworkRes.ts" />
         <option value="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" />
+        <option value="$PROJECT_DIR$/utils/homework/homeworkRes.ts" />
         <option value="$PROJECT_DIR$/pages/homework/homework.ts" />
       </list>
     </option>
@@ -193,6 +199,12 @@
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="homework" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -238,12 +250,12 @@
       <workItem from="1549035786152" duration="1180000" />
       <workItem from="1549688253541" duration="28000" />
       <workItem from="1550371869171" duration="2737000" />
-      <workItem from="1550482803514" duration="16978000" />
+      <workItem from="1550482803514" duration="19764000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38010000" />
+    <option name="totallyTimeSpent" value="40796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="19" width="1696" height="1026" extended-state="6" />
@@ -316,13 +328,6 @@
     <entry file="file://$PROJECT_DIR$/app.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/form/form.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -376,10 +381,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="166" column="26" lean-forward="true" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="26" />
+        <state relative-caret-position="380">
+          <caret line="158" column="74" selection-start-line="158" selection-start-column="74" selection-end-line="158" selection-end-column="74" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>

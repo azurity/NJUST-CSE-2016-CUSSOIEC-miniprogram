@@ -1,5 +1,5 @@
 import { IMyApp } from '../../app'
-import { homeworkRes, answerRes } from '../../utils/homework/homeworkRes'
+import { homeworkRes, answerRes, questionRes } from '../../utils/homework/homeworkRes'
 
 const app = getApp<IMyApp>()
 
@@ -77,13 +77,38 @@ Page({
     async getHomework() {
         let res = await new Promise<homeworkRes>((resolve, reject) => {
             wx.request({
+                url: app.globalData.hostName + '/course/homework_list',
+                method: 'GET',
+                data: {
+                    // 从courseDetail传来的courseID
+                    // openid
+                },
+                success: ({ data }) => {
+                    resolve(<homeworkRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (res.success) {
+            this.setData({
+                homeworkList: res.result.homeworkList
+            })
+        } else {
+            // 作业未获取成功
+        }
+    },
+    async getQuestion() {
+        let res = await new Promise<questionRes>((resolve, reject) => {
+            wx.request({
                 url: app.globalData.hostName + '/course/homework',
                 method: 'GET',
                 data: {
                     // 从courseDetail传来的courseID
+                    // homeworkID
+                    // openid
                 },
                 success: ({ data }) => {
-                    resolve(<homeworkRes>data)
+                    resolve(<questionRes>data)
                 },
                 fail: reject
             })
@@ -104,6 +129,7 @@ Page({
                 data: {
                     openid: app.globalData.openid,
                     // 从courseDetail传来的courseID
+                    // homeworkID
                     data: {
                         answer: this.data.answerList
                     }
@@ -125,9 +151,12 @@ Page({
             for (let i = 0; i < this.data.questionList.length; i++) {
                 for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
                     if (isInArray(this.data.questionList[i].userAnswer, j.toString())) {
-                        this.data.questionList[i].choseList[j].checked = true
+                        this.data.questionList[i].choseList[j].checked = 1
                     } else {
-                        this.data.questionList[i].choseList[j].checked = false
+                        this.data.questionList[i].choseList[j].checked = 0
+                    }
+                    if (isInArray(this.data.questionList[i].correctAnswer, j.toString())) {
+                        this.data.questionList[i].choseList[j].checked = 2
                     }
                     this.setData({
                         questionList: this.data.questionList
@@ -147,29 +176,8 @@ Page({
     },
     questionSteps() {
         console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
-        if (this.data.questionNum == this.data.questionList.length - 1) {
-            // 完成作业提交
-            // 页面跳转返回
-            if (arrayEqual(this
-                .data.userAnswer, this.data.questionList[this.data.questionNum].correctAnswer)) {
-                this.data.answerList.push({
-                    indexNum: this.data.questionNum,
-                    isCorrect: true,
-                    userAnswer: this.data.userAnswer
-                })
-            } else {
-                this.data.answerList.push({
-                    indexNum: this.data.questionNum,
-                    isCorrect: false,
-                    userAnswer: this.data.userAnswer
-                })
-            }
-            this.setData({
-                answerList: this.data.answerList
-            })
-            this.backCard()
-        }
-        if (this.data.userAnswer.length==0) {
+        let finished:boolean = this.data.homeworkList[this.data.listNum].isFinished
+        if (this.data.userAnswer.length==0 && !finished) {
             wx.showToast({
                 title: '请作答！',
                 icon: 'none',
@@ -201,6 +209,18 @@ Page({
                 this.setData({
                     userAnswer: []
                 })
+            }
+            else {
+                if (!finished) {
+                    // 完成，发送answerList
+                }
+                this.setData({
+                    questionNum: 0
+                })
+                this.setData({
+                    answerList: []
+                })
+                this.backCard()
             }
         }
         wx.pageScrollTo({
