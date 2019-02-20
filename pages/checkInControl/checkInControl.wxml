@@ -1,7 +1,4 @@
 <!--pages/checkInControl/checkInControl.wxml-->
-<view class="padding flex flex-direction">
-  <button class="cu-btn bg-green lg light" bindtap="toggleState" loading="{{loading}}" disabled="{{loading}}">{{isOpen?'结束签到':'开放签到'}}</button>
-</view>
 <view class="cu-list menu">
   <view class="cu-item" wx:for="{{list}}" wx:key>
     <view class="content">
@@ -16,6 +13,10 @@
       </button>
     </view>
   </view>
+  <view class="pad-down"></view>
+</view>
+<view class="flat-btn padding flex flex-direction">
+  <button class="cu-btn bg-green lg light" bindtap="toggleState" loading="{{loading}}" disabled="{{loading}}">{{isOpen?'结束签到':'开放签到'}}</button>
 </view>
 <view wx:if="{{listLoading}}" class="loader">
   <view class="square-spin">
