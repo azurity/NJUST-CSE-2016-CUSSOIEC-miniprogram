@@ -2,7 +2,7 @@ import { IMyApp } from '../../app'
 import { liveRes } from '../../utils/course/liveRes'
 import { DayVideos, videosRes } from '../../utils/course/videoRes'
 import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkIn/checkInRes'
-import { CourseDetailInfo, CourseWeekInfo } from '../../utils/course/CourseInfo'
+import { CourseDetailInfo } from '../../utils/course/CourseInfo'
 
 const app = getApp<IMyApp>()
 
@@ -242,12 +242,6 @@ Page({
     },
 
     async checkIn() {
-        let courseWeekInfo: CourseWeekInfo | null = null
-        try {
-            courseWeekInfo = wx.getStorageSync('CourseWeekInfo')
-        } catch (e) {
-            // TODO:
-        }
         let result = await new Promise<checkInPostRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in',
@@ -256,9 +250,7 @@ Page({
                     college: app.globalData.college,
                     personID: app.globalData.personID,
                     courseID: this.data.info.courseID,
-                    numOfWeek: courseWeekInfo!.numOfWeek,
-                    dayOfWeek: courseWeekInfo!.dayOfWeek,
-                    indexOfDay: courseWeekInfo!.indexOfDay
+                    time: this.data.checkIn.time
                 },
                 success: ({ data }) => {
                     resolve(<checkInPostRes>data)

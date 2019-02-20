@@ -3,6 +3,7 @@ import { successRes, failRes } from '../../basicRes'
 export interface CheckInfo {
     hasChecked: boolean
     isOpen: boolean
+    time: string
 }
 
 interface checkIn extends successRes {

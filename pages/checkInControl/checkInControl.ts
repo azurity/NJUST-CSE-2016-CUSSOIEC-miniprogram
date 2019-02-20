@@ -1,8 +1,9 @@
 // pages/checkInControl/checkInControl.ts
 import { IMyApp } from '../../app'
-import { CourseDetailInfo, CourseWeekInfo } from '../../utils/course/CourseInfo'
+import { CourseDetailInfo } from '../../utils/course/CourseInfo'
 import { historyRes, HistoryItem } from '../../utils/course/checkIn/historyRes'
 import { itemRes } from '../../utils/course/checkIn/itemRes'
+import dayjs = require('dayjs')
 
 const app = getApp<IMyApp>()
 
@@ -14,19 +15,14 @@ Page({
         courseID: '',
         list: <HistoryItem[]>[
             {
-                weekInfo: {
-                    numOfWeek: 1,
-                    dayOfWeek: 1,
-                    indexOfDay: [1, 2, 3]
-                },
-                recordID: 12,
+                time: '2019-02-20 12:03:23',
                 count: 28
             }
         ],
         isOpen: false,
         loading: false,
         listLoading: true,
-        currentRecordID: 0,
+        currentTime: '',
         weekNum: ['一', '二', '三', '四', '五', '六', '日']
     },
 
@@ -63,7 +59,7 @@ Page({
     },
 
     deleteItem(e: wx.TapEvent) {
-        this.delete(e.currentTarget.dataset.index)
+        this.delete(e.currentTarget.dataset.time)
             .then(() => {})
             .catch((reason) => {
                 console.log(reason)
@@ -99,19 +95,14 @@ Page({
     },
 
     async open() {
-        let weekInfo: CourseWeekInfo | null = null
-        try {
-            weekInfo = wx.getStorageSync('CourseWeekInfo')
-        } catch (e) {
-            // TODO:
-        }
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
                 data: {
+                    courseID: this.data.courseID,
+                    time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
                     data: {
-                        courseID: this.data.courseID,
-                        weekInfo: weekInfo!
+                        isOpen: true
                     }
                 },
                 success: ({ data }) => {
@@ -122,7 +113,7 @@ Page({
         })
         if (result.success) {
             this.setData({
-                currentRecordID: result.result
+                currentTime: result.result
             })
             // TODO: 反馈
         } else {
@@ -134,7 +125,13 @@ Page({
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
-                data: { recordID: this.data.currentRecordID, data: { isOpen: false } },
+                data: {
+                    courseID: this.data.courseID,
+                    time: this.data.currentTime,
+                    data: {
+                        isOpen: false
+                    }
+                },
                 success: ({ data }) => {
                     resolve(<itemRes>data)
                 },
@@ -148,11 +145,15 @@ Page({
         }
     },
 
-    async delete(recordID: number) {
+    async delete(time: string) {
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
-                data: { recordID: recordID, data: null },
+                data: {
+                    courseID: this.data.courseID,
+                    time: time,
+                    data: null
+                },
                 success: ({ data }) => {
                     resolve(<itemRes>data)
                 },

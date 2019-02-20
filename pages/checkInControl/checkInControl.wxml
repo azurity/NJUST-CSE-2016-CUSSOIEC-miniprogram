@@ -5,15 +5,13 @@
 <view class="cu-list menu">
   <view class="cu-item" wx:for="{{list}}" wx:key>
     <view class="content">
-      <text class="text-black">第{{item.weekInfo.numOfWeek}}周，</text>
-      <text class="text-black">星期{{weekNum[item.weekInfo.dayOfWeek]}}，</text>
-      <text class="text-black">第{{item.weekInfo.indexOfDay[0]+1}}~{{item.weekInfo.indexOfDay[item.weekInfo.indexOfDay.length-1]+1}}节</text>
+      <text class="text-black">{{item.time}}</text>
       <view class="text-grey text-sm">
         <text>{{item.count}}人</text>
       </view>
     </view>
     <view class="action">
-      <button class="cu-btn round line-green" data-index="{{item.recordID}}" bindtap="deleteItem">
+      <button class="cu-btn round line-green" data-time="{{item.time}}" bindtap="deleteItem">
         <text class="icon-delete"> 删除</text>
       </button>
     </view>
