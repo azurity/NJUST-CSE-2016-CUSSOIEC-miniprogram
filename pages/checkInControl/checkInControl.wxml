@@ -1,7 +1,7 @@
 <!--pages/checkInControl/checkInControl.wxml-->
 <view class="cu-list menu">
-  <view class="cu-item" wx:for="{{list}}" wx:key>
-    <view class="content">
+  <view class="cu-item margin-top" wx:for="{{list}}" wx:key>
+    <view class="content padding">
       <text class="text-black">{{item.time}}</text>
       <view class="text-grey text-sm">
         <text>{{item.count}}人</text>
