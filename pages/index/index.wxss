@@ -3,5 +3,19 @@
 @import '../../component/colorUI/icon.wxss';
 
 .card-swiper swiper-item {
+  padding-top: 10px;
+  padding-bottom: 50rpx;
+}
+
+.card-swiper swiper-item {
   left: 0rpx;
+}
+
+.cu-card > .cu-item {
+  margin: 15rpx;
+}
+
+.floating {
+  position: fixed;
+  top: 0;
 }

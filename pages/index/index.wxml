@@ -1,7 +1,55 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
-<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-  <swiper-item wx:for="{{4}}" wx:key class="{{cardCur==index?'cur':''}}" style="width: 610rpx;">
+<!--view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="icon-titles text-orange text-bold"></text> <text class="text-bold">推荐内容</text>
+  </view>
+</view-->
+<swiper id="recommand" class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item wx:for="{{4}}" wx:key class="{{cardCur==index?'cur':''}}" style="width: 100%;">
     <view class='bg-img shadow-blur' style="background-image:url(https://image.weilanwl.com/img/4x3-{{index+1}}.jpg)"></view>
   </swiper-item>
 </swiper>
+<!--/-->
+<scroll-view scroll-x class="bg-white nav padding-left" bindscroll="scroll" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view wx:for="{{listName}}" class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" data-id="{{index}}" id="item-{{index}}" bindtap="tabSelect" wx:key>{{item}}</view>
+</scroll-view>
+<scroll-view wx:if="{{floating}}" scroll-x class="bg-white nav padding-left floating solid-bottom shadow" bindscroll="scroll" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view wx:for="{{listName}}" class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" data-id="{{index}}" id="item-{{index}}" bindtap="tabSelect" wx:key>{{item}}</view>
+</scroll-view>
+<!--/-->
+<view class="cu-card article">
+  <view class="cu-item shadow">
+    <view class="title">文章类卡片</view>
+    <view class="content">
+      <image src="https://image.weilanwl.com/img/4x3-3.jpg" mode="aspectFill"></image>
+      <view class="desc">
+        <view>描述文字</view>
+        <view>
+          <view class='cu-tag bg-red light sm round'>tag-1</view>
+          <view class='cu-tag bg-green light sm round'>tag-2</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--/-->
+<view class="cu-card case">
+  <view class="cu-item shadow">
+    <view class='image'>
+      <image src="https://image.weilanwl.com/img/4x3-1.jpg" mode="widthFix"></image>
+      <view class="cu-tag bg-blue">测试Tag</view>
+      <view class='cu-bar bg-shadeBottom'>重点文章卡片</view>
+    </view>
+  </view>
+</view>
+<!--/-->
+<view class="cu-card article">
+  <view class="cu-item shadow">
+    <view class="title">通知卡片</view>
+    <view class="content">
+      <view class="desc">
+        <view>描述文字</view>
+      </view>
+    </view>
+  </view>
+</view>

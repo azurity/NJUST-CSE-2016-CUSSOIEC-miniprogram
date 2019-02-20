@@ -3545,7 +3545,14 @@ declare namespace wx {
 			}
 		> {}
 
-	interface ScrollEvent extends BuiltInEvent<"scroll", {}> {}
+	interface ScrollEvent extends BuiltInEvent<"scroll", {
+		scrollLeft:number
+		scrollTop:number
+		scrollHeight:number
+		scrollWidth:number
+		deltaX:number
+		deltaY:number
+	}> {}
 
 	interface Touch {
 		identifier: number;
