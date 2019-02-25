@@ -16,8 +16,65 @@
 <scroll-view wx:if="{{floating}}" scroll-x class="bg-white nav padding-left floating solid-bottom shadow" bindscroll="scroll" scroll-with-animation scroll-left="{{scrollLeft}}">
   <view wx:for="{{listName}}" class="cu-item {{index==TabCur?'text-blue text-spacing cur':'text-spacing'}}" data-id="{{index}}" id="item-{{index}}" bindtap="tabSelect" wx:key>{{item}}</view>
 </scroll-view>
+<!--/主要渲染\-->
+<view wx:for="{{infoList}}" wx:key class="cu-card {{item.type=='activity'?'case':'article'}}">
+  <!--activity-->
+  <view wx:if="{{item.type=='activity'}}" class="cu-item shadow">
+    <view class='image'>
+      <image src="{{item.image}}" mode="widthFix"></image>
+      <view wx:if="{{item.tag!=''}}" class="cu-tag bg-blue">{{item.tag}}</view>
+      <view class='cu-bar bg-shadeBottom'>{{item.description}}</view>
+    </view>
+  </view>
+  <!--notice-->
+  <view wx:elif="{{item.type=='notice'}}" class="cu-item shadow">
+    <view class="title">{{item.title}}</view>
+    <view class="content">
+      <image wx:if="{{item.image!=''}}" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="desc">
+        <view>{{item.description}}</view>
+        <view>
+          <view wx:for="{{item.tag}}" wx:for-item="tag" class='cu-tag bg-green light sm round'>{{tag}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--exam-->
+  <view wx:elif="{{item.type=='exam'}}" class="cu-item shadow">
+    <view class="title">考试 - {{item.name}}</view>
+    <view class="content">
+      <view class="desc">
+        <view>时间：{{item.time}}</view>
+        <view>地点：{{item.location}}</view>
+        <view>座位号：{{item.seatNumber}}</view>
+      </view>
+    </view>
+  </view>
+  <!--score-->
+  <view wx:elif="{{item.type=='score'}}" class="cu-item shadow">
+    <view class="title">成绩 - {{item.name}}</view>
+    <view class="content">
+      <view class="desc">
+        <view>分数：{{item.score}}</view>
+        <view>GPA：{{item.GPA}}</view>
+      </view>
+    </view>
+  </view>
+  <!--community-->
+  <view wx:elif="{{item.type=='community'}}" class="cu-item shadow">
+    <view class="title">{{item.subtype}}</view>
+    <view class="content">
+      <view class="desc">
+        <view>来自：{{item.sender}}</view>
+        <view>{{item.time}}</view>
+        <view>{{item.description}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--\_______/-->
 <!--/-->
-<view class="cu-card article">
+<!--view class="cu-card article">
   <view class="cu-item shadow">
     <view class="title">文章类卡片</view>
     <view class="content">
@@ -32,7 +89,7 @@
     </view>
   </view>
 </view>
-<!--/-->
+
 <view class="cu-card case">
   <view class="cu-item shadow">
     <view class='image'>
@@ -42,7 +99,7 @@
     </view>
   </view>
 </view>
-<!--/-->
+
 <view class="cu-card article">
   <view class="cu-item shadow">
     <view class="title">通知卡片</view>
@@ -52,4 +109,4 @@
       </view>
     </view>
   </view>
-</view>
+</view-->
