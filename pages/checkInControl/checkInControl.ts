@@ -13,12 +13,7 @@ Page({
      */
     data: {
         courseID: '',
-        list: <HistoryItem[]>[
-            {
-                time: '2019-02-20 12:03:23',
-                count: 28
-            }
-        ],
+        list: <HistoryItem[]>[],
         isOpen: false,
         loading: false,
         listLoading: true,
@@ -30,8 +25,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad() {
-        console.log(this.data.list)
-        /*this.init()
+        this.init()
             .then(() => {
                 this.setData({
                     listLoading: false
@@ -39,7 +33,7 @@ Page({
             })
             .catch((reason) => {
                 console.log(reason)
-            })*/
+            })
     },
 
     toggleState(_: wx.TapEvent) {

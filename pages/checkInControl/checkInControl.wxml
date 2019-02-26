@@ -4,7 +4,8 @@
     <view class="content padding">
       <text class="text-black">{{item.time}}</text>
       <view class="text-grey text-sm">
-        <text>{{item.count}}人</text>
+        <view>实到：{{item.count}}人</view>
+        <view>应到：{{item.expectation}}人</view>
       </view>
     </view>
     <view class="action">

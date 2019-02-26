@@ -3,6 +3,7 @@ import { successRes, failRes } from '../../basicRes'
 export interface HistoryItem {
     time: string
     count: number
+    expectation: number
 }
 
 interface history extends successRes {
