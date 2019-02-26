@@ -9,11 +9,13 @@
   <view class="flex solid-bottom padding justify-center">
   <video
     id="myVideo"
-    src="{{src}}"
+    src="{{url}}"
     danmu-list="{{danmuList}}"
     enable-danmu
     danmu-btn
     controls
+    bindtimeupdate="timeUpdate"
+    bindended="finish"
   ></video>
   </view>
 </view>
