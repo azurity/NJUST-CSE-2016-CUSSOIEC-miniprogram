@@ -3,69 +3,22 @@ import { homeworkRes, answerRes, questionRes } from '../../utils/homework/homewo
 
 const app = getApp<IMyApp>()
 
+interface questionI {
+    questionID: string
+}
+
+type question = questionI
+
+interface choseI {
+    choseID: string
+}
+
+type chose = choseI
+
 Page({
     data: {
         basics: 0,
-        homeworkList: [{
-            name: '数字音频理论',
-            homeworkID: '1234',
-            isFinished: true
-        }, {
-            name: '数字视频信号处理',
-            homeworkID: '12345',
-            isFinished: false
-        }],
         isInList: false,
-        questionList: [{
-            type: 0,
-            question: '这是单选题',
-            imageURL: '',
-            choseList: [{
-                name: '选项一'
-            }, {
-                name: '选项二'
-            }, {
-                name: '选项三'
-            }, {
-                name: '选项四'
-            }],
-            correctAnswer: '0',
-            userAnswer: '1'
-        }, {
-            type: 1,
-            question: '这是多选题',
-            imageURL: '',
-            choseList: [{
-                name: '选项一'
-            }, {
-                name: '选项二'
-            }, {
-                name: '选项三'
-            }, {
-                name: '选项四'
-            }, {
-                name: '选项五'
-            }],
-            correctAnswer: ['1', '2'],
-            userAnswer: ['1', '2']
-        }, {
-            type: 1,
-            question: '这是多选题2',
-            imageURL: '',
-            choseList: [{
-                name: '选项一'
-            }, {
-                name: '选项二'
-            }, {
-                name: '选项三'
-            }, {
-                name: '选项四'
-            }, {
-                name: '选项五'
-            }],
-            correctAnswer: ['1', '2'],
-            userAnswer: ['1', '2']
-        }],
         answerList: [],
         userAnswer: [],
         questionNum: 0,
@@ -73,6 +26,7 @@ Page({
     },
     onLoad() {
         // 获取作业列表
+        Promise.all([this.getHomework()])
     },
     async getHomework() {
         let res = await new Promise<homeworkRes>((resolve, reject) => {
@@ -80,8 +34,12 @@ Page({
                 url: app.globalData.hostName + '/course/homework_list',
                 method: 'GET',
                 data: {
-                    // 从courseDetail传来的courseID
-                    // openid
+                    // courseID: wx.getStorageSync('CourseDetail').data.courseID,
+                    // personID: app.globalData.personID,
+                    // college: app.globalData.college
+                    courseID: '3',
+                    personID: '916106840407',
+                    college: '南京理工大学'
                 },
                 success: ({ data }) => {
                     resolve(<homeworkRes>data)
@@ -97,15 +55,20 @@ Page({
             // 作业未获取成功
         }
     },
-    async getQuestion() {
+    async getQuestion(homework_id: string) {
         let res = await new Promise<questionRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/homework',
                 method: 'GET',
                 data: {
-                    // 从courseDetail传来的courseID
-                    // homeworkID
-                    // openid
+                    // courseID: wx.getStorageSync('CourseDetail').data.courseID,
+                    // personID: app.globalData.personID,
+                    // college: app.globalData.college,
+                    // homeworkID: homework_id
+                    courseID: '3',
+                    personID: '916106840407',
+                    college: '南京理工大学',
+                    homeworkID: '9'
                 },
                 success: ({ data }) => {
                     resolve(<questionRes>data)
@@ -121,15 +84,20 @@ Page({
             // 作业未获取成功
         }
     },
-    async postAnswer() {
+    async postAnswer(homework_id: string) {
         let res = await new Promise<answerRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/homework_answer',
                 method: 'POST',
                 data: {
-                    openid: app.globalData.openid,
-                    // 从courseDetail传来的courseID
-                    // homeworkID
+                    // personID: app.globalData.personID,
+                    // college: app.globalData.college,
+                    // courseID: wx.getStorageSync('courseDetail').data.courseID,
+                    // homeworkID: homework_id,
+                    courseID: '3',
+                    personID: '916106840407',
+                    college: '南京理工大学',
+                    homeworkID: '9',
                     data: {
                         answer: this.data.answerList
                     }
@@ -143,30 +111,48 @@ Page({
         return res
     },
     entryCard(e: wx.TapEvent) {
-        // 获取作业详情
         this.setData({
             listNum: e.currentTarget.id
         })
-        if (this.data.homeworkList[this.data.listNum].isFinished) {
-            for (let i = 0; i < this.data.questionList.length; i++) {
-                for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
-                    if (isInArray(this.data.questionList[i].userAnswer, j.toString())) {
-                        this.data.questionList[i].choseList[j].checked = 1
-                    } else {
-                        this.data.questionList[i].choseList[j].checked = 0
+        // 获取作业详情
+        Promise.all([this.getQuestion(this.data.homeworkList[this.data.listNum].homeworkID)])
+            .then(() => {
+                    this.setData({
+                        questionList: this.data.questionList.sort(function(a: question, b: question) {
+                            return parseInt(a.questionID) - parseInt(b.questionID)
+                        })
+                    })
+                    for (let n = 0; n < this.data.questionList.length; n++) {
+                        this.data.questionList[n].choseList = this.data.questionList[n].choseList.sort(function(a: chose, b: chose) {
+                            return parseInt(a.choseID) - parseInt(b.choseID)
+                        })
+                        this.setData({
+                            questionList: this.data.questionList
+                        })
                     }
-                    if (isInArray(this.data.questionList[i].correctAnswer, j.toString())) {
-                        this.data.questionList[i].choseList[j].checked = 2
+                    if (this.data.homeworkList[this.data.listNum].isFinished) {
+                        for (let i = 0; i < this.data.questionList.length; i++) {
+                            for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
+                                if (this.data.questionList[i].userAnswer.indexOf(j.toString()) >= 0) {
+                                    this.data.questionList[i].choseList[j].checked = 1
+                                } else {
+                                    this.data.questionList[i].choseList[j].checked = 0
+                                }
+                                if (this.data.questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
+                                    this.data.questionList[i].choseList[j].checked = 2
+                                }
+                                this.setData({
+                                    questionList: this.data.questionList
+                                })
+                            }
+                        }
                     }
                     this.setData({
-                        questionList: this.data.questionList
+                        isInList: true
                     })
                 }
-            }
-        }
-        this.setData({
-            isInList: true
-        })
+            )
+            .catch()
     },
     backCard() {
         this.setData({
@@ -212,6 +198,12 @@ Page({
             } else {
                 if (!finished) {
                     // 完成，发送answerList
+                    Promise.all([this.postAnswer(this.data.homeworkList[this.data.listNum].homeworkID)])
+                        .then((reason) => {
+                            console.log(reason)
+                        }).catch((reason) => {
+                        console.log(reason)
+                    })
                 }
                 this.setData({
                     questionNum: 0
@@ -228,13 +220,17 @@ Page({
     },
     checkboxChange(e) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+        let value = e.detail.value
+        if (this.data.questionList[this.data.questionNum].type == 0) {
+            value = [e.detail.value]
+        }
         this.setData({
-            userAnswer: e.detail.value
+            userAnswer: value
         })
     }
 })
 
-function arrayEqual(array1: Array<any>, array2: Array<any>): boolean {
+function arrayEqual(array1: string[], array2: string[]): boolean {
     if (!array2)
         return false
     if (!array1)
@@ -243,22 +239,13 @@ function arrayEqual(array1: Array<any>, array2: Array<any>): boolean {
     if (array1.length != array2.length)
         return false
 
-    for (let i = 0, l = array1.length; i < l; i++) {
-        if (array1[i] instanceof Array && array2[i] instanceof Array) {
-            if (!array1[i].equals(array2[i]))
-                return false
-        } else if (array1[i] != array2[i]) {
+    let tempArr1 = array1.sort()
+    let tempArr2 = array2.sort()
+    console.log(tempArr1, tempArr2)
+    for (let i = 0; i < tempArr1.length; i++) {
+        if (tempArr1[i] != tempArr2[i]) {
             return false
         }
     }
     return true
-}
-
-function isInArray(array: Array<any>, value: any): boolean {
-    for (let i = 0; i < array.length; i++) {
-        if (value === array[i]) {
-            return true
-        }
-    }
-    return false
 }
