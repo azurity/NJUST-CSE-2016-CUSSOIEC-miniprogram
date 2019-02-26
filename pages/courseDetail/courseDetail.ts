@@ -55,10 +55,15 @@ Page({
         switch (e.currentTarget.id) {
             case '考勤':
                 if (this.data.checkIn.hasChecked) {
+                    console.log('已经签到')
                     // TODO: 已经签到
                 } else if (this.data.checkIn.isOpen) {
                     this.checkIn()
-                        .then(() => {})
+                        .then(() => {
+                            wx.showToast({
+                                title: '成功签到'
+                            })
+                        })
                         .catch((reason) => {
                             console.log(reason)
                         })
