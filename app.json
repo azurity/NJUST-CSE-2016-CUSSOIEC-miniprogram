@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/homework/homework",
     "pages/homeworkTeacher/homeworkTeacher",
-    
+    "pages/homework/homework",
     "pages/courseDetail/courseDetail",
     "pages/video/video",
     "pages/course/course",

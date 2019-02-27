@@ -19,3 +19,9 @@ interface question extends successRes {
 }
 
 export type questionRes = question | failRes
+
+interface questionPost extends successRes {
+    result: null
+}
+
+export type questionPostRes = questionPost | failRes

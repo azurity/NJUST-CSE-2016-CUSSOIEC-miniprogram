@@ -64,11 +64,11 @@ Page({
                     // courseID: wx.getStorageSync('CourseDetail').data.courseID,
                     // personID: app.globalData.personID,
                     // college: app.globalData.college,
-                    // homeworkID: homework_id
+                    homeworkID: homework_id,
                     courseID: '3',
                     personID: '916106840407',
-                    college: '南京理工大学',
-                    homeworkID: '9'
+                    college: '南京理工大学'
+                    // homeworkID: '9'
                 },
                 success: ({ data }) => {
                     resolve(<questionRes>data)
@@ -93,11 +93,11 @@ Page({
                     // personID: app.globalData.personID,
                     // college: app.globalData.college,
                     // courseID: wx.getStorageSync('courseDetail').data.courseID,
-                    // homeworkID: homework_id,
+                    homeworkID: homework_id,
                     courseID: '3',
                     personID: '916106840407',
                     college: '南京理工大学',
-                    homeworkID: '9',
+                    // homeworkID: '9',
                     data: {
                         answer: this.data.answerList
                     }
@@ -222,7 +222,7 @@ Page({
             scrollTop: 0
         })
     },
-    checkboxChange(e) {
+    checkboxChange(e: { detail: { value: any; }; }) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
         let value = e.detail.value
         if (this.data.questionList[this.data.questionNum].type == 0) {

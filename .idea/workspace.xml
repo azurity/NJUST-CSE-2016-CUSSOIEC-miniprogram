@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homework/homework.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homework/homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/homework/homework.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,10 +26,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="19" lean-forward="true" selection-start-line="5" selection-end-line="15" selection-end-column="19" />
+            <state relative-caret-position="4256">
+              <caret line="224" column="19" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -36,29 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="61" column="47" lean-forward="true" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
+            <state relative-caret-position="494">
+              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -82,6 +86,8 @@
       <find>checked</find>
       <find>type</find>
       <find>ID</find>
+      <find>questionNum</find>
+      <find>choseList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,10 +103,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-157" />
-    <option name="y" value="-35" />
-    <option name="width" value="1920" />
-    <option name="height" value="1038" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1939" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -200,13 +206,6 @@
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="homework" type="462c0819:PsiDirectoryNode" />
-              <item name="homework.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="homeworkTeacher" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -214,12 +213,6 @@
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="index" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="video" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
@@ -284,11 +277,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63276000" />
+    <option name="totallyTimeSpent" value="74845000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24570674" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -296,7 +288,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49939686" visible="true" weight="0.04249292" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49939686" weight="0.04249292" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -420,24 +412,24 @@
     <entry file="file://$PROJECT_DIR$/utils/basicRes.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
+    <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="418">
+          <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
+    <entry file="file://$PROJECT_DIR$/utils/homework/homeworkRes.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="61" column="47" lean-forward="true" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
+        <state relative-caret-position="494">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="5" selection-end-line="15" selection-end-column="19" />
+        <state relative-caret-position="4256">
+          <caret line="224" column="19" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="19" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -446,8 +438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+        <state relative-caret-position="532">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>

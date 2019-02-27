@@ -2,24 +2,32 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/app.js" />
+        <item url="file://$PROJECT_DIR$/pages/binding/binding.js" />
         <item url="file://$PROJECT_DIR$/pages/courseDetail/courseDetail.js" />
         <item url="file://$PROJECT_DIR$/pages/homework/homework.js" />
         <item url="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" />
+        <item url="file://$PROJECT_DIR$/pages/launch/launch.js" />
         <item url="file://$PROJECT_DIR$/pages/video/video.js" />
         <item url="file://$PROJECT_DIR$/utils/course/checkIn.js" />
         <item url="file://$PROJECT_DIR$/utils/course/live.js" />
         <item url="file://$PROJECT_DIR$/utils/course/video.js" />
+        <item url="file://$PROJECT_DIR$/utils/globalRes.js" />
         <item url="file://$PROJECT_DIR$/utils/homework/homeworkRes.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/app.js" />
+      <root url="file://$PROJECT_DIR$/pages/binding/binding.js" />
       <root url="file://$PROJECT_DIR$/pages/courseDetail/courseDetail.js" />
       <root url="file://$PROJECT_DIR$/pages/homework/homework.js" />
       <root url="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" />
+      <root url="file://$PROJECT_DIR$/pages/launch/launch.js" />
       <root url="file://$PROJECT_DIR$/pages/video/video.js" />
       <root url="file://$PROJECT_DIR$/utils/course/checkIn.js" />
       <root url="file://$PROJECT_DIR$/utils/course/live.js" />
       <root url="file://$PROJECT_DIR$/utils/course/video.js" />
+      <root url="file://$PROJECT_DIR$/utils/globalRes.js" />
       <root url="file://$PROJECT_DIR$/utils/homework/homeworkRes.js" />
     </CLASSES>
     <SOURCES />

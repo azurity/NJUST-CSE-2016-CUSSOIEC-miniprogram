@@ -1,5 +1,5 @@
 import { IMyApp } from '../../app'
-import { homeworkRes, questionRes } from '../../utils/homework/homeworkRes'
+import { homeworkRes, questionRes, questionPostRes } from '../../utils/homework/homeworkRes'
 
 const app = getApp<IMyApp>()
 
@@ -21,12 +21,20 @@ Page({
         isInList: false,
         answerList: [],
         userAnswer: [],
-        questionNum: 0,
-        listNum: 0
+        questionNum: 1,
+        listNum: 0,
+        isDelete: false,
+        isAdd: false,
+        choseNum: 1,
+        choseType: 0
     },
     onLoad() {
         // 获取作业列表
-        Promise.all([this.getHomework()])
+        Promise.all([this.getHomework()]).then(() => {
+            console.log(this.data.homeworkList)
+        }).catch((reason) => {
+            console.log(reason)
+        })
     },
     async getHomework() {
         let res = await new Promise<homeworkRes>((resolve, reject) => {
@@ -64,11 +72,11 @@ Page({
                     // courseID: wx.getStorageSync('CourseDetail').data.courseID,
                     // personID: app.globalData.personID,
                     // college: app.globalData.college,
-                    // homeworkID: homework_id
+                    homeworkID: homework_id,
                     courseID: '3',
                     personID: '916106840407',
-                    college: '南京理工大学',
-                    homeworkID: '9'
+                    college: '南京理工大学'
+                    // homeworkID: '9'
                 },
                 success: ({ data }) => {
                     resolve(<questionRes>data)
@@ -83,6 +91,52 @@ Page({
         } else {
             // 作业未获取成功
         }
+    },
+    async postHomework(homework_name: string) {
+        let res = await new Promise<questionPostRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/homework',
+                method: 'POST',
+                data: {
+                    // personID: app.globalData.personID,
+                    // college: app.globalData.college,
+                    // courseID: wx.getStorageSync('courseDetail').data.courseID,
+                    courseID: '3',
+                    personID: '916106840407',
+                    college: '南京理工大学',
+                    homeworkName: homework_name,
+                    data: this.data.answerList
+                },
+                success: ({ data }) => {
+                    resolve(<questionPostRes>data)
+                },
+                fail: reject
+            })
+        })
+        return res
+    },
+    async deleteHomework(homework_name: string) {
+        let res = await new Promise<questionPostRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/course/homework',
+                method: 'POST',
+                data: {
+                    // personID: app.globalData.personID,
+                    // college: app.globalData.college,
+                    // courseID: wx.getStorageSync('courseDetail').data.courseID,
+                    courseID: '3',
+                    personID: '916106840407',
+                    college: '南京理工大学',
+                    homeworkName: homework_name,
+                    data: null
+                },
+                success: ({ data }) => {
+                    resolve(<questionPostRes>data)
+                },
+                fail: reject
+            })
+        })
+        return res
     },
     entryCard(e: wx.TapEvent) {
         this.setData({
@@ -132,39 +186,65 @@ Page({
     },
     backCard() {
         this.setData({
+            isAdd: false
+        })
+        this.setData({
+            choseNum: 1
+        })
+        this.setData({
             isInList: false
         })
         Promise.all([this.getHomework()])
     },
+    addCard() {
+        this.setData({
+            questionList: [{
+                questionIndex: '0',
+                question: '请输入题目'
+            }]
+        })
+        this.setData({
+            isAdd: true
+        })
+        this.setData({
+            isInList: true
+        })
+    },
+    deleteCard() {
+        // Promise.all([this.deleteCard()])
+        Promise.all([this.getHomework()])
+    },
+    addChose() {
+        this.setData({
+            choseNum: this.data.choseNum + 1
+        })
+        console.log(this.data.choseNum)
+    },
     questionSteps() {
-        console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
         let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
         if (this.data.userAnswer.length == 0 && !finished) {
             wx.showToast({
-                title: '请作答！',
+                title: '请设置正确选项！',
                 icon: 'none',
                 duration: 2000
             })
         } else {
-            if (arrayEqual(this
-                .data.userAnswer, this.data.questionList[this.data.questionNum].correctAnswer)) {
-                this.data.answerList.push({
-                    indexNum: this.data.questionNum,
-                    isCorrect: true,
-                    userAnswer: this.data.userAnswer
-                })
-            } else {
-                this.data.answerList.push({
-                    indexNum: this.data.questionNum,
-                    isCorrect: false,
-                    userAnswer: this.data.userAnswer
-                })
-            }
+            this.data.answerList.push({
+                questionIndex: this.data.questionNum,
+                correctAnswer: this.data.userAnswer
+            })
             this.setData({
                 answerList: this.data.answerList
             })
             console.log(this.data.answerList)
-            if (this.data.questionNum < this.data.questionList.length - 1) {
+            if (this.data.questionNum < this.data.questionList.length - 1 && !this.data.isAdd) {
+                this.setData({
+                    questionNum: this.data.questionNum + 1
+                })
+                this.setData({
+                    userAnswer: []
+                })
+            } else if (this.data.isAdd) {
                 this.setData({
                     questionNum: this.data.questionNum + 1
                 })
@@ -172,19 +252,6 @@ Page({
                     userAnswer: []
                 })
             } else {
-                if (!finished) {
-                    // 完成，发送answerList
-                    Promise.all([this.postAnswer(this.data.homeworkList[this.data.listNum].homeworkID)])
-                        .then((reason) => {
-                            console.log(reason)
-                        }).catch((reason) => {
-                        console.log(reason)
-                    })
-                    this.data.homeworkList[this.data.listNum].isFinished = true
-                    this.setData({
-                        homeworkList: this.data.homeworkList
-                    })
-                }
                 this.setData({
                     questionNum: 0
                 })
@@ -198,23 +265,53 @@ Page({
             scrollTop: 0
         })
     },
+    questionFinished() {
+        Promise.all([this.postHomework(this.data.homeworkName)])
+            .then((reason) => {
+                console.log(reason)
+            }).catch((reason) => {
+            console.log(reason)
+        })
+        this.data.homeworkList[this.data.listNum].isFinished = true
+        this.setData({
+            homeworkList: this.data.homeworkList
+        })
+        this.setData({
+            questionNum: 0
+        })
+        this.setData({
+            answerList: []
+        })
+        this.backCard()
+    },
+
+    checkboxChange(e: { detail: { value: any; }; }) {
+        console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+        let value = e.detail.value
+        if (this.data.choseType == 0) {
+            value = [e.detail.value]
+        }
+        this.setData({
+            userAnswer: value
+        })
+    },
 
     // ListTouch触摸开始
-    ListTouchStart(e) {
+    ListTouchStart(e: { touches: { pageX: any; }[]; }) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         })
     },
 
     // ListTouch计算方向
-    ListTouchMove(e) {
+    ListTouchMove(e: { touches: { pageX: number; }[]; }) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         })
     },
 
     // ListTouch计算滚动
-    ListTouchEnd(e) {
+    ListTouchEnd(e: { currentTarget: { dataset: { target: any; }; }; }) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -229,23 +326,3 @@ Page({
         })
     }
 })
-
-function arrayEqual(array1: string[], array2: string[]): boolean {
-    if (!array2)
-        return false
-    if (!array1)
-        return false
-
-    if (array1.length != array2.length)
-        return false
-
-    let tempArr1 = array1.sort()
-    let tempArr2 = array2.sort()
-    console.log(tempArr1, tempArr2)
-    for (let i = 0; i < tempArr1.length; i++) {
-        if (tempArr1[i] != tempArr2[i]) {
-            return false
-        }
-    }
-    return true
-}
