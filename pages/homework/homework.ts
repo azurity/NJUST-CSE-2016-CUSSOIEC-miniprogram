@@ -4,13 +4,13 @@ import { homeworkRes, answerRes, questionRes } from '../../utils/homework/homewo
 const app = getApp<IMyApp>()
 
 interface questionI {
-    questionID: string
+    questionIndex: string
 }
 
 type question = questionI
 
 interface choseI {
-    choseID: string
+    choseIndex: string
 }
 
 type chose = choseI
@@ -49,7 +49,7 @@ Page({
         })
         if (res.success) {
             this.setData({
-                homeworkList: res.result.homeworkList
+                homeworkList: res.result
             })
         } else {
             // 作业未获取成功
@@ -119,12 +119,12 @@ Page({
             .then(() => {
                     this.setData({
                         questionList: this.data.questionList.sort(function(a: question, b: question) {
-                            return parseInt(a.questionID) - parseInt(b.questionID)
+                            return parseInt(a.questionIndex) - parseInt(b.questionIndex)
                         })
                     })
                     for (let n = 0; n < this.data.questionList.length; n++) {
                         this.data.questionList[n].choseList = this.data.questionList[n].choseList.sort(function(a: chose, b: chose) {
-                            return parseInt(a.choseID) - parseInt(b.choseID)
+                            return parseInt(a.choseIndex) - parseInt(b.choseIndex)
                         })
                         this.setData({
                             questionList: this.data.questionList
@@ -158,7 +158,7 @@ Page({
         this.setData({
             isInList: false
         })
-        this.onLoad()
+        Promise.all([this.getHomework()])
     },
     questionSteps() {
         console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
@@ -203,6 +203,10 @@ Page({
                             console.log(reason)
                         }).catch((reason) => {
                         console.log(reason)
+                    })
+                    this.data.homeworkList[this.data.listNum].isFinished = true
+                    this.setData({
+                        homeworkList: this.data.homeworkList
                     })
                 }
                 this.setData({

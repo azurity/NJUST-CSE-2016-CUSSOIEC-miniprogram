@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/homework/homework",
+    "pages/homeworkTeacher/homeworkTeacher",
+    
     "pages/courseDetail/courseDetail",
     "pages/video/video",
-    "pages/homeworkTeacher/homeworkTeacher",
     "pages/course/course",
     "pages/launch/launch",
     "pages/binding/binding",
