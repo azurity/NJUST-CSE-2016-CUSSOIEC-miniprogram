@@ -20,13 +20,17 @@ Page({
         basics: 0,
         isInList: false,
         answerList: [],
-        userAnswer: [],
+        correctAnswer: [],
         questionNum: 1,
+        questionIndex: 0,
         listNum: 0,
         isDelete: false,
         isAdd: false,
         choseNum: 1,
-        choseType: 0
+        choseType: 0,
+        homeworkName: '',
+        questionName: '',
+        questionType: false
     },
     onLoad() {
         // 获取作业列表
@@ -105,6 +109,7 @@ Page({
                     personID: '916106840407',
                     college: '南京理工大学',
                     homeworkName: homework_name,
+                    homeworkID: null,
                     data: this.data.answerList
                 },
                 success: ({ data }) => {
@@ -115,7 +120,7 @@ Page({
         })
         return res
     },
-    async deleteHomework(homework_name: string) {
+    async deleteHomework(homework_name: string, homework_id: string) {
         let res = await new Promise<questionPostRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/homework',
@@ -128,6 +133,7 @@ Page({
                     personID: '916106840407',
                     college: '南京理工大学',
                     homeworkName: homework_name,
+                    homeworkID: homework_id,
                     data: null
                 },
                 success: ({ data }) => {
@@ -186,6 +192,12 @@ Page({
     },
     backCard() {
         this.setData({
+            questionIndex: 0
+        })
+        this.setData({
+            questionNum: 0
+        })
+        this.setData({
             isAdd: false
         })
         this.setData({
@@ -221,8 +233,9 @@ Page({
         console.log(this.data.choseNum)
     },
     questionSteps() {
+        console.log(this.data.questionName)
         let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
-        if (this.data.userAnswer.length == 0 && !finished) {
+        if (this.data.correctAnswer.length == 0 && !finished) {
             wx.showToast({
                 title: '请设置正确选项！',
                 icon: 'none',
@@ -230,8 +243,10 @@ Page({
             })
         } else {
             this.data.answerList.push({
-                questionIndex: this.data.questionNum,
-                correctAnswer: this.data.userAnswer
+                questionIndex: this.data.questionIndex,
+                questionName: this.data.questionName,
+                correctAnswer: this.data.correctAnswer,
+                type: this.data.questionType
             })
             this.setData({
                 answerList: this.data.answerList
@@ -239,21 +254,26 @@ Page({
             console.log(this.data.answerList)
             if (this.data.questionNum < this.data.questionList.length - 1 && !this.data.isAdd) {
                 this.setData({
-                    questionNum: this.data.questionNum + 1
+                    questionIndex: this.data.questionIndex + 1
                 })
                 this.setData({
-                    userAnswer: []
+                    correctAnswer: []
                 })
             } else if (this.data.isAdd) {
+                if (this.data.questionNum - 1 == this.data.questionIndex) {
+                    this.setData({
+                        questionNum: this.data.questionNum + 1
+                    })
+                }
                 this.setData({
-                    questionNum: this.data.questionNum + 1
+                    questionIndex: this.data.questionIndex + 1
                 })
                 this.setData({
-                    userAnswer: []
+                    correctAnswer: []
                 })
             } else {
                 this.setData({
-                    questionNum: 0
+                    questionIndex: 0
                 })
                 this.setData({
                     answerList: []
@@ -261,8 +281,19 @@ Page({
                 this.backCard()
             }
         }
+        this.setData({
+            questionName: ''
+        })
         wx.pageScrollTo({
             scrollTop: 0
+        })
+    },
+    questionStepsBack() {
+        this.setData({
+            questionIndex: this.data.questionIndex - 1
+        })
+        this.setData({
+            questionName: this.data.answerList[this.data.questionIndex].questionName
         })
     },
     questionFinished() {
@@ -280,11 +311,31 @@ Page({
             questionNum: 0
         })
         this.setData({
+            questionIndex: 0
+        })
+        this.setData({
             answerList: []
         })
         this.backCard()
     },
 
+    inputQuestionName(e) {
+        this.setData({
+            questionName: e.detail.value
+        })
+    },
+    questionTypeChange(e) {
+        if (e.detail.value) {
+            this.setData({
+                questionType: 1
+            })
+        } else {
+            this.setData({
+                questionType: 0
+            })
+        }
+        console.log(this.data.questionType)
+    },
     checkboxChange(e: { detail: { value: any; }; }) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
         let value = e.detail.value
@@ -292,7 +343,7 @@ Page({
             value = [e.detail.value]
         }
         this.setData({
-            userAnswer: value
+            correctAnswer: value
         })
     },
 

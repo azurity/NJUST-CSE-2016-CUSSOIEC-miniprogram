@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8c48eb4-b88d-481b-b595-ec3043089620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homework/homework.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homework/homework.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/homework/homeworkRes.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
+            <state relative-caret-position="1159">
               <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
             </state>
           </provider>
@@ -37,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4256">
+            <state relative-caret-position="4237">
               <caret line="224" column="19" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="19" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
@@ -49,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+            <state relative-caret-position="469">
+              <caret line="283" column="22" lean-forward="true" selection-start-line="283" selection-start-column="22" selection-end-line="283" selection-end-column="22" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -86,8 +79,9 @@
       <find>checked</find>
       <find>type</find>
       <find>ID</find>
-      <find>questionNum</find>
       <find>choseList</find>
+      <find>questionNum</find>
+      <find>user</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,10 +97,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="x" value="1817" />
+    <option name="y" value="12" />
+    <option name="width" value="1552" />
+    <option name="height" value="840" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -114,6 +108,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,7 +224,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,22 +267,24 @@
       <workItem from="1550482803514" duration="20830000" />
       <workItem from="1551093801672" duration="6747000" />
       <workItem from="1551162647490" duration="14119000" />
+      <workItem from="1551283663388" duration="25000" />
+      <workItem from="1551352316202" duration="5567000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74845000" />
+    <option name="totallyTimeSpent" value="80437000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="1912" y="26" width="1696" height="1026" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24570674" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22436671" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49939686" weight="0.04249292" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49939686" weight="0.041479822" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -414,8 +410,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/component/colorUI/pages/component/list/list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="1159">
           <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4237">
+          <caret line="224" column="19" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -426,20 +432,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/homework/homework.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4256">
-          <caret line="224" column="19" selection-start-line="224" selection-start-column="19" selection-end-line="224" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/homeworkTeacher/homeworkTeacher.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        <state relative-caret-position="469">
+          <caret line="283" column="22" lean-forward="true" selection-start-line="283" selection-start-column="22" selection-end-line="283" selection-end-column="22" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
