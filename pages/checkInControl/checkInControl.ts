@@ -92,6 +92,7 @@ Page({
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
+                method: 'POST',
                 data: {
                     courseID: this.data.courseID,
                     time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
@@ -107,6 +108,7 @@ Page({
         })
         if (result.success) {
             this.setData({
+                isOpen: true,
                 currentTime: result.result
             })
             // TODO: 反馈
@@ -119,6 +121,7 @@ Page({
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
+                method: 'POST',
                 data: {
                     courseID: this.data.courseID,
                     time: this.data.currentTime,
@@ -133,7 +136,10 @@ Page({
             })
         })
         if (result.success) {
-            // TODO: 刷新list
+            this.setData({
+                isOpen: false
+            })
+            await this.init()
         } else {
             // TODO:
         }
@@ -143,6 +149,7 @@ Page({
         let result = await new Promise<itemRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in/item',
+                method: 'POST',
                 data: {
                     courseID: this.data.courseID,
                     time: time,
@@ -155,7 +162,11 @@ Page({
             })
         })
         if (result.success) {
-            // TODO: 刷新list
+            this.setData({
+                list: this.data.list.filter((value: HistoryItem) => {
+                    return value.time != time
+                })
+            })
         } else {
             // TODO:
         }
