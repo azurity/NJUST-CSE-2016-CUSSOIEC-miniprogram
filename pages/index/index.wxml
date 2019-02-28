@@ -29,12 +29,13 @@
   <!--notice-->
   <view wx:elif="{{item.type=='notice'}}" class="cu-item shadow">
     <view class="title">{{item.title}}</view>
+    <view class="content text-grey">来自：{{item.source}}</view>
     <view class="content">
       <image wx:if="{{item.image!=''}}" src="{{item.image}}" mode="aspectFill"></image>
       <view class="desc">
         <view>{{item.description}}</view>
         <view>
-          <view wx:for="{{item.tag}}" wx:for-item="tag" class='cu-tag bg-green light sm round'>{{tag}}</view>
+          <view wx:for="{{item.tag}}" wx:key wx:for-item="tag" class='cu-tag bg-green light sm round'>{{tag}}</view>
         </view>
       </view>
     </view>
