@@ -1,8 +1,13 @@
-<!--pages/resource/resource.wxml-->
+<!--pages/resourceT/resourceT.wxml-->
 <view class="cu-bar bg-white solid-bottom">
   <view class='action title-style-3'>
     <text class='icon-circlefill text-olive'></text>
     <text class='text-xl text-bold'>配套资源</text>
+  </view>
+  <view class='action'>
+    <button class='cu-btn line-cyan shadow round' bindtap='uptap'>
+      <text class='icon-upload'></text>
+     上传</button>
   </view>
 </view>
 <view class="cu-list menu menu-avatar">
@@ -22,7 +27,7 @@
         <text class='icon-down'></text> 下载</button>
     </view>
   </view>
-   <view class='flex-sub text-center'>
+  <view class='flex-sub text-center'>
       <view class='solid-bottom text-sm padding'>
       </view>
       <text class='text-grey'>下面没有啦</text>

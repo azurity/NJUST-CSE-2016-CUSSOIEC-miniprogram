@@ -1,0 +1,3 @@
+/* pages/resourceT/resourceT.wxss */
+@import "../../component/colorUI/colorui.wxss";
+@import "../../component/colorUI/icon.wxss";
