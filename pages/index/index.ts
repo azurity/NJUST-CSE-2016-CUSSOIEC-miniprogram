@@ -1,5 +1,6 @@
 //index.js
 import { IMyApp } from '../../app'
+import { InfoItem, infoRes } from '../../utils/infoRes'
 
 interface ChangeDetail {
     current: number
@@ -17,7 +18,8 @@ Page({
         floating: false,
         scrollLeft: 0,
         TabCur: 0,
-        listName: ['全部', '考试', '成绩', '教务', '社区']
+        infoList: <InfoItem[]>[],
+        listName: ['全部', '考试', '成绩', '通知', '社区']
     },
 
     /**
