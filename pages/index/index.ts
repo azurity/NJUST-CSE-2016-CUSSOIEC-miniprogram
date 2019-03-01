@@ -14,6 +14,7 @@ Page({
     /**
      * 页面的初始数据
      */
+    types: ['all', 'exam', 'score', 'notice', 'community'],
     data: {
         floating: false,
         scrollLeft: 0,
@@ -25,7 +26,13 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad() {},
+    onLoad() {
+        this.loadInfo(this.types[0], true)
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
+    },
 
     cardSwiper(e: wx.CustomEvent<'change', ChangeDetail>) {
         //console.log(e)
@@ -48,6 +55,14 @@ Page({
             .exec()
     },
 
+    onReachBottom() {
+        this.loadInfo(this.types[this.data.TabCur], false)
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
+    },
+
     scroll(e: wx.ScrollEvent) {
         this.setData({
             scrollLeft: e.detail.scrollLeft
@@ -64,5 +79,41 @@ Page({
                 })
             })
             .exec()
+        this.loadInfo(this.types[e.currentTarget.dataset.id], true)
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
+    },
+
+    async loadInfo(type: string, reset: boolean) {
+        if (reset) {
+            this.setData({
+                infoList: <InfoItem[]>[]
+            })
+        }
+        let result = await new Promise<infoRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/stream/infos',
+                method: 'GET',
+                data: {
+                    college: app.globalData.college,
+                    personID: app.globalData.personID,
+                    type: type,
+                    startIndex: this.data.infoList.length
+                },
+                success: ({ data }) => {
+                    resolve(<infoRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (result.success) {
+            this.setData({
+                infoList: this.data.infoList.concat(result.result)
+            })
+        } else {
+            // TODO:
+        }
     }
 })
