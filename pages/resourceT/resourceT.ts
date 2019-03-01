@@ -4,10 +4,10 @@ const app = getApp<IMyApp>()
 Page({
     data:{
         loadModal:false,
-        resourceList:[{name:'1.函数及其特性.zip',url:'',isDownLoad:false},
-        {name:'2.极限的概念、性质和运算法则.zip',url:'',isDownLoad:false},
-        {name:'3.两个重要极限.zip',url: '',isDownLoad:true}]
-        //resourceList:<resourceItem[]>[]
+        // resourceList:[{name:'1.函数及其特性.zip',url:'',isDownLoad:false},
+        // {name:'2.极限的概念、性质和运算法则.zip',url:'',isDownLoad:false},
+        // {name:'3.两个重要极限.zip',url: '',isDownLoad:true}]
+        resourceList:<resourceItem[]>[]
     },
     uptap(event:any){
       wx.chooseImage({
