@@ -11,7 +11,7 @@
   </view>
 </view>
 <view class="cu-list menu menu-avatar">
-  <view class="cu-item" wx:for="{{resourceList}}">
+  <view class="cu-item" wx:for="{{resourceList}}" wx:key>
     <view class="cu-avatar radius lg icon-file text-blue"></view>
     <view class='content'>
       <view class='text-grey'>{{item.name}}</view>

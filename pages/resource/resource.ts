@@ -9,29 +9,42 @@ Page({
         // {name:'3.两个重要极限.zip',url: '',isDownLoad:true}]
         resourceList: <resourceItem[]>[]
     },
-    downtap(event: any) {
+    downtap(event: wx.TapEvent) {
         let url: string = event.currentTarget.dataset.url
         this.setData({
             loadModal: true
         })
-        let that = this
         wx.downloadFile({
             url: url,
-            success(res) {
+            success: (res) => {
                 // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-                var filePath = res.tempFilePath
-                that.setData({
+                let filePath = res.tempFilePath
+                // TODO: 文件存储
+                wx.showToast({
+                    title: '下载完成',
+                    icon: 'success'
+                })
+            },
+            fail: () => {
+                wx.showToast({
+                    title: '下载失败',
+                    icon: 'none'
+                })
+            },
+            complete: () => {
+                this.setData({
                     loadModal: false
                 })
             }
         })
-        setTimeout(() => {
-            this.setData({
-                loadModal: false
-            })
-        }, 2000)
     },
-    onLoad() {},
+    onLoad() {
+        this.initSource(wx.getStorageSync('CourseDetail').data.courseID)
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
+    },
     async initSource(courseID: string) {
         let resource = await new Promise<resourceRes>((resolve, reject) => {
             wx.request({

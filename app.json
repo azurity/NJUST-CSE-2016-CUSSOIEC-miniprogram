@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/resource/resource",
+    "pages/resourceT/resourceT",
     "pages/homework/homework",
     "pages/courseDetail/courseDetail",
     "pages/video/video",

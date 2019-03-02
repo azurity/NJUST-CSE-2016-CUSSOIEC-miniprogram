@@ -4,73 +4,84 @@ const app = getApp<IMyApp>()
 Page({
     data: {
         loadModal: false,
-        // resourceList:[{name:'1.函数及其特性.zip',url:'',isDownLoad:false},
-        // {name:'2.极限的概念、性质和运算法则.zip',url:'',isDownLoad:false},
-        // {name:'3.两个重要极限.zip',url: '',isDownLoad:true}]
         resourceList: <resourceItem[]>[]
     },
-    uptap(event: any) {
-        wx.chooseImage({
-            success(res) {
-                console.log('choose')
-                wx.showToast({
-                    title: '正在上传...',
-                    icon: 'loading',
-                    mask: true,
-                    duration: 2000,
-                    success: function(ress) {}
+    uptap(_: wx.TapEvent) {
+        ;(async function() {
+            let res = await new Promise<wx.TempFilesData>((resolve, reject) => {
+                wx.chooseImage({
+                    success: resolve,
+                    fail: reject
                 })
-                const tempFilePaths = res.tempFilePaths
+            })
+            wx.showLoading({
+                title: '正在上传...',
+                mask: true
+            })
+            await new Promise((resolve, reject) => {
                 wx.uploadFile({
-                    url: '', // 需要文件上传接口
-                    filePath: tempFilePaths[0],
+                    url: app.globalData.hostName + '/course/resource',
+                    filePath: res.tempFilePaths[0],
                     name: 'file',
-                    formData: {
-                        user: app.globalData.personID
+                    formData: {},
+                    success: () => {
+                        resolve()
                     },
-                    success(res) {
-                        wx.showToast({
-                            title: '成功',
-                            icon: 'success',
-                            duration: 1000,
-                            mask: true
-                        })
-                    },
-                    fail(res) {
-                        wx.showToast({
-                            title: '上传失败',
-                            icon: 'none',
-                            duration: 1000,
-                            mask: true
-                        })
+                    fail: () => {
+                        reject('上传失败')
                     }
                 })
-            }
-        })
+            })
+            wx.hideLoading()
+            wx.showToast({
+                title: '上传成功',
+                icon: 'success'
+            })
+        })()
+            .then(() => {})
+            .catch((reason) => {
+                wx.showToast({
+                    title: reason,
+                    icon: 'none'
+                })
+            })
     },
-    downtap(event: any) {
+    downtap(event: wx.TapEvent) {
         let url: string = event.currentTarget.dataset.url
         this.setData({
             loadModal: true
         })
-        let that = this
         wx.downloadFile({
             url: url,
-            success(res) {
+            success: (res) => {
                 // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-                var filePath = res.tempFilePath
-                that.setData({
+                let filePath = res.tempFilePath
+                // TODO: 文件存储
+                wx.showToast({
+                    title: '下载完成',
+                    icon: 'success'
+                })
+            },
+            fail: () => {
+                wx.showToast({
+                    title: '下载失败',
+                    icon: 'none'
+                })
+            },
+            complete: () => {
+                this.setData({
                     loadModal: false
                 })
             }
         })
-        setTimeout(() => {
-            this.setData({
-                loadModal: false
-            })
-        }, 2000)
     },
-    onLoad() {},
+    onLoad() {
+        this.initSource(wx.getStorageSync('CourseDetail').data.courseID)
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
+    },
     async initSource(courseID: string) {
         let resource = await new Promise<resourceRes>((resolve, reject) => {
             wx.request({
