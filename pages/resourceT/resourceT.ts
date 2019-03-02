@@ -25,7 +25,7 @@ Page({
           })
           const tempFilePaths = res.tempFilePaths
           wx.uploadFile({
-            url: '', // 需要文件上传接口
+            url: app.globalData.hostName +'/course/resource', // 需要文件上传接口
             filePath: tempFilePaths[0],
             name: 'file',
             formData: {
@@ -85,6 +85,7 @@ Page({
     },
     onLoad(){
 
+  
     },
     async initSource(courseID:string){
       let resource=await new Promise<resourceRes>((resolve,reject)=>{
