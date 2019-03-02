@@ -15,12 +15,12 @@
     <view class="cu-avatar radius lg icon-file text-blue"></view>
     <view class='content'>
       <view class='text-grey'>{{item.name}}</view>
-      <view class='text-gray text-sm' wx:if="{{!item.isDownLoad}}">
+      <!--view class='text-gray text-sm' wx:if="{{!item.isDownLoad}}">
         <text class='icon-infofill text-red'></text>未下载
       </view>
       <view class='text-gray text-sm' wx:else>
         <text class='icon-roundcheckfill text-green'></text>
-      </view>
+      </view-->
     </view>
     <view class='action'>
       <button class='cu-btn round bg-olive shadow' bindtap='downtap' data-name="{{item.name}}" data-url="{{item.url}}" data-index="{{index}}">
