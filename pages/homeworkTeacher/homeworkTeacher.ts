@@ -30,11 +30,13 @@ Page({
         choseType: 0,
         homeworkName: '',
         questionName: '',
-        questionType: false
+        questionType: false,
+        choseList: [],
+        imageURLs: { url: 'imageURLs' }
     },
     onLoad() {
         // 获取作业列表
-        Promise.all([this.getHomework()]).then(() => {
+        this.getHomework().then(() => {
             console.log(this.data.homeworkList)
         }).catch((reason) => {
             console.log(reason)
@@ -92,6 +94,36 @@ Page({
             this.setData({
                 questionList: res.result
             })
+            this.setData({
+                questionList: this.data.questionList.sort(function(a: question, b: question) {
+                    return parseInt(a.questionIndex) - parseInt(b.questionIndex)
+                })
+            })
+            for (let n = 0; n < this.data.questionList.length; n++) {
+                this.data.questionList[n].choseList = this.data.questionList[n].choseList.sort(function(a: chose, b: chose) {
+                    return parseInt(a.choseIndex) - parseInt(b.choseIndex)
+                })
+                this.setData({
+                    questionList: this.data.questionList
+                })
+            }
+            if (this.data.homeworkList[this.data.listNum].isFinished) {
+                for (let i = 0; i < this.data.questionList.length; i++) {
+                    for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
+                        if (this.data.questionList[i].userAnswer.indexOf(j.toString()) >= 0) {
+                            this.data.questionList[i].choseList[j].checked = 1
+                        } else {
+                            this.data.questionList[i].choseList[j].checked = 0
+                        }
+                        if (this.data.questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
+                            this.data.questionList[i].choseList[j].checked = 2
+                        }
+                        this.setData({
+                            questionList: this.data.questionList
+                        })
+                    }
+                }
+            }
         } else {
             // 作业未获取成功
         }
@@ -149,38 +181,8 @@ Page({
             listNum: e.currentTarget.id
         })
         // 获取作业详情
-        Promise.all([this.getQuestion(this.data.homeworkList[this.data.listNum].homeworkID)])
+        this.getQuestion(this.data.homeworkList[this.data.listNum].homeworkID)
             .then(() => {
-                    this.setData({
-                        questionList: this.data.questionList.sort(function(a: question, b: question) {
-                            return parseInt(a.questionIndex) - parseInt(b.questionIndex)
-                        })
-                    })
-                    for (let n = 0; n < this.data.questionList.length; n++) {
-                        this.data.questionList[n].choseList = this.data.questionList[n].choseList.sort(function(a: chose, b: chose) {
-                            return parseInt(a.choseIndex) - parseInt(b.choseIndex)
-                        })
-                        this.setData({
-                            questionList: this.data.questionList
-                        })
-                    }
-                    if (this.data.homeworkList[this.data.listNum].isFinished) {
-                        for (let i = 0; i < this.data.questionList.length; i++) {
-                            for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
-                                if (this.data.questionList[i].userAnswer.indexOf(j.toString()) >= 0) {
-                                    this.data.questionList[i].choseList[j].checked = 1
-                                } else {
-                                    this.data.questionList[i].choseList[j].checked = 0
-                                }
-                                if (this.data.questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
-                                    this.data.questionList[i].choseList[j].checked = 2
-                                }
-                                this.setData({
-                                    questionList: this.data.questionList
-                                })
-                            }
-                        }
-                    }
                     this.setData({
                         isInList: true
                     })
@@ -224,42 +226,46 @@ Page({
     },
     deleteCard() {
         // Promise.all([this.deleteCard()])
-        Promise.all([this.getHomework()])
+        this.getHomework()
     },
     addChose() {
         this.setData({
             choseNum: this.data.choseNum + 1
         })
-        console.log(this.data.choseNum)
     },
     questionSteps() {
-        console.log(this.data.questionName)
-        let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
-        if (this.data.correctAnswer.length == 0 && !finished) {
-            wx.showToast({
-                title: '请设置正确选项！',
-                icon: 'none',
-                duration: 2000
-            })
-        } else {
-            this.data.answerList.push({
-                questionIndex: this.data.questionIndex,
-                questionName: this.data.questionName,
-                correctAnswer: this.data.correctAnswer,
-                type: this.data.questionType
-            })
-            this.setData({
-                answerList: this.data.answerList
-            })
-            console.log(this.data.answerList)
-            if (this.data.questionNum < this.data.questionList.length - 1 && !this.data.isAdd) {
-                this.setData({
-                    questionIndex: this.data.questionIndex + 1
+        if (this.data.isAdd) {
+            if (this.data.correctAnswer.length == 0) {
+                wx.showToast({
+                    title: '请设置正确选项！',
+                    icon: 'none',
+                    duration: 2000
+                })
+            } else if (this.data.questionName.length == 0) {
+                wx.showToast({
+                    title: '请填写题目！',
+                    icon: 'none',
+                    duration: 2000
+                })
+            } else if (this.data.homeworkName.length == 0) {
+                wx.showToast({
+                    title: '请设置作业名称！',
+                    icon: 'none',
+                    duration: 2000
+                })
+            } else {
+                this.data.answerList.push({
+                    questionIndex: this.data.questionIndex,
+                    questionName: this.data.questionName,
+                    correctAnswer: this.data.correctAnswer,
+                    type: this.data.questionType,
+                    choseList: this.data.choseList,
+                    imageURLs: this.data.imageURLs
                 })
                 this.setData({
-                    correctAnswer: []
+                    answerList: this.data.answerList
                 })
-            } else if (this.data.isAdd) {
+                console.log(this.data.answerList)
                 if (this.data.questionNum - 1 == this.data.questionIndex) {
                     this.setData({
                         questionNum: this.data.questionNum + 1
@@ -271,18 +277,34 @@ Page({
                 this.setData({
                     correctAnswer: []
                 })
+            }
+        } else {
+            if (this.data.questionNum <= this.data.questionList.length - 1) {
+                this.setData({
+                    questionIndex: this.data.questionIndex + 1
+                })
             } else {
-                this.setData({
-                    questionIndex: 0
-                })
-                this.setData({
-                    answerList: []
-                })
                 this.backCard()
             }
         }
+        // this.setData({
+        //     correctAnswer: []
+        // })
+
+        this.setData({
+            answerList: []
+        })
         this.setData({
             questionName: ''
+        })
+        this.setData({
+            chose: ''
+        })
+        this.setData({
+            choseNum: 0
+        })
+        this.setData({
+            questionType: false
         })
         wx.pageScrollTo({
             scrollTop: 0
@@ -295,18 +317,15 @@ Page({
         this.setData({
             questionName: this.data.answerList[this.data.questionIndex].questionName
         })
+        this.setData({
+            questionType: this.data.answerList[this.data.questionIndex].type
+        })
     },
     questionFinished() {
-        Promise.all([this.postHomework(this.data.homeworkName)])
-            .then((reason) => {
+        this.postHomework(this.data.homeworkName)
+            .catch((reason) => {
                 console.log(reason)
-            }).catch((reason) => {
-            console.log(reason)
-        })
-        this.data.homeworkList[this.data.listNum].isFinished = true
-        this.setData({
-            homeworkList: this.data.homeworkList
-        })
+            })
         this.setData({
             questionNum: 0
         })
@@ -316,15 +335,47 @@ Page({
         this.setData({
             answerList: []
         })
+        this.setData({
+            homeworkName: ''
+        })
+        this.setData({
+            questionName: ''
+        })
+        this.setData({
+            chose: ''
+        })
+        this.setData({
+            choseNum: 0
+        })
+        this.setData({
+            questionType: false
+        })
         this.backCard()
     },
 
-    inputQuestionName(e) {
+    inputHomeworkName(e: { detail: { value: any; }; }) {
+        this.setData({
+            homeworkName: e.detail.value
+        })
+    },
+    inputQuestionName(e: { detail: { value: any; }; }) {
         this.setData({
             questionName: e.detail.value
         })
     },
-    questionTypeChange(e) {
+    inputChose(e: { detail: { value: { [x: string]: any; }; }; }) {
+        for (let i = 0; i < this.data.choseNum; i++) {
+            this.data.choseList.push({
+                name: e.detail.value['chose' + i.toString()],
+                choseIndex: i
+            })
+            this.setData({
+                choseList: this.data.choseList
+            })
+        }
+        console.log(this.data.choseList)
+    },
+    questionTypeChange(e: { detail: { value: any; }; }) {
         if (e.detail.value) {
             this.setData({
                 questionType: 1
