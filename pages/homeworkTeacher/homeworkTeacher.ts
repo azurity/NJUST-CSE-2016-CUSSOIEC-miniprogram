@@ -32,7 +32,7 @@ Page({
         questionName: '',
         questionType: false,
         choseList: [],
-        imageURLs: { url: 'imageURLs' }
+        imageURLs: [{ url: 'imageURLs' }]
     },
     onLoad() {
         // 获取作业列表
@@ -52,7 +52,7 @@ Page({
                     // personID: app.globalData.personID,
                     // college: app.globalData.college
                     courseID: '3',
-                    personID: '916106840407',
+                    personID: '916000000001',
                     college: '南京理工大学'
                 },
                 success: ({ data }) => {
@@ -138,7 +138,7 @@ Page({
                     // college: app.globalData.college,
                     // courseID: wx.getStorageSync('courseDetail').data.courseID,
                     courseID: '3',
-                    personID: '916106840407',
+                    personID: '916000000001',
                     college: '南京理工大学',
                     homeworkName: homework_name,
                     homeworkID: null,
@@ -152,7 +152,7 @@ Page({
         })
         return res
     },
-    async deleteHomework(homework_name: string, homework_id: string) {
+    async deleteHomework(homework_id: string) {
         let res = await new Promise<questionPostRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/homework',
@@ -162,9 +162,9 @@ Page({
                     // college: app.globalData.college,
                     // courseID: wx.getStorageSync('courseDetail').data.courseID,
                     courseID: '3',
-                    personID: '916106840407',
+                    personID: '916000000001',
                     college: '南京理工大学',
-                    homeworkName: homework_name,
+                    homeworkName: null,
                     homeworkID: homework_id,
                     data: null
                 },
@@ -224,8 +224,13 @@ Page({
             isInList: true
         })
     },
-    deleteCard() {
-        // Promise.all([this.deleteCard()])
+    deleteCard: function(e:wx.TapEvent) {
+        console.log(e.currentTarget.dataset.id_card)
+        this.setData({
+            listNum: e.currentTarget.dataset.id_card
+        })
+        console.log(this.data.homeworkList[this.data.listNum].homeworkID)
+        this.deleteHomework(this.data.homeworkList[this.data.listNum].homeworkID)
         this.getHomework()
     },
     addChose() {
@@ -254,11 +259,15 @@ Page({
                     duration: 2000
                 })
             } else {
+                let question_type: number = 0
+                if (this.data.questionType) {
+                    question_type = 1
+                }
                 this.data.answerList.push({
-                    questionIndex: this.data.questionIndex,
-                    questionName: this.data.questionName,
+                    questionIndex: this.data.questionIndex.toString(),
+                    question: this.data.questionName,
                     correctAnswer: this.data.correctAnswer,
-                    type: this.data.questionType,
+                    type: question_type,
                     choseList: this.data.choseList,
                     imageURLs: this.data.imageURLs
                 })
@@ -290,10 +299,6 @@ Page({
         // this.setData({
         //     correctAnswer: []
         // })
-
-        this.setData({
-            answerList: []
-        })
         this.setData({
             questionName: ''
         })
@@ -301,7 +306,7 @@ Page({
             chose: ''
         })
         this.setData({
-            choseNum: 0
+            choseNum: 1
         })
         this.setData({
             questionType: false
@@ -322,10 +327,14 @@ Page({
         })
     },
     questionFinished() {
-        this.postHomework(this.data.homeworkName)
-            .catch((reason) => {
-                console.log(reason)
-            })
+        console.log(this.data.answerList)
+        if (this.data.answerList.length > 0) {
+            //本页的数据提交
+            this.postHomework(this.data.homeworkName).then((reason) => console.log(reason))
+                .catch((reason) => {
+                    console.log(reason)
+                })
+        }
         this.setData({
             questionNum: 0
         })
@@ -367,7 +376,7 @@ Page({
         for (let i = 0; i < this.data.choseNum; i++) {
             this.data.choseList.push({
                 name: e.detail.value['chose' + i.toString()],
-                choseIndex: i
+                choseIndex: i.toString()
             })
             this.setData({
                 choseList: this.data.choseList

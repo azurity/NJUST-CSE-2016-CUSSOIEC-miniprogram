@@ -5,14 +5,14 @@
       <text class="icon-check lg text-green margin-xs padding"></text>
       <view class="text-green margin-xs padding" bindtap='entryCard' id='{{index}}'>{{homeworkList[index].name}}</view>
       <view class='move'>
-        <view class="text-red text-bold" bindtap='deleteCard'>删除</view>
+        <view class="text-red text-bold" bindtap='deleteCard' data-id_card='{{index}}'>删除</view>
       </view>
     </view>
     <view class="flex justify-start bg-red light" wx:else id='{{index}}'>
       <text class="icon-close lg text-red margin-xs padding"></text>
       <view class="text-red margin-xs padding" bindtap='entryCard' id='{{index}}'>{{homeworkList[index].name}}</view>
       <view class='move'>
-        <view class="text-red text-bold" bindtap='deleteCard'>删除</view>
+        <view class="text-red text-bold" bindtap='deleteCard' data-id_card='{{index}}'>删除</view>
       </view>
     </view>
   </view>
