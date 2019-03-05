@@ -83,3 +83,8 @@
     </view>
   </scroll-view>
 </view>
+<view wx:if="{{loading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
+  </view>
+</view>

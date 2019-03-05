@@ -1,32 +1,38 @@
 import { IMyApp } from '../../app'
-import { homeworkRes, answerRes, questionRes } from '../../utils/homework/homeworkRes'
+import {
+    HomeworkItem,
+    QuestionItem,
+    ChoseItem,
+    homeworkRes,
+    answerRes,
+    questionRes
+} from '../../utils/homework/homeworkRes'
 
 const app = getApp<IMyApp>()
-
-interface questionI {
-    questionIndex: string
-}
-
-type question = questionI
-
-interface choseI {
-    choseIndex: string
-}
-
-type chose = choseI
 
 Page({
     data: {
         basics: 0,
         isInList: false,
-        answerList: [],
+        answerList: <string[]>[],
         userAnswer: [],
         questionNum: 0,
-        listNum: 0
+        homeworkList: <HomeworkItem[]>[],
+        questionList: <QuestionItem[]>[],
+        listNum: 0,
+        loading: true
     },
     onLoad() {
         // 获取作业列表
-        Promise.all([this.getHomework()])
+        this.getHomework()
+            .then(() => {
+                this.setData({
+                    loading: false
+                })
+            })
+            .catch((reason) => {
+                console.log(reason)
+            })
     },
     async getHomework() {
         let res = await new Promise<homeworkRes>((resolve, reject) => {
@@ -55,7 +61,7 @@ Page({
             // 作业未获取成功
         }
     },
-    async getQuestion(homework_id: string) {
+    async getQuestion(homework: HomeworkItem) {
         let res = await new Promise<questionRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/homework',
@@ -64,7 +70,7 @@ Page({
                     // courseID: wx.getStorageSync('CourseDetail').data.courseID,
                     // personID: app.globalData.personID,
                     // college: app.globalData.college,
-                    homeworkID: homework_id,
+                    homeworkID: homework.homeworkID,
                     courseID: '3',
                     personID: '916106840407',
                     college: '南京理工大学'
@@ -77,8 +83,31 @@ Page({
             })
         })
         if (res.success) {
+            let questionList = res.result.sort(function(a: QuestionItem, b: QuestionItem) {
+                return parseInt(a.questionIndex) - parseInt(b.questionIndex)
+            })
+            for (let it of questionList) {
+                it.choseList = it.choseList.sort(function(a: ChoseItem, b: ChoseItem) {
+                    return parseInt(a.choseIndex) - parseInt(b.choseIndex)
+                })
+            }
+            if (homework.isFinished) {
+                for (let i = 0; i < questionList.length; i++) {
+                    for (let j = 0; j < questionList[i].choseList.length; j++) {
+                        if (questionList[i].userAnswer.indexOf(j.toString()) >= 0) {
+                            questionList[i].choseList[j].checked = 1
+                        } else {
+                            questionList[i].choseList[j].checked = 0
+                        }
+                        if (questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
+                            questionList[i].choseList[j].checked = 2
+                        }
+                    }
+                }
+            }
             this.setData({
-                questionList: res.result
+                isInList: true,
+                questionList: questionList
             })
         } else {
             // 作业未获取成功
@@ -115,51 +144,24 @@ Page({
             listNum: e.currentTarget.id
         })
         // 获取作业详情
-        Promise.all([this.getQuestion(this.data.homeworkList[this.data.listNum].homeworkID)])
-            .then(() => {
-                    this.setData({
-                        questionList: this.data.questionList.sort(function(a: question, b: question) {
-                            return parseInt(a.questionIndex) - parseInt(b.questionIndex)
-                        })
-                    })
-                    for (let n = 0; n < this.data.questionList.length; n++) {
-                        this.data.questionList[n].choseList = this.data.questionList[n].choseList.sort(function(a: chose, b: chose) {
-                            return parseInt(a.choseIndex) - parseInt(b.choseIndex)
-                        })
-                        this.setData({
-                            questionList: this.data.questionList
-                        })
-                    }
-                    if (this.data.homeworkList[this.data.listNum].isFinished) {
-                        for (let i = 0; i < this.data.questionList.length; i++) {
-                            for (let j = 0; j < this.data.questionList[i].choseList.length; j++) {
-                                if (this.data.questionList[i].userAnswer.indexOf(j.toString()) >= 0) {
-                                    this.data.questionList[i].choseList[j].checked = 1
-                                } else {
-                                    this.data.questionList[i].choseList[j].checked = 0
-                                }
-                                if (this.data.questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
-                                    this.data.questionList[i].choseList[j].checked = 2
-                                }
-                                this.setData({
-                                    questionList: this.data.questionList
-                                })
-                            }
-                        }
-                    }
-                    this.setData({
-                        isInList: true
-                    })
-                }
-            )
-            .catch()
+        this.getQuestion(this.data.homeworkList[this.data.listNum])
+            .then(() => {})
+            .catch((reason) => {
+                console.log(reason)
+            })
     },
     backCard() {
         this.setData({
-            isInList: false
+            isInList: false,
+            answerList: [],
+            userAnswer: [],
+            questionNum: 0
         })
-        Promise.all([this.getHomework()])
+        this.getHomework().catch((reason) => {
+            console.log(reason)
+        })
     },
+    // TODO: next time check start from here
     questionSteps() {
         console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
         let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
@@ -170,8 +172,12 @@ Page({
                 duration: 2000
             })
         } else {
-            if (arrayEqual(this
-                .data.userAnswer, this.data.questionList[this.data.questionNum].correctAnswer)) {
+            if (
+                arrayEqual(
+                    this.data.userAnswer,
+                    this.data.questionList[this.data.questionNum].correctAnswer
+                )
+            ) {
                 this.data.answerList.push({
                     indexNum: this.data.questionNum,
                     isCorrect: true,
@@ -198,12 +204,13 @@ Page({
             } else {
                 if (!finished) {
                     // 完成，发送answerList
-                    Promise.all([this.postAnswer(this.data.homeworkList[this.data.listNum].homeworkID)])
+                    this.postAnswer(this.data.homeworkList[this.data.listNum].homeworkID)
                         .then((reason) => {
                             console.log(reason)
-                        }).catch((reason) => {
-                        console.log(reason)
-                    })
+                        })
+                        .catch((reason) => {
+                            console.log(reason)
+                        })
                     this.data.homeworkList[this.data.listNum].isFinished = true
                     this.setData({
                         homeworkList: this.data.homeworkList
@@ -222,7 +229,7 @@ Page({
             scrollTop: 0
         })
     },
-    checkboxChange(e: { detail: { value: any; }; }) {
+    checkboxChange(e: { detail: { value: any } }) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
         let value = e.detail.value
         if (this.data.questionList[this.data.questionNum].type == 0) {
@@ -235,17 +242,14 @@ Page({
 })
 
 function arrayEqual(array1: string[], array2: string[]): boolean {
-    if (!array2)
-        return false
-    if (!array1)
-        return false
+    if (!array2) return false
+    if (!array1) return false
 
-    if (array1.length != array2.length)
-        return false
+    if (array1.length != array2.length) return false
 
     let tempArr1 = array1.sort()
     let tempArr2 = array2.sort()
-    console.log(tempArr1, tempArr2)
+    //console.log(tempArr1, tempArr2)
     for (let i = 0; i < tempArr1.length; i++) {
         if (tempArr1[i] != tempArr2[i]) {
             return false
