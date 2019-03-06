@@ -15,7 +15,7 @@ Page({
         basics: 0,
         isInList: false,
         answerList: <string[]>[],
-        userAnswer: [],
+        userAnswer: <string[]>[],
         questionNum: 0,
         homeworkList: <HomeworkItem[]>[],
         questionList: <QuestionItem[]>[],
@@ -161,7 +161,6 @@ Page({
             console.log(reason)
         })
     },
-    // TODO: next time check start from here
     questionSteps() {
         console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
         let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
@@ -196,9 +195,7 @@ Page({
             console.log(this.data.answerList)
             if (this.data.questionNum < this.data.questionList.length - 1) {
                 this.setData({
-                    questionNum: this.data.questionNum + 1
-                })
-                this.setData({
+                    questionNum: this.data.questionNum + 1,
                     userAnswer: []
                 })
             } else {
@@ -216,12 +213,6 @@ Page({
                         homeworkList: this.data.homeworkList
                     })
                 }
-                this.setData({
-                    questionNum: 0
-                })
-                this.setData({
-                    answerList: []
-                })
                 this.backCard()
             }
         }

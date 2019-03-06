@@ -78,7 +78,7 @@
             <view class="cu-form-group" wx:for="{{choseList}}" wx:key>
               <input placeholder="请输入选项文字" class='radius' bindinput="oneChoseInput" name='chose{{index}}' value='{{item.name}}' data-index="{{index}}"></input>
               <view>
-                <radio class='round blue' value="{{item.choseIndex}}"></radio>
+                <radio class='round blue' value="{{item.choseIndex}}" checked="{{item.checked}}"></radio>
               </view>
             </view>
             <view class="flex padding justify-center align-center">
@@ -93,7 +93,7 @@
             <view class="cu-form-group" wx:for="{{choseList}}" wx:key>
               <input placeholder="请输入选项文字" class='radius' bindinput="oneChoseInput" name='chose{{index}}' value='{{item.name}}' data-index="{{index}}"></input>
               <view>
-                <radio class='round blue' value="{{item.choseIndex}}"></radio>
+                <radio class='round blue' value="{{item.choseIndex}}" checked="{{item.checked}}"></radio>
               </view>
             </view>
             <view class="flex padding justify-center align-center">
@@ -144,5 +144,8 @@
     </view>
   </scroll-view>
 </view>
-
-
+<view wx:if="{{loading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
+  </view>
+</view>

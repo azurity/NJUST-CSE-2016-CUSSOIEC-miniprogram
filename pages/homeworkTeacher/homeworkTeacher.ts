@@ -21,6 +21,7 @@ interface QuestionPostItem {
 
 Page({
     data: {
+        loading: true,
         basics: 0,
         isInList: false,
         answerList: <QuestionPostItem[]>[],
@@ -32,8 +33,7 @@ Page({
         listNum: 0,
         isDelete: false,
         isAdd: false,
-        choseNum: 1,
-        choseType: 0,
+        choseNum: 0,
         homeworkName: '',
         questionName: '',
         questionType: false,
@@ -44,6 +44,9 @@ Page({
         // 获取作业列表
         this.getHomework()
             .then(() => {
+                this.setData({
+                    loading: false
+                })
                 console.log(this.data.homeworkList)
             })
             .catch((reason) => {
@@ -111,7 +114,7 @@ Page({
                 for (let j = 0; j < questionList[i].choseList.length; j++) {
                     if (questionList[i].correctAnswer.indexOf(j.toString()) >= 0) {
                         questionList[i].choseList[j].checked = 2
-                    }else{
+                    } else {
                         questionList[i].choseList[j].checked = 0
                     }
                 }
@@ -215,7 +218,8 @@ Page({
             isAdd: true,
             questionNum: 1,
             isInList: true,
-            choseList: [<ChoseItem>{ name: '', choseIndex: '0' }]
+            choseList: [<ChoseItem>{ name: '', choseIndex: '0' }],
+            choseNum: 1
         })
     },
     deleteCard(e: wx.TapEvent) {
@@ -239,37 +243,34 @@ Page({
         })
         console.log(this.data)
     },
+    dataCheck() {
+        if (this.data.correctAnswer.length == 0) {
+            wx.showToast({
+                title: '请设置正确选项！',
+                icon: 'none',
+                duration: 2000
+            })
+        } else if (this.data.questionName.length == 0) {
+            wx.showToast({
+                title: '请填写题目！',
+                icon: 'none',
+                duration: 2000
+            })
+        } else if (this.data.homeworkName.length == 0) {
+            wx.showToast({
+                title: '请设置作业名称！',
+                icon: 'none',
+                duration: 2000
+            })
+        } else {
+            return true
+        }
+        return false
+    },
     questionSteps() {
+        console.log('step')
         if (this.data.isAdd) {
-            if (this.data.correctAnswer.length == 0) {
-                wx.showToast({
-                    title: '请设置正确选项！',
-                    icon: 'none',
-                    duration: 2000
-                })
-                this.setData({
-                    choseList: [<ChoseItem>{ name: '', choseIndex: '0' }]
-                })
-                return
-            } else if (this.data.questionName.length == 0) {
-                wx.showToast({
-                    title: '请填写题目！',
-                    icon: 'none',
-                    duration: 2000
-                })
-                this.setData({
-                    choseList: [<ChoseItem>{ name: '', choseIndex: '0' }]
-                })
-                return
-            } else if (this.data.homeworkName.length == 0) {
-                wx.showToast({
-                    title: '请设置作业名称！',
-                    icon: 'none',
-                    duration: 2000
-                })
-                this.setData({
-                    choseList: [<ChoseItem>{ name: '', choseIndex: '0' }]
-                })
+            if (!this.dataCheck()) {
                 return
             } else {
                 let question_type: 0 | 1 = 0
@@ -294,6 +295,9 @@ Page({
                     })
                 }
                 this.setData({
+                    questionName: '',
+                    choseNum: 1,
+                    questionType: false,
                     questionIndex: this.data.questionIndex + 1,
                     correctAnswer: [],
                     choseList: [<ChoseItem>{ name: '', choseIndex: '0' }]
@@ -309,11 +313,6 @@ Page({
                 this.backCard()
             }
         }
-        this.setData({
-            questionName: '',
-            choseNum: 1,
-            questionType: false
-        })
         wx.pageScrollTo({
             scrollTop: 0
         })
@@ -325,15 +324,23 @@ Page({
         const question = <QuestionPostItem>this.data.answerList[this.data.questionIndex]
         this.setData({
             questionName: question.question,
-            questionType: question.type,
-            choseList: question.choseList,
+            questionType: question.type == 1,
+            choseList: question.choseList.map((value) => {
+                if (question.correctAnswer.indexOf(value.choseIndex) >= 0) {
+                    value.checked = 2
+                }
+                return value
+            }),
             choseNum: question.choseList.length,
             correctAnswer: question.correctAnswer
         })
         console.log(this.data)
     },
     questionFinished() {
-        console.log(this.data.answerList)
+        console.log('finish', this.data.answerList)
+        if (!this.dataCheck()) {
+            return
+        }
         if (this.data.answerList.length > 0) {
             //本页的数据提交
             this.postHomework(this.data.homeworkName)
@@ -375,7 +382,7 @@ Page({
                 choseList: choseList
             })
         }
-        console.log(this.data.choseList)
+        console.log('submit', this.data.choseList)
     },
     questionTypeChange(e: wx.CustomEvent<'change', { value: boolean }>) {
         if (e.detail.value) {
@@ -392,10 +399,16 @@ Page({
     checkboxChange(e: { detail: { value: any } }) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
         let value = e.detail.value
-        if (this.data.choseType == 0) {
+        if (!this.data.questionType) {
             value = [e.detail.value]
         }
+        for (let it of this.data.choseList as ChoseItem[]) {
+            if (value.indexOf(it.choseIndex) >= 0) {
+                it.checked = 2
+            }
+        }
         this.setData({
+            choseList: this.data.choseList,
             correctAnswer: value
         })
     },
