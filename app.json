@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/bbs/bbs",
     "pages/launch/launch",
     "pages/binding/binding",
     "pages/info/info",
