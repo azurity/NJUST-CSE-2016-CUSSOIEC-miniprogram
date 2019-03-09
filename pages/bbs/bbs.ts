@@ -4,8 +4,38 @@ Page({
      * 页面的初始数据
      */
     data: {
-      bbsList:[{title:"",time:'2019-03-07 11:11:00',tag:'高等数学'},'b','c','d','e','f','g','h','i','j','k']
+      bbsList:[{"topicID":"1234567",
+                  "user":"张三",
+                  "time":"2019-02-28 22:09:23",
+                  "title":"为什么这个题使用字扩展而不是位扩展？",
+                  "content":"balabalabala，4x8k，balabalabala，4x16k，balabalabala",
+                  "replyCount":12,
+                  "clickingRate":14
+      },{"topicID":"1234567",
+                  "user":"张三",
+                  "time":"2019-02-28 22:09:23",
+                  "title":"为什么这个题使用字扩展而不是位扩展？",
+                  "content":"balabalabala，4x8k，balabalabala，4x16k，balabalabala",
+                  "replyCount":12,
+                  "clickingRate":14
+      }],
+      modalName:''
+      
     },
+    showModal(e:any) {
+      this.setData({
+          modalName:'bottomModal'
+      })
+    },
+    hideModal(e:any) {
+      this.setData({
+        modalName: null
+      })
+    },
+    topic(e:any){
+
+    },
+    
     onPullDownRefresh() {
       wx.stopPullDownRefresh()
     },
