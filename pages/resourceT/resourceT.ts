@@ -76,7 +76,7 @@ Page({
         })
     },
     onLoad() {
-        this.initSource(wx.getStorageSync('CourseDetail').data.courseID)
+        this.initSource(wx.getStorageSync('CourseDetail').courseID)
             .then(() => {})
             .catch((reason) => {
                 console.log(reason)
