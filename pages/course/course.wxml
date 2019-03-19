@@ -13,7 +13,7 @@
     </scroll-view>
     <view>
       <view class="cu-card article">
-        <view wx:for="{{obj}}" wx:key="item" class='cu-item shadow'>
+        <view wx:for="{{obj}}" wx:key="item" class='cu-item shadow' id="{{index}}" bindtap='showCourse'>
           <view class="title text-limit-long"> {{item.info.name}} </view>
           <view class='content'>
             <view class="desc">

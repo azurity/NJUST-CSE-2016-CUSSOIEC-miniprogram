@@ -1,6 +1,7 @@
 import { IMyApp } from '../../app'
 import { weekInfoRes } from '../../utils/globalRes'
 import { CourseItem, scheduleRes } from '../../utils/course/courseRes'
+import { CourseDetailInfo } from '../../utils/course/CourseInfo'
 import dayjs = require('dayjs')
 
 const app = getApp<IMyApp>()
@@ -39,6 +40,16 @@ Page({
                 toggleDelay: false
             })
         }, 1000)
+    },
+    showCourse(e: wx.TapEvent) {
+        let it = <CourseItem>this.data.obj[parseInt(e.currentTarget.id)]
+        wx.setStorageSync('CourseDetail', <CourseDetailInfo>{
+            courseID: it.courseID,
+            name: it.info.name,
+            teacher: it.info.teacher,
+            location: it.info.location
+        })
+        wx.navigateTo({ url: '/pages/courseDetail/courseDetail' })
     },
     onLoad() {
         /*let sch = []
@@ -137,8 +148,8 @@ Page({
                 url: app.globalData.hostName + '/global/week_info',
                 method: 'GET',
                 data: {
-                    college: app.globalData.college,
-                    personID: app.globalData.personID,
+                    college: app.globalData.personInfo!.college,
+                    personID: app.globalData.personInfo!.personID,
                     date: dayjs().format('YYYY-MM-DD')
                 },
                 success: ({ data }) => {
@@ -161,8 +172,8 @@ Page({
                 url: app.globalData.hostName + '/course/courses',
                 method: 'GET',
                 data: {
-                    college: app.globalData.college,
-                    personID: app.globalData.personID
+                    college: app.globalData.personInfo!.college,
+                    personID: app.globalData.personInfo!.personID
                 },
                 success: ({ data }) => {
                     resolve(<scheduleRes>data)
