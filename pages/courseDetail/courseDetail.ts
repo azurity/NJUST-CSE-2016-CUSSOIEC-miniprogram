@@ -54,21 +54,25 @@ Page({
     tapIcon(e: wx.TapEvent) {
         switch (e.currentTarget.id) {
             case '考勤':
-                if (this.data.checkIn.hasChecked) {
-                    console.log('已经签到')
-                    // TODO: 已经签到
-                } else if (this.data.checkIn.isOpen) {
-                    this.checkIn()
-                        .then(() => {
-                            wx.showToast({
-                                title: '成功签到'
+                if (app.globalData.personInfo!.userType === 'student') {
+                    if (this.data.checkIn.hasChecked) {
+                        console.log('已经签到')
+                        // TODO: 已经签到
+                    } else if (this.data.checkIn.isOpen) {
+                        this.checkIn()
+                            .then(() => {
+                                wx.showToast({
+                                    title: '成功签到'
+                                })
                             })
-                        })
-                        .catch((reason) => {
-                            console.log(reason)
-                        })
+                            .catch((reason) => {
+                                console.log(reason)
+                            })
+                    } else {
+                        // TODO: 不能签到
+                    }
                 } else {
-                    // TODO: 不能签到
+                    wx.navigateTo({ url: '/pages/checkInControl/checkInControl' })
                 }
                 break
             case '试题作业':

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/checkInControl/checkInControl",
     "pages/courseDetail/courseDetail",
+    "pages/checkInControl/checkInControl",
     "pages/homeworkTeacher/homeworkTeacher",
     "pages/resource/resource",
     "pages/resourceT/resourceT",
