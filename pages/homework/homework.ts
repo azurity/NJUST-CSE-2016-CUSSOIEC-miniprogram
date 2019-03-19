@@ -162,7 +162,7 @@ Page({
         })
     },
     questionSteps() {
-        console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
+        //console.log(this.data.questionList[this.data.questionNum].choseList[1].checked)
         let finished: boolean = this.data.homeworkList[this.data.listNum].isFinished
         if (this.data.userAnswer.length == 0 && !finished) {
             wx.showToast({
