@@ -135,7 +135,7 @@ Page({
                 data: {
                     personID: app.globalData.personInfo!.personID,
                     college: app.globalData.personInfo!.college,
-                    courseID: wx.getStorageSync('courseDetail').courseID,
+                    courseID: wx.getStorageSync('CourseDetail').courseID,
                     //courseID: '3',
                     //personID: '916000000001',
                     //college: '南京理工大学',
@@ -159,7 +159,7 @@ Page({
                 data: {
                     personID: app.globalData.personInfo!.personID,
                     college: app.globalData.personInfo!.college,
-                    courseID: wx.getStorageSync('courseDetail').courseID,
+                    courseID: wx.getStorageSync('CourseDetail').courseID,
                     //courseID: '3',
                     //personID: '916000000001',
                     //college: '南京理工大学',
