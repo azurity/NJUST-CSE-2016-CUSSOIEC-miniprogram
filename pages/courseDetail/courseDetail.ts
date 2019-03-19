@@ -77,12 +77,17 @@ Page({
                 if (app.globalData.personInfo!.userType === 'student') {
                     wx.navigateTo({ url: '/pages/homework/homework' })
                 } else {
-                    wx.navigateTo({ url: 'pages/homeworkTeacher/homeworkTeacher' })
+                    wx.navigateTo({ url: '/pages/homeworkTeacher/homeworkTeacher' })
                 }
                 break
             case '评教':
                 break
             case '配套资源':
+                if (app.globalData.personInfo!.userType === 'student') {
+                    wx.navigateTo({ url: '/pages/resource/resource' })
+                } else {
+                    wx.navigateTo({ url: '/pages/resourceT/resourceT' })
+                }
                 break
         }
     },
