@@ -1,15 +1,8 @@
 import { IMyApp } from '../../app'
 import { liveRes } from '../../utils/course/liveRes'
 import { DayVideos, videosRes } from '../../utils/course/videoRes'
-import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkInRes'
-import { CourseWeekInfo } from '../../utils/course/CourseWeekInfo'
-
-interface CourseDetailInfo {
-    courseID: string
-    name: string
-    teacher: string
-    location: string
-}
+import { CheckInfo, checkInRes, checkInPostRes } from '../../utils/course/checkIn/checkInRes'
+import { CourseDetailInfo } from '../../utils/course/CourseInfo'
 
 const app = getApp<IMyApp>()
 
@@ -62,10 +55,15 @@ Page({
         switch (e.currentTarget.id) {
             case '考勤':
                 if (this.data.checkIn.hasChecked) {
+                    console.log('已经签到')
                     // TODO: 已经签到
                 } else if (this.data.checkIn.isOpen) {
                     this.checkIn()
-                        .then(() => {})
+                        .then(() => {
+                            wx.showToast({
+                                title: '成功签到'
+                            })
+                        })
                         .catch((reason) => {
                             console.log(reason)
                         })
@@ -259,12 +257,6 @@ Page({
     },
 
     async checkIn() {
-        let courseWeekInfo: CourseWeekInfo | null = null
-        try {
-            courseWeekInfo = wx.getStorageSync('CourseWeekInfo')
-        } catch (e) {
-            // TODO:
-        }
         let result = await new Promise<checkInPostRes>((resolve, reject) => {
             wx.request({
                 url: app.globalData.hostName + '/course/check_in',
@@ -273,9 +265,7 @@ Page({
                     college: app.globalData.personInfo!.college,
                     personID: app.globalData.personInfo!.personID,
                     courseID: this.data.info.courseID,
-                    numOfWeek: courseWeekInfo!.numOfWeek,
-                    dayOfWeek: courseWeekInfo!.dayOfWeek,
-                    indexOfDay: courseWeekInfo!.indexOfDay
+                    time: this.data.checkIn.time
                 },
                 success: ({ data }) => {
                     resolve(<checkInPostRes>data)

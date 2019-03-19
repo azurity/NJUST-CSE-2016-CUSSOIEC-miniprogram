@@ -83,10 +83,15 @@ Page({
         switch (e.currentTarget.id) {
             case '考勤':
                 if (this.data.checkIn.hasChecked) {
+                    console.log('已经签到');
                 }
                 else if (this.data.checkIn.isOpen) {
                     this.checkIn()
-                        .then(function () { })
+                        .then(function () {
+                        wx.showToast({
+                            title: '成功签到'
+                        });
+                    })
                         .catch(function (reason) {
                         console.log(reason);
                     });
@@ -234,36 +239,27 @@ Page({
     },
     checkIn: function () {
         return __awaiter(this, void 0, void 0, function () {
-            var courseWeekInfo, result;
+            var result;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        courseWeekInfo = null;
-                        try {
-                            courseWeekInfo = wx.getStorageSync('CourseWeekInfo');
-                        }
-                        catch (e) {
-                        }
-                        return [4, new Promise(function (resolve, reject) {
-                                wx.request({
-                                    url: app.globalData.hostName + '/course/check_in',
-                                    method: 'POST',
-                                    data: {
-                                        college: app.globalData.personInfo.college,
-                                        personID: app.globalData.personInfo.personID,
-                                        courseID: _this.data.info.courseID,
-                                        numOfWeek: courseWeekInfo.numOfWeek,
-                                        dayOfWeek: courseWeekInfo.dayOfWeek,
-                                        indexOfDay: courseWeekInfo.indexOfDay
-                                    },
-                                    success: function (_a) {
-                                        var data = _a.data;
-                                        resolve(data);
-                                    },
-                                    fail: reject
-                                });
-                            })];
+                    case 0: return [4, new Promise(function (resolve, reject) {
+                            wx.request({
+                                url: app.globalData.hostName + '/course/check_in',
+                                method: 'POST',
+                                data: {
+                                    college: app.globalData.college,
+                                    personID: app.globalData.personID,
+                                    courseID: _this.data.info.courseID,
+                                    time: _this.data.checkIn.time
+                                },
+                                success: function (_a) {
+                                    var data = _a.data;
+                                    resolve(data);
+                                },
+                                fail: reject
+                            });
+                        })];
                     case 1:
                         result = _a.sent();
                         if (result.success) {

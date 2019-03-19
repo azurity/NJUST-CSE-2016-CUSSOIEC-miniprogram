@@ -1,0 +1,26 @@
+<!--pages/checkInControl/checkInControl.wxml-->
+<view class="cu-list menu">
+  <view class="cu-item margin-top" wx:for="{{list}}" wx:key>
+    <view class="content padding">
+      <text class="text-black">{{item.time}}</text>
+      <view class="text-grey text-sm">
+        <view>实到：{{item.count}}人</view>
+        <view>应到：{{item.expectation}}人</view>
+      </view>
+    </view>
+    <view class="action">
+      <button class="cu-btn round line-green" data-time="{{item.time}}" bindtap="deleteItem">
+        <text class="icon-delete"> 删除</text>
+      </button>
+    </view>
+  </view>
+  <view class="pad-down"></view>
+</view>
+<view class="flat-btn padding flex flex-direction">
+  <button class="cu-btn bg-green lg light" bindtap="toggleState" loading="{{loading}}" disabled="{{loading}}">{{isOpen?'结束签到':'开放签到'}}</button>
+</view>
+<view wx:if="{{listLoading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
+  </view>
+</view>
