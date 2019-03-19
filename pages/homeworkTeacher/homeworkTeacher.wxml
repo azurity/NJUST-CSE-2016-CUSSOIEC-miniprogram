@@ -1,0 +1,151 @@
+  <!--pages/homeworkTeacher/homeworkTeacher.wxml-->
+<view class="cu-list" wx:if="{{!isInList}}">
+  <view wx:for="{{homeworkList}}" wx:key="{{index}}" class="cu-item margin shadow {{modalName=='move-box-'+ index?'move-cur':''}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+    <view class="flex justify-start bg-green light" wx:if="{{homeworkList[index].isFinished}}" id='{{index}}'>
+      <text class="icon-check lg text-green margin-xs padding"></text>
+      <view class="text-green margin-xs padding" bindtap='entryCard' id='{{index}}'>{{homeworkList[index].name}}</view>
+      <view class='move'>
+        <view class="text-red text-bold" bindtap='deleteCard' data-id_card='{{index}}'>删除</view>
+      </view>
+    </view>
+    <view class="flex justify-start bg-red light" wx:else id='{{index}}'>
+      <text class="icon-close lg text-red margin-xs padding"></text>
+      <view class="text-red margin-xs padding" bindtap='entryCard' id='{{index}}'>{{homeworkList[index].name}}</view>
+      <view class='move'>
+        <view class="text-red text-bold" bindtap='deleteCard' data-id_card='{{index}}'>删除</view>
+      </view>
+    </view>
+  </view>
+  <view class='cu-btn bg-mauve lg shadow flex justify-center margin' bindtap='addCard'>添加作业</view>
+</view>
+
+<view wx:else>
+  <view class="cu-bar bg-blue light">
+    <view class='action' bindtap='backCard'>
+      <text class='icon-close'></text> 关闭
+    </view>
+    <view class='content text-bold' bingtap='backCard' wx:if='{{!isAdd}}'>
+      {{homeworkList[listNum].name}}
+    </view>
+    <input placeholder="请输入作业名" class='content text-bold' name='input' value='{{homeworkName}}' bindinput='inputHomeworkName' wx:else></input>
+  </view>
+  <scroll-view scroll-y scroll-with-animation='true' scroll-top='{{ topNum }}'>
+    <view>
+      
+      <view class='bg-white padding radius shadow-lg'wx:if='{{!isAdd}}'>
+        <view class='cu-steps'>
+          <view class='cu-item {{index>questionIndex?"":"text-blue"}}' wx:for="{{questionList}}" wx:key>
+            <text class='num' data-index='{{index + 1}}'></text>
+          </view>
+        </view>
+      </view>
+
+      <view class='bg-white padding radius shadow-lg' wx:else>
+        <!--input placeholder="请输入作业名" class='content text-bold' value='{{homeworkName}}' name='homeworkName' bindinput='inputHomeworkName'></input-->
+        <view class='cu-steps'>
+          <view class='cu-item {{index>=questionIndex?"":"text-blue"}}' wx:for="{{questionNum}}" wx:key>
+            <text class='num' data-index='{{index + 1}}'></text>
+          </view>
+        </view>
+      </view>
+
+      <view class="cu-card dynamic no-card">
+        <view class="cu-item shadow padding">
+          <view class='text-content' wx:if='{{!isAdd}}'>
+            {{questionList[questionIndex].question}}
+          </view>
+          <input placeholder="请输入题目" class='radius' value='{{questionName}}' name='questionName' bindinput='inputQuestionName' wx:else></input>
+          <view class="padding">
+            <view class="bg-img">
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="cu-form-group" wx:if='{{isAdd}}'>
+        <view class='title text-bold'>题目类型</view>
+        <view>是否多选题？</view>
+        <switch bindchange='questionTypeChange' checked='{{questionType}}'></switch>
+      </view>
+      <view class="cu-form-group" wx:if='{{isAdd}}'>
+        <view class='title text-bold'>选项设置</view>
+        <button class='cu-btn bg-green shadow' bindtap='addChose'>添加选项</button>
+      </view>
+
+      <block wx:if="{{isAdd}}">
+        <radio-group class="section block margin-top" bindchange="checkboxChange" wx:if='{{!questionType}}'>
+          <form bindsubmit='inputChose'>
+            <view class="cu-form-group" wx:for="{{choseList}}" wx:key>
+              <input placeholder="请输入选项文字" class='radius' bindinput="oneChoseInput" name='chose{{index}}' value='{{item.name}}' data-index="{{index}}"></input>
+              <view>
+                <radio class='round blue' value="{{item.choseIndex}}" checked="{{item.checked}}"></radio>
+              </view>
+            </view>
+            <view class="flex padding justify-center align-center">
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionStepsBack'>上一题</button>
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionSteps' form-type='submit'>下一题</button>
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionFinished' form-type='submit'>完成</button>
+            </view>
+          </form>
+        </radio-group>  
+        <checkbox-group class="section block margin-top" bindchange="checkboxChange" wx:else>
+          <form bindsubmit='inputChose'>
+            <view class="cu-form-group" wx:for="{{choseList}}" wx:key>
+              <input placeholder="请输入选项文字" class='radius' bindinput="oneChoseInput" name='chose{{index}}' value='{{item.name}}' data-index="{{index}}"></input>
+              <view>
+                <radio class='round blue' value="{{item.choseIndex}}" checked="{{item.checked}}"></radio>
+              </view>
+            </view>
+            <view class="flex padding justify-center align-center">
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionStepsBack'>上一题</button>
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionSteps' form-type='submit'>下一题</button>
+              <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionFinished' form-type='submit'>完成</button>
+            </view>
+          </form>
+        </checkbox-group>
+      </block>
+      
+      <block wx:if='{{!isAdd}}'>
+        <block wx:if='{{questionList[questionIndex].type==0}}'>
+          <radio-group class="block margin-top" bindchange="checkboxChange">
+            <view class="cu-form-group" wx:for="{{questionList[questionIndex].choseList}}" wx:key="{{index}}">
+              <block>
+                <view class='title'>{{questionList[questionIndex].choseList[index].name}}</view>
+                <view>
+                  <text class='icon-roundcheckfill text-green' wx:if="{{questionList[questionIndex].choseList[index].checked==2}}"></text>
+                  <text class='icon-roundcheckfill text-red' wx:elif="{{questionList[questionIndex].choseList[index].checked==1}}"></text>
+                  <text class='icon-roundclosefill text-gray' wx:else></text>
+                </view>
+              </block>
+            </view>
+          </radio-group>
+        </block>
+
+        <block wx:else>
+          <checkbox-group class="margin-top" bindchange="checkboxChange">
+            <view class="cu-form-group" wx:for="{{questionList[questionIndex].choseList}}" wx:key="{{index}}">
+              <block>
+                <view class='title'>{{questionList[questionIndex].choseList[index].name}}</view>
+                <view>
+                  <text class='icon-roundcheckfill text-green' wx:if="{{questionList[questionIndex].choseList[index].checked==2}}"></text>
+                  <text class='icon-roundcheckfill text-red' wx:elif="{{questionList[questionIndex].choseList[index].checked==1}}"></text>
+                  <text class='icon-roundclosefill text-gray' wx:else></text>
+                </view>
+              </block>
+            </view>
+          </checkbox-group>
+        </block>
+      </block>
+
+      <view class="flex padding justify-center align-center" wx:if='{{!isAdd}}'>
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='backCard' wx:if="{{questionIndex == questionList.length - 1}}">完成</button>
+        <button class="cu-btn bg-blue lg shadow margin-xs" bindtap='questionSteps' wx:else>下一题</button>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view wx:if="{{loading}}" class="loader">
+  <view class="square-spin">
+    <view></view>
+  </view>
+</view>

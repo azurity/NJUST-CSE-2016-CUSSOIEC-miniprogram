@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import "component/loader/loaders.min.wxss";
+
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +10,19 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.square-spin > view {
+  background-color: lightgray;
+}

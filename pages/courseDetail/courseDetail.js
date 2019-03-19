@@ -146,6 +146,41 @@ Page({
             });
         });
     },
+    initCheckIn: function (courseID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var checkIn;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, new Promise(function (resolve, reject) {
+                            wx.request({
+                                url: app.globalData.hostName + '/course/check_in',
+                                method: 'GET',
+                                data: {
+                                    college: app.globalData.college,
+                                    personID: app.globalData.personID,
+                                    courseID: courseID
+                                },
+                                success: function (_a) {
+                                    var data = _a.data;
+                                    resolve(data);
+                                },
+                                fail: reject
+                            });
+                        })];
+                    case 1:
+                        checkIn = _a.sent();
+                        if (checkIn.success) {
+                            this.setData({
+                                checkIn: checkIn.result
+                            });
+                        }
+                        else {
+                        }
+                        return [2];
+                }
+            });
+        });
+    },
     initLive: function (courseID) {
         return __awaiter(this, void 0, void 0, function () {
             var live;
