@@ -82,6 +82,17 @@ Page({
     tapIcon: function (e) {
         switch (e.currentTarget.id) {
             case '考勤':
+                if (this.data.checkIn.hasChecked) {
+                }
+                else if (this.data.checkIn.isOpen) {
+                    this.checkIn()
+                        .then(function () { })
+                        .catch(function (reason) {
+                        console.log(reason);
+                    });
+                }
+                else {
+                }
                 break;
             case '试题作业':
                 break;
@@ -236,6 +247,49 @@ Page({
                             this.setData({
                                 videoList: result.result
                             });
+                        }
+                        else {
+                        }
+                        return [2];
+                }
+            });
+        });
+    },
+    checkIn: function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var courseWeekInfo, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        courseWeekInfo = null;
+                        try {
+                            courseWeekInfo = wx.getStorageSync('CourseWeekInfo');
+                        }
+                        catch (e) {
+                        }
+                        return [4, new Promise(function (resolve, reject) {
+                                wx.request({
+                                    url: app.globalData.hostName + '/course/check_in',
+                                    method: 'POST',
+                                    data: {
+                                        college: app.globalData.college,
+                                        personID: app.globalData.personID,
+                                        courseID: _this.data.info.courseID,
+                                        numOfWeek: courseWeekInfo.numOfWeek,
+                                        dayOfWeek: courseWeekInfo.dayOfWeek,
+                                        indexOfDay: courseWeekInfo.indexOfDay
+                                    },
+                                    success: function (_a) {
+                                        var data = _a.data;
+                                        resolve(data);
+                                    },
+                                    fail: reject
+                                });
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        if (result.success) {
                         }
                         else {
                         }
