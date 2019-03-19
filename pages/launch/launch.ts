@@ -1,6 +1,7 @@
 // pages/launch/launch.js
 import { IMyApp } from '../../app'
 import { openidRes } from '../../utils/globalRes'
+import { infoRes } from '../../utils/info/infoRes'
 
 const app = getApp<IMyApp>()
 
@@ -22,12 +23,13 @@ Page({
         Promise.all([this.initOpenid()]) // 利用Prmoise.all做多个并行的初始化流程
             .then(() => {
                 let aim = DirectAim.Binding // 没有学号信息时强制绑定
-                if (app.globalData.college != null && app.globalData.personID != null) {
+                if (app.globalData.personInfo != null) {
                     aim = DirectAim.Index
                 }
                 this.direct(aim)
             })
             .catch((reason) => {
+                // TODO: 错误处理
                 console.log(reason)
             })
     },
@@ -38,9 +40,9 @@ Page({
         })
         let res = await new Promise<openidRes>((resolve, reject) => {
             wx.request({
-                url: app.globalData.hostName + '/global/login',
-                method: 'POST',
-                data: JSON.stringify({ code: code.code }),
+                url: app.globalData.hostName + '/global/openid',
+                method: 'GET',
+                data: { code: code.code },
                 success: ({ data }) => {
                     resolve(<openidRes>data)
                 },
@@ -52,15 +54,30 @@ Page({
         } else {
             // TODO: 未能获取到openid，做出处理
         }
+        let personInfo = await new Promise<infoRes>((resolve, reject) => {
+            wx.request({
+                url: app.globalData.hostName + '/user/info',
+                method: 'GET',
+                data: { openid: app.globalData.openid },
+                success: ({ data }) => {
+                    resolve(<infoRes>data)
+                },
+                fail: reject
+            })
+        })
+        if (personInfo.success) {
+            app.globalData.personInfo = personInfo.result
+        }
         // error抛出到外面，由catch处理
     },
 
     direct(aim: DirectAim) {
-        // TODO: 在此处完成实际的跳转过程，跳转至主页面
         if (aim == DirectAim.Binding) {
             // 跳转至绑定页
+            wx.redirectTo({ url: '/pages/binding/binding' })
         } else if (aim == DirectAim.Index) {
             // 跳转至主页
+            wx.switchTab({ url: '/pages/index/index' })
         }
     }
 })

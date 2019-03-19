@@ -208,6 +208,12 @@
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
               <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="course" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NJUST-CSE-2016-CUSSOIEC-miniprogram" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="index" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -281,6 +287,7 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
+  <component name="TodoView" selected-index="3" />
   <component name="ToolWindowManager">
     <frame x="1912" y="19" width="1696" height="1026" extended-state="6" />
     <layout>

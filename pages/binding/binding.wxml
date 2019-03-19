@@ -1,4 +1,33 @@
 <!--pages/binding/binding.wxml-->
-<text>pages/binding/binding.wxml</text>
-<input type="text" placeholder="学号" auto-focus />
-<button type="default" size="defaultSize" bindtap="submit" hover-class="defaultTap">Button</button>
+<form>
+<view class="cu-form-group margin-top">
+    <view class="title must-star">学校</view>
+    <input type="text" class="radius" bindinput="collegeInput" placeholder="学校" disabled="{{loading}}" auto-focus />
+  </view>
+  <view class="cu-form-group">
+    <view class="title must-star">编号</view>
+    <input type="text" class="radius" bindinput="personIDInput" placeholder="学号/教工号" disabled="{{loading}}" />
+  </view>
+  <view class="cu-form-group">
+    <view class="title must-star">姓名</view>
+    <input type="text" class="radius" bindinput="realNameInput" placeholder="姓名" disabled="{{loading}}" />
+  </view>
+  <view class="cu-form-group">
+    <view class="title">昵称</view>
+    <input type="text" class="radius" bindinput="nickNameInput" placeholder="昵称" disabled="{{loading}}" />
+  </view>
+</form>
+<view class='flex-sub text-center'>
+  <view class='text-sm padding'>
+    <text class="text-gray">带有</text><text class="must-star"></text><text class="text-gray">的为必填项</text>
+  </view>
+</view>
+<view class="padding flex flex-direction">
+  <button wx:if="{{canIUse}}" class="cu-btn bg-green lg light" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" loading="{{loading}}" disabled="{{loading}}">用户授权 & 绑定</button>
+  <button wx:else class="cu-btn bg-green lg light" bindtap="userInfoSubmit" loading="{{loading}}" disabled="{{loading}}">用户授权 & 绑定</button>
+</view>
+<view class='flex-sub text-center'>
+  <view class='text-sm padding'>
+    <text class="text-gray">授权小程序使用您的微信头像和昵称</text>
+  </view>
+</view>

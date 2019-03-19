@@ -59,7 +59,7 @@ Page({
     },
     initOpenid: function () {
         return __awaiter(this, void 0, void 0, function () {
-            var code, res;
+            var code, res, personID;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
@@ -69,9 +69,9 @@ Page({
                         code = _a.sent();
                         return [4, new Promise(function (resolve, reject) {
                                 wx.request({
-                                    url: app.globalData.hostName + '/global/login',
-                                    method: 'POST',
-                                    data: JSON.stringify({ code: code.code }),
+                                    url: app.globalData.hostName + '/global/openid',
+                                    method: 'GET',
+                                    data: { code: code.code },
                                     success: function (_a) {
                                         var data = _a.data;
                                         resolve(data);
@@ -85,6 +85,24 @@ Page({
                             app.globalData.openid = res.result;
                         }
                         else {
+                        }
+                        return [4, new Promise(function (resolve, reject) {
+                                wx.request({
+                                    url: app.globalData.hostName + '/global/person_id',
+                                    method: 'GET',
+                                    data: { openid: app.globalData.openid },
+                                    success: function (_a) {
+                                        var data = _a.data;
+                                        resolve(data);
+                                    },
+                                    fail: reject
+                                });
+                            })];
+                    case 3:
+                        personID = _a.sent();
+                        if (personID.success) {
+                            app.globalData.college = personID.result.college;
+                            app.globalData.personID = personID.result.personID;
                         }
                         return [2];
                 }

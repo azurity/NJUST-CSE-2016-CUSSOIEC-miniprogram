@@ -1,1 +1,7 @@
 /* pages/binding/binding.wxss */
+@import '../../component/colorUI/colorui.wxss';
+
+.must-star::after {
+    content: '*';
+    color: red;
+}
