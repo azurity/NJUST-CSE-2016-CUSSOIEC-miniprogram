@@ -59,12 +59,12 @@ Page({
                 url: app.globalData.hostName + '/course/homework_list',
                 method: 'GET',
                 data: {
-                    // courseID: wx.getStorageSync('CourseDetail').data.courseID,
-                    // personID: app.globalData.personID,
-                    // college: app.globalData.college
-                    courseID: '3',
-                    personID: '916000000001',
-                    college: '南京理工大学'
+                    courseID: wx.getStorageSync('CourseDetail').courseID,
+                    personID: app.globalData.personInfo!.personID,
+                    college: app.globalData.personInfo!.college
+                    //courseID: '3',
+                    //personID: '916000000001',
+                    //college: '南京理工大学'
                 },
                 success: ({ data }) => {
                     resolve(<homeworkRes>data)
@@ -86,13 +86,13 @@ Page({
                 url: app.globalData.hostName + '/course/homework',
                 method: 'GET',
                 data: {
-                    // courseID: wx.getStorageSync('CourseDetail').data.courseID,
-                    // personID: app.globalData.personID,
-                    // college: app.globalData.college,
+                    courseID: wx.getStorageSync('CourseDetail').courseID,
+                    personID: app.globalData.personInfo!.personID,
+                    college: app.globalData.personInfo!.college,
                     homeworkID: homework.homeworkID,
-                    courseID: '3',
-                    personID: '916106840407',
-                    college: '南京理工大学'
+                    //courseID: '3',
+                    //personID: '916106840407',
+                    //college: '南京理工大学'
                     // homeworkID: '9'
                 },
                 success: ({ data }) => {
@@ -133,12 +133,12 @@ Page({
                 url: app.globalData.hostName + '/course/homework',
                 method: 'POST',
                 data: {
-                    // personID: app.globalData.personID,
-                    // college: app.globalData.college,
-                    // courseID: wx.getStorageSync('courseDetail').data.courseID,
-                    courseID: '3',
-                    personID: '916000000001',
-                    college: '南京理工大学',
+                    personID: app.globalData.personInfo!.personID,
+                    college: app.globalData.personInfo!.college,
+                    courseID: wx.getStorageSync('courseDetail').courseID,
+                    //courseID: '3',
+                    //personID: '916000000001',
+                    //college: '南京理工大学',
                     homeworkName: homework_name,
                     homeworkID: null,
                     data: this.data.answerList
@@ -157,12 +157,12 @@ Page({
                 url: app.globalData.hostName + '/course/homework',
                 method: 'POST',
                 data: {
-                    // personID: app.globalData.personID,
-                    // college: app.globalData.college,
-                    // courseID: wx.getStorageSync('courseDetail').data.courseID,
-                    courseID: '3',
-                    personID: '916000000001',
-                    college: '南京理工大学',
+                    personID: app.globalData.personInfo!.personID,
+                    college: app.globalData.personInfo!.college,
+                    courseID: wx.getStorageSync('courseDetail').courseID,
+                    //courseID: '3',
+                    //personID: '916000000001',
+                    //college: '南京理工大学',
                     homeworkName: null,
                     homeworkID: homework_id,
                     data: null

@@ -70,10 +70,15 @@ Page({
                             console.log(reason)
                         })
                 } else {
-                    // TODO: 不能亲到
+                    // TODO: 不能签到
                 }
                 break
             case '试题作业':
+                if (app.globalData.personInfo!.userType === 'student') {
+                    wx.navigateTo({ url: '/pages/homework/homework' })
+                } else {
+                    wx.navigateTo({ url: 'pages/homeworkTeacher/homeworkTeacher' })
+                }
                 break
             case '评教':
                 break
@@ -186,8 +191,8 @@ Page({
                 url: app.globalData.hostName + '/course/check_in',
                 method: 'GET',
                 data: {
-                    college: app.globalData.college,
-                    personID: app.globalData.personID,
+                    college: app.globalData.personInfo!.college,
+                    personID: app.globalData.personInfo!.personID,
                     courseID: courseID
                 },
                 success: ({ data }) => {
@@ -260,8 +265,8 @@ Page({
                 url: app.globalData.hostName + '/course/check_in',
                 method: 'POST',
                 data: {
-                    college: app.globalData.college,
-                    personID: app.globalData.personID,
+                    college: app.globalData.personInfo!.college,
+                    personID: app.globalData.personInfo!.personID,
                     courseID: this.data.info.courseID,
                     numOfWeek: courseWeekInfo!.numOfWeek,
                     dayOfWeek: courseWeekInfo!.dayOfWeek,
