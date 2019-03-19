@@ -27,7 +27,7 @@
     <view class='content text-bold' bingtap='backCard' wx:if='{{!isAdd}}'>
       {{homeworkList[listNum].name}}
     </view>
-    <input placeholder="请输入作业名" class='content text-bold' name='input' wx:else></input>
+    <input placeholder="请输入作业名" class='content text-bold' name='input' value='{{homeworkName}}' bindinput='inputHomeworkName' wx:else></input>
   </view>
   <scroll-view scroll-y scroll-with-animation='true' scroll-top='{{ topNum }}'>
     <view>
@@ -41,7 +41,7 @@
       </view>
 
       <view class='bg-white padding radius shadow-lg' wx:else>
-        <input placeholder="请输入作业名" class='content text-bold' value='{{homeworkName}}' name='homeworkName' bindinput='inputHomeworkName'></input>
+        <!--input placeholder="请输入作业名" class='content text-bold' value='{{homeworkName}}' name='homeworkName' bindinput='inputHomeworkName'></input-->
         <view class='cu-steps'>
           <view class='cu-item {{index>=questionIndex?"":"text-blue"}}' wx:for="{{questionNum}}" wx:key>
             <text class='num' data-index='{{index + 1}}'></text>

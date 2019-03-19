@@ -337,20 +337,39 @@ Page({
         console.log(this.data)
     },
     questionFinished() {
-        console.log('finish', this.data.answerList)
+        console.log('finish')
         if (!this.dataCheck()) {
             return
         }
+        let question_type: 0 | 1 = 0
+        if (this.data.questionType) {
+            question_type = 1
+        }
+        ;(<QuestionPostItem[]>this.data.answerList)[this.data.questionIndex] = {
+            questionIndex: this.data.questionIndex.toString(),
+            question: this.data.questionName,
+            correctAnswer: this.data.correctAnswer,
+            type: question_type,
+            choseList: this.data.choseList,
+            imageURLs: this.data.imageURLs
+        }
+        this.setData({
+            answerList: this.data.answerList
+        })
+        console.log(this.data.answerList)
         if (this.data.answerList.length > 0) {
             //本页的数据提交
             this.postHomework(this.data.homeworkName)
-                .then(() => {})
+                .then(() => {
+                    this.backCard()
+                })
                 .catch((reason) => {
                     console.log(reason)
                 })
+        } else {
+            this.clear()
+            this.backCard()
         }
-        this.clear()
-        this.backCard()
     },
 
     inputHomeworkName(e: wx.InputEvent) {
