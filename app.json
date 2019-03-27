@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/launch/launch",
     "pages/course/course",
     "pages/courseDetail/courseDetail",
     "pages/checkInControl/checkInControl",
@@ -8,7 +9,6 @@
     "pages/resourceT/resourceT",
     "pages/homework/homework",
     "pages/video/video",
-    "pages/launch/launch",
     "pages/binding/binding",
     "pages/info/info",
     "pages/index/index",
