@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/launch/launch",
+    "pages/bbs/bbs",
     "pages/course/course",
     "pages/courseDetail/courseDetail",
     "pages/checkInControl/checkInControl",

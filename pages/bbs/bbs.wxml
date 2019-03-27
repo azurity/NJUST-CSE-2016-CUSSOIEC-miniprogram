@@ -1,0 +1,57 @@
+<view class="cu-custom" style="height:30px;">
+</view>
+<view class="cu-bar search bg-white fixed" style="height:30px;padding-top:0px;" >
+    <view class='action'>
+       <view class='icon-people text-green'>
+        <view class='cu-tag badge'></view>
+      </view>
+      我的
+    </view>
+    <view class='search-form round'>
+      <text class="icon-search"></text>
+      <input type="text" placeholder="搜索" confirm-type="search"></input>
+    </view>
+    <view class='action'>
+      <button class='cu-btn bg-cyan shadow-blur round'>搜索</button>
+    </view>
+
+</view>
+<view class="cu-card article margin-top">
+  <view wx:for="{{bbsList}}" wx:key class="cu-item shadow">
+    <view class="title solid-bottom">{{item.title}}</view>
+    <view class="content">
+      <view class="desc">
+        <view class='text-content solid-bottom'>{{item.content}}</view>
+        <view>
+          <view class='text-grey fl'>{{item.user}} {{item.time}}</view>
+          <view class='text-grey fr'>
+          回复{{item.replyCount}} 点击{{item.clickingRate}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="round-click shadow-blur" bindtap='showModal' data-target="Modal">
+  <text class='icon-add round-clicktext'></text>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+    <view class='action text-blue' bindtap='hideModal'>取消</view>
+    <view class='action text-green' bindtap='topic'>发布</view>
+      
+    </view>
+    <view class='padding-l text-left' >
+      <form>
+        <view class="cu-form-group margin-top">
+          
+          <input placeholder="标题" class='radius' name='title'></input>
+        </view>
+        <view class="cu-form-group margin-top">
+            <textarea placeholder="内容" maxlength="-1" placeholder-class='placeholder'/>
+      
+        </view>
+      </form>
+    </view>
+  </view>
+</view>
